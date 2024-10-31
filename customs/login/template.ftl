@@ -1,17 +1,18 @@
 <#import "field.ftl" as field>
 <#macro username>
+  <div></div>
   <#assign label>
     <#if !realm.loginWithEmailAllowed>${msg("username")}<#elseif !realm.registrationEmailAsUsername>${msg("usernameOrEmail")}<#else>${msg("email")}</#if>
   </#assign>
   <@field.group name="username" label=label>
-    <div class="${properties.kcInputGroup}">
-      <div class="${properties.kcInputGroupItemClass} ${properties.kcFill}">
-        <span class="${properties.kcInputClass} ${properties.kcFormReadOnlyClass}">
-          <input id="kc-attempted-username" value="${auth.attemptedUsername}" readonly>
+    <div class="flex item-center gap-4 mt-2">
+      <div class="w-full">
+        <span class="w-full">
+          <input class="px-4 py-2.5 bg-white text-gray-800 rounded-lg outline-none border-purple-300 border-dashed ring-1 ring-offset-2 ring-purple-500 w-full focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500" id="kc-attempted-username" value="${auth.attemptedUsername}" readonly>
         </span>
       </div>
       <div class="${properties.kcInputGroupItemClass}">
-        <button id="reset-login" class="${properties.kcFormPasswordVisibilityButtonClass} kc-login-tooltip" type="button" 
+        <button id="reset-login" class="py-2.5 px-4 rounded-lg border-2 border-purple-400 text-center text-purple-600 w-max" type="button" 
               aria-label="${msg('restartLoginTooltip')}" onclick="location.href='${url.loginRestartFlowUrl}'">
             <i class="fa-sync-alt fas" aria-hidden="true"></i>
             <span class="kc-tooltip-text">${msg("restartLoginTooltip")}</span>
@@ -96,7 +97,7 @@
     <h1 class="text-center text-4xl font-semibold text-white">Fairness For You</h1>
   </div>
   <div class="px-4 w-full flex flex-col justify-center bg-[url(https://potluck-warzone.vercel.app/svg/hero-pattern.svg)]">
-    <main class="max-w-sm w-full mx-auto">
+    <main class="max-w-md w-full mx-auto">
       <header id="kc-header-custom" class="mb-10 font-semibold">
         <p class="text-gray-800 text-4xl">${kcSanitize(msg("loginTitleHtml",(realm.displayNameHtml!'')))?no_esc}</p>
       </header>
