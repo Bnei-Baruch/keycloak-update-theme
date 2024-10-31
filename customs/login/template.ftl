@@ -146,8 +146,8 @@
       <div class="${properties.kcLoginMainBody!}">
         <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
             <#if displayRequiredFields>
-                <div class="${properties.kcContentWrapperClass!}">
-                    <div class="${properties.kcLabelWrapperClass!} subtitle">
+                <div class="${properties.kcContentWrapperClass!} hidden">
+                    <div class="${properties.kcLabelWrapperClass!} subtitle text-gray-800">
                         <span class="${properties.kcInputHelperTextItemTextClass!}">
                           <span class="${properties.kcInputRequiredClass!}">*</span> ${msg("requiredFields")}
                         </span>
@@ -156,8 +156,8 @@
             </#if>
         <#else>
             <#if displayRequiredFields>
-                <div class="${properties.kcContentWrapperClass!}">
-                    <div class="${properties.kcLabelWrapperClass!} subtitle">
+                <div class="${properties.kcContentWrapperClass!} hidden">
+                    <div class="${properties.kcLabelWrapperClass!} subtitle text-gray-800">
                         <span class="${properties.kcInputHelperTextItemTextClass!}">
                           <span class="${properties.kcInputRequiredClass!}">*</span> ${msg("requiredFields")}
                         </span>

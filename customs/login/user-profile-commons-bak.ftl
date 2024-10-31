@@ -1,58 +1,8 @@
 <#import "field.ftl" as field>
 <#macro userProfileFormFields>
 	<#assign currentGroup="">
-	<@field.group name=profile.attributes[0].name label=advancedMsg(profile.attributes[0].displayName!'') error=kcSanitize(messagesPerField.get('${profile.attributes[0].name}'))?no_esc required=profile.attributes[0].required>
-		<div class="${properties.kcInputWrapperClass!}">
-			<#if profile.attributes[0].annotations.inputHelperTextBefore??>
-				<div class="${properties.kcInputHelperTextBeforeClass!}" id="form-help-text-before-${attribute.name}" aria-live="polite">${kcSanitize(advancedMsg(attribute.annotations.inputHelperTextBefore))?no_esc}</div>
-			</#if>
-			<p>${profile.attributes[0].group!}</p>
-			<@inputFieldByType attribute=profile.attributes[0]/>
-			<#if profile.attributes[0].annotations.inputHelperTextAfter??>
-				<div class="${properties.kcInputHelperTextAfterClass!}" id="form-help-text-after-${profile.attributes[0].name}" aria-live="polite">${kcSanitize(advancedMsg(profile.attributes[0].annotations.inputHelperTextAfter))?no_esc}</div>
-			</#if>
-		</div>
-	</@field.group>
-	<@field.group name=profile.attributes[1].name label=advancedMsg(profile.attributes[1].displayName!'') error=kcSanitize(messagesPerField.get('${profile.attributes[1].name}'))?no_esc required=profile.attributes[1].required>
-		<div class="${properties.kcInputWrapperClass!}">
-			<#if profile.attributes[1].annotations.inputHelperTextBefore??>
-				<div class="${properties.kcInputHelperTextBeforeClass!}" id="form-help-text-before-${attribute.name}" aria-live="polite">${kcSanitize(advancedMsg(attribute.annotations.inputHelperTextBefore))?no_esc}</div>
-			</#if>
-			<p>${profile.attributes[0].group!}</p>
-			<@inputFieldByType attribute=profile.attributes[1]/>
-			<#if profile.attributes[1].annotations.inputHelperTextAfter??>
-				<div class="${properties.kcInputHelperTextAfterClass!}" id="form-help-text-after-${profile.attributes[1].name}" aria-live="polite">${kcSanitize(advancedMsg(profile.attributes[1].annotations.inputHelperTextAfter))?no_esc}</div>
-			</#if>
-		</div>
-	</@field.group>
-	<div class="grid lg:grid-cols-2 gap-4">
-		<@field.group name=profile.attributes[2].name label=advancedMsg(profile.attributes[2].displayName!'') error=kcSanitize(messagesPerField.get('${profile.attributes[2].name}'))?no_esc required=profile.attributes[2].required>
-			<div class="${properties.kcInputWrapperClass!}">
-				<#if profile.attributes[2].annotations.inputHelperTextBefore??>
-					<div class="${properties.kcInputHelperTextBeforeClass!}" id="form-help-text-before-${attribute.name}" aria-live="polite">${kcSanitize(advancedMsg(attribute.annotations.inputHelperTextBefore))?no_esc}</div>
-				</#if>
-				<@inputFieldByType attribute=profile.attributes[2]/>
-				<#if profile.attributes[2].annotations.inputHelperTextAfter??>
-					<div class="${properties.kcInputHelperTextAfterClass!}" id="form-help-text-after-${profile.attributes[2].name}" aria-live="polite">${kcSanitize(advancedMsg(profile.attributes[2].annotations.inputHelperTextAfter))?no_esc}</div>
-				</#if>
-			</div>
-		</@field.group>
-		<@field.group name=profile.attributes[3].name label=advancedMsg(profile.attributes[3].displayName!'') error=kcSanitize(messagesPerField.get('${profile.attributes[3].name}'))?no_esc required=profile.attributes[3].required>
-			<div class="${properties.kcInputWrapperClass!}">
-				<#if profile.attributes[3].annotations.inputHelperTextBefore??>
-					<div class="${properties.kcInputHelperTextBeforeClass!}" id="form-help-text-before-${attribute.name}" aria-live="polite">${kcSanitize(advancedMsg(attribute.annotations.inputHelperTextBefore))?no_esc}</div>
-				</#if>
-				<@inputFieldByType attribute=profile.attributes[3]/>
-				<#if profile.attributes[3].annotations.inputHelperTextAfter??>
-					<div class="${properties.kcInputHelperTextAfterClass!}" id="form-help-text-after-${profile.attributes[3].name}" aria-live="polite">${kcSanitize(advancedMsg(profile.attributes[3].annotations.inputHelperTextAfter))?no_esc}</div>
-				</#if>
-			</div>
-		</@field.group>
-	</div>
-		<#nested "beforeField" profile.attributes[0]>
-		<#nested "afterField" profile.attributes[1]>
-
-	<#--  <#list profile.attributes as attribute>
+	
+	<#list profile.attributes as attribute>
 
 		<#assign group = (attribute.group)!"">
 		<#if group != currentGroup>
@@ -84,7 +34,6 @@
 				</div>
 			</#if>
 		</#if>
-
 		<#nested "beforeField" attribute>
 
 		<@field.group name=attribute.name label=advancedMsg(attribute.displayName!'') error=kcSanitize(messagesPerField.get('${attribute.name}'))?no_esc required=attribute.required>
@@ -92,14 +41,15 @@
 				<#if attribute.annotations.inputHelperTextBefore??>
 					<div class="${properties.kcInputHelperTextBeforeClass!}" id="form-help-text-before-${attribute.name}" aria-live="polite">${kcSanitize(advancedMsg(attribute.annotations.inputHelperTextBefore))?no_esc}</div>
 				</#if>
-				<@inputFieldByType attribute=attribute/>
+				<#--  <@inputFieldByType attribute=attribute/>  -->
+				<@inputTag attribute=attribute value=attribute.value!''/>
 				<#if attribute.annotations.inputHelperTextAfter??>
 					<div class="${properties.kcInputHelperTextAfterClass!}" id="form-help-text-after-${attribute.name}" aria-live="polite">${kcSanitize(advancedMsg(attribute.annotations.inputHelperTextAfter))?no_esc}</div>
 				</#if>
 			</div>
 		</@field.group>
 		<#nested "afterField" attribute>
-	</#list>  -->
+	</#list>
 
 	<#list profile.html5DataAnnotations?keys as key>
         <script type="module" src="${url.resourcesPath}/js/${key}.js"></script>

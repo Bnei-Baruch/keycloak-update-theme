@@ -2,6 +2,7 @@
 <#import "field.ftl" as field>
 <#import "user-profile-commons.ftl" as userProfileCommons>
 <#import "register-commons.ftl" as registerCommons>
+<#import "buttons.ftl" as buttons>
 <@layout.registrationLayout displayMessage=messagesPerField.exists('global') displayRequiredFields=true; section>
 <!-- template: register.ftl -->
 
@@ -15,6 +16,8 @@
         <form id="kc-register-form" class="${properties.kcFormClass!}" action="${url.registrationAction}" method="post" novalidate="novalidate">
             <@userProfileCommons.userProfileFormFields; callback, attribute>
                 <#if callback = "afterField">
+                    <@field.password name="password" label=msg("password") autocomplete="new-password" />
+                    <@field.password name="password-confirm" label=msg("passwordConfirm") autocomplete="new-password" />
                 <#-- render password fields just under the username or email (if used as username) -->
                     <#if passwordRequired?? && (attribute.name == 'username' || (attribute.name == 'email' && realm.registrationEmailAsUsername))>
                         <@field.password name="password" label=msg("password") autocomplete="new-password" />
@@ -33,17 +36,10 @@
                 </div>
             </#if>
 
-            <div id="kc-form-buttons" class="${properties.kcFormButtonsClass!}">
-                <input class="${properties.kcButtonClass!} ${properties.kcButtonPrimaryClass!} ${properties.kcButtonBlockClass!} ${properties.kcButtonLargeClass!}" type="submit" value="${msg("doRegister")}"/>
+            <div id="kc-form-buttons" class="flex item-center space-x-4 justify-end">
+                <@buttons.buttonLink href=url.loginUrl label="backToLogin" class=[]/>
+                <input class="px-8 py-2.5 transition bg-purple-600 hover:bg-purple-500 text-white w-max float-right rounded-lg" type="submit" value="${msg("doRegister")}"/>
             </div>
-            <div class="${properties.kcFormGroupClass!} pf-v5-c-login__main-footer-band">
-                <div id="kc-form-options" class="${properties.kcFormOptionsClass!} pf-v5-c-login__main-footer-band-item">
-                    <div class="${properties.kcFormOptionsWrapperClass!}">
-                        <span><a href="${url.loginUrl}">${kcSanitize(msg("backToLogin"))?no_esc}</a></span>
-                    </div>
-                </div>
-            </div>
-
         </form>
 
         <template id="errorTemplate">
