@@ -12,16 +12,15 @@
             <@field.input name="username" label=label value=auth.attemptedUsername!'' autofocus=true />
 
             <@buttons.actionGroup>
-              <@buttons.buttonLink href=url.loginUrl label="backToLogin" class=["kcButtonSecondaryClass", "kcButtonBlockClass"]/>
-              <@buttons.button id="kc-form-buttons" label="doSubmit" class=["kcButtonPrimaryClass", "kcButtonBlockClass"]/>
+              <@buttons.buttonLink href=url.loginUrl label="backToLogin" class=[]/>
+              <@buttons.button id="kc-form-buttons" label="doSubmit" class=[]/>
             </@buttons.actionGroup>
-
         </form>
     <#elseif section = "info" >
         <#if realm.duplicateEmailsAllowed>
             ${msg("emailInstructionUsername")}
         <#else>
-            ${msg("emailInstruction")}
+            <p class="text-gray-700">${msg("emailInstruction")}</p>
         </#if>
     </#if>
 </@layout.registrationLayout>

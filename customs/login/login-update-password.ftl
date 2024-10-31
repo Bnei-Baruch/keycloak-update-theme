@@ -17,10 +17,10 @@
 
             <@buttons.actionGroup>
                 <#if isAppInitiatedAction??>
-                    <@buttons.button label="doSubmit" class=["kcButtonPrimaryClass"]/>
-                    <@buttons.button label="doCancel" name="cancel-aia" class=["kcButtonSecondaryClass"]/>
+                    <@buttons.buttonOutline label="doCancel" id="btn-cancel-act" name="cancel-aia" class=[]/>
+                    <@buttons.button label="doSubmit" id="btn-submit-act" class=[]/>
                 <#else>
-                    <@buttons.button label="doSubmit" class=["kcButtonPrimaryClass", "kcButtonBlockClass"]/>
+                    <@buttons.button label="doSubmit" id="btn-submit" class=[]/>
                 </#if>
             </@buttons.actionGroup>
         </form>

@@ -781,36 +781,20 @@ select{
   margin-bottom: 0.5rem;
 }
 
-.mb-1{
-  margin-bottom: 0.25rem;
+.ml-2{
+  margin-left: 0.5rem;
 }
 
 .mt-1{
   margin-top: 0.25rem;
 }
 
-.ml-2{
-  margin-left: 0.5rem;
-}
-
 .mt-2{
   margin-top: 0.5rem;
 }
 
-.mt-5{
-  margin-top: 1.25rem;
-}
-
 .mt-3{
   margin-top: 0.75rem;
-}
-
-.mt-4{
-  margin-top: 1rem;
-}
-
-.block{
-  display: block;
 }
 
 .flex{
@@ -833,10 +817,6 @@ select{
   height: 100%;
 }
 
-.w-64{
-  width: 16rem;
-}
-
 .w-full{
   width: 100%;
 }
@@ -846,20 +826,16 @@ select{
   width: max-content;
 }
 
-.max-w-sm{
-  max-width: 24rem;
-}
-
 .max-w-md{
   max-width: 28rem;
 }
 
-.list-disc{
-  list-style-type: disc;
-}
-
 .list-\[square\]{
   list-style-type: square;
+}
+
+.list-disc{
+  list-style-type: disc;
 }
 
 .flex-col{
@@ -880,10 +856,6 @@ select{
 
 .gap-3{
   gap: 0.75rem;
-}
-
-.gap-2{
-  gap: 0.5rem;
 }
 
 .gap-4{
@@ -916,16 +888,6 @@ select{
   border-style: dashed;
 }
 
-.border-gray-200{
-  --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity));
-}
-
-.border-purple-400{
-  --tw-border-opacity: 1;
-  border-color: rgb(192 132 252 / var(--tw-border-opacity));
-}
-
 .border-gray-300{
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
@@ -934,6 +896,11 @@ select{
 .border-purple-300{
   --tw-border-opacity: 1;
   border-color: rgb(216 180 254 / var(--tw-border-opacity));
+}
+
+.border-purple-400{
+  --tw-border-opacity: 1;
+  border-color: rgb(192 132 252 / var(--tw-border-opacity));
 }
 
 .bg-purple-600{
@@ -946,11 +913,6 @@ select{
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-pink-300{
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 168 212 / var(--tw-bg-opacity));
-}
-
 .bg-\[url\(https\:\/\/potluck-warzone\.vercel\.app\/svg\/hero-pattern\.svg\)\]{
   background-image: url(https://potluck-warzone.vercel.app/svg/hero-pattern.svg);
 }
@@ -959,12 +921,36 @@ select{
   background-image: url(https://wallpaperaccess.com/full/6618507.jpg);
 }
 
+.bg-\[url\(\.\.\/img\/hero\.webp\)\]{
+  background-image: url(../img/hero.webp);
+}
+
+.bg-\[url\(\/img\/hero\.webp\)\]{
+  background-image: url(/img/hero.webp);
+}
+
+.bg-\[url\(\.\.\/img\/hero-pattern\.svg\)\]{
+  background-image: url(../img/hero-pattern.svg);
+}
+
+.bg-\[url\(\.\.\/img\/grid-skew\.svg\)\]{
+  background-image: url(../img/grid-skew.svg);
+}
+
 .bg-cover{
   background-size: cover;
 }
 
+.bg-contain{
+  background-size: contain;
+}
+
 .bg-no-repeat{
   background-repeat: no-repeat;
+}
+
+.p-4{
+  padding: 1rem;
 }
 
 .px-4{
@@ -972,14 +958,14 @@ select{
   padding-right: 1rem;
 }
 
-.py-2\.5{
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
-}
-
 .px-8{
   padding-left: 2rem;
   padding-right: 2rem;
+}
+
+.py-2\.5{
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
 }
 
 .pb-24{
@@ -988,10 +974,6 @@ select{
 
 .text-center{
   text-align: center;
-}
-
-.text-right{
-  text-align: right;
 }
 
 .text-2xl{
@@ -1042,6 +1024,11 @@ select{
   color: rgb(147 51 234 / var(--tw-text-opacity));
 }
 
+.text-red-600{
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
+}
+
 .text-slate-700{
   --tw-text-opacity: 1;
   color: rgb(51 65 85 / var(--tw-text-opacity));
@@ -1050,11 +1037,6 @@ select{
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-red-600{
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity));
 }
 
 .outline-none{
@@ -1098,14 +1080,14 @@ select{
   background-color: rgb(168 85 247 / var(--tw-bg-opacity));
 }
 
-.hover\:text-purple-500:hover{
-  --tw-text-opacity: 1;
-  color: rgb(168 85 247 / var(--tw-text-opacity));
-}
-
 .hover\:text-purple-600:hover{
   --tw-text-opacity: 1;
   color: rgb(147 51 234 / var(--tw-text-opacity));
+}
+
+.hover\:text-purple-500:hover{
+  --tw-text-opacity: 1;
+  color: rgb(168 85 247 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover{
@@ -1116,17 +1098,9 @@ select{
   border-style: dashed;
 }
 
-.focus\:border-none:focus{
-  border-style: none;
-}
-
 .focus\:border-purple-300:focus{
   --tw-border-opacity: 1;
   border-color: rgb(216 180 254 / var(--tw-border-opacity));
-}
-
-.focus\:border-transparent:focus{
-  border-color: transparent;
 }
 
 .focus\:outline-none:focus{
@@ -1150,10 +1124,6 @@ select{
   --tw-ring-color: rgb(168 85 247 / var(--tw-ring-opacity));
 }
 
-.focus\:ring-transparent:focus{
-  --tw-ring-color: transparent;
-}
-
 .focus\:ring-offset-2:focus{
   --tw-ring-offset-width: 2px;
 }
@@ -1161,10 +1131,6 @@ select{
 @media (min-width: 1024px){
   .lg\:block{
     display: block;
-  }
-
-  .lg\:w-80{
-    width: 20rem;
   }
 
   .lg\:grid-cols-2{

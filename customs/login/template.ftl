@@ -93,10 +93,10 @@
 <body id="keycloak-bg-custom" class="bg-white">
 
 <div class="grid lg:grid-cols-2 h-full w-full">
-  <div class="text-gray-800 content-end pb-24 hidden lg:block bg-[url(https://wallpaperaccess.com/full/6618507.jpg)] bg-cover bg-no-repeat">
+  <div class="text-gray-800 content-end pb-24 hidden lg:block bg-[url(../img/hero.webp)] bg-cover bg-no-repeat">
     <h1 class="text-center text-4xl font-semibold text-white">Fairness For You</h1>
   </div>
-  <div class="px-4 w-full flex flex-col justify-center bg-[url(https://potluck-warzone.vercel.app/svg/hero-pattern.svg)]">
+  <div class="p-4 w-full flex flex-col justify-center bg-[url(../img/hero-pattern.svg)]">
     <main class="max-w-md w-full mx-auto">
       <header id="kc-header-custom" class="mb-10 font-semibold">
         <p class="text-gray-800 text-4xl">${kcSanitize(msg("loginTitleHtml",(realm.displayNameHtml!'')))?no_esc}</p>

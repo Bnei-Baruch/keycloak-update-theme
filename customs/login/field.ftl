@@ -35,7 +35,7 @@
 
 <#macro errorIcon error="">
   <#if error?has_content>
-    <span class="${properties.kcFormControlUtilClass} text-red-600">
+    <span class="${properties.kcFormControlUtilClass} text-red-600 flex">
         <span class="${properties.kcInputErrorIconStatusClass}">
           <i class="${properties.kcInputErrorIconClass}" aria-hidden="true"></i>
         </span>
@@ -48,10 +48,9 @@
   <#assign error=kcSanitize(messagesPerField.get(fieldName))?no_esc>
   <@group name=name label=label error=error required=required>
     <span class="<#if error?has_content></#if>">
-        <input class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full" id="${name}" name="${name}" value="${value}" type="text" autocomplete="${autocomplete}" <#if autofocus>autofocus</#if>
-                aria-invalid="<#if error?has_content>true</#if>"/>
-        <@errorIcon error=error/>
+        <input class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full" id="${name}" name="${name}" value="${value}" type="text" autocomplete="${autocomplete}" <#if autofocus>autofocus</#if> aria-invalid="<#if error?has_content>true</#if>"/>
     </span>
+    <#--  <@errorIcon error=error/>  -->
   </@group>
 </#macro>
 
@@ -79,7 +78,7 @@
         <div class="${properties.kcFormHelperTextClass} mt-3 float-right" aria-live="polite">
             <div class="${properties.kcInputHelperTextClass}">
                 <div class="${properties.kcInputHelperTextItemClass}">
-                    <span class="${properties.kcInputHelperTextItemTextClass} text-gray-600">
+                    <span class="${properties.kcInputHelperTextItemTextClass} text-gray-600 hover:text-purple-600 transition">
                         <a href="${url.loginResetCredentialsUrl}">${msg("doForgotPassword")}</a>
                     </span>
                 </div>

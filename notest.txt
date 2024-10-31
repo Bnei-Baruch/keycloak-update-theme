@@ -1,2 +1,5 @@
 bg-[url(https://potluck-warzone.vercel.app/svg/hero-pattern.svg)]
 bg-[url(https://i.pinimg.com/1200x/50/58/8e/50588e71c43a6a09f191f2f3df3fbf27.jpg)]
+
+
+<div class="text-gray-800 text-2xl"><span> &bull; Potluck Warzone</span></div>

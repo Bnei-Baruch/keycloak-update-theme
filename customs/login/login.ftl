@@ -37,7 +37,7 @@
         <#if realm.password && realm.registrationAllowed && !registrationDisabled??>
             <div id="kc-registration-container" class="${properties.kcLoginFooterBand!} text-gray-600">
                 <div id="kc-registration" class="${properties.kcLoginFooterBandItem!}">
-                    <span>${msg("noAccount")} <a href="${url.registrationUrl}" class="hover:underline">${msg("doRegister")}</a></span>
+                    <span>${msg("noAccount")} <a href="${url.registrationUrl}" class="hover:text-purple-600 transition">${msg("doRegister")}</a></span>
                 </div>
             </div>
         </#if>
