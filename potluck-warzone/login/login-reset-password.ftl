@@ -18,9 +18,9 @@
         </form>
     <#elseif section = "info" >
         <#if realm.duplicateEmailsAllowed>
-            ${msg("emailInstructionUsername")}
+            <p class="text-gray-600 text-sm">${msg("emailInstructionUsername")}</p>
         <#else>
-            <p class="text-gray-700">${msg("emailInstruction")}</p>
+            <p class="text-gray-600 text-sm">${msg("emailInstruction")}</p>
         </#if>
     </#if>
 </@layout.registrationLayout>
