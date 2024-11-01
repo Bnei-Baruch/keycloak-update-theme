@@ -1,5 +1,40 @@
-Creating Themes
-===============
+# Potluck Warzone Keycloak Theme (WIP)
+
+Author: **Eko Sutrisno** [Github](https://github.com/ekosutrisno)
+
+This theme focus on customize for Standard Login Theme page with full responsive:
+
+CSS Framework:
+
+- TailwindCSS
+
+Customized Page:
+
+- Login
+- Register
+- Forgot/Password
+- Update Password
+- Setup 2FA OTP
+- Login With OTP
+
+## Preview Page
+
+- Login Page
+![Login Page](./public/login_page.webp)
+- Login With OTP Page
+![Login Page](./public/input_otp_page.webp)
+- Register Page
+![Login Page](./public/register_page.webp)
+- Forgot Password Page
+![Login Page](./public/forgot_password_page.webp)
+- Update Password Page
+![Login Page](./public/update_password_page.webp)
+- Setup 2FA OTP Page
+![Login Page](./public/setup_otp_page.webp)
+
+## Creating Themes
+
+---
 
 Themes are used to configure the look and feel of login pages and the account management console.
 
@@ -14,8 +49,9 @@ the server when making changes.
 
 See the theme section in the [Server Developer Guide](https://www.keycloak.org/docs/latest/server_development/#_themes) for more details about how to create custom themes.
 
-Overriding the built-in templates
----------------------------------
+## Overriding the built-in templates
+
+---
 
 While creating custom themes, especially when overriding templates, it may be useful to use the built-in templates as
 a reference. These can be found within the theme directory of `../lib/lib/main/org.keycloak.keycloak-themes-26.0.2.jar`, which can be opened using any
