@@ -58,7 +58,7 @@ a reference. These can be found within the theme directory of `../lib/lib/main/o
 standard ZIP archive tool.
 
 ```sh
-npx tailwindcss -i ./customs/login/resources/css/tailwind.css -o ./customs/login/resources/css/styles.css --watch
+npx tailwindcss -i ./potluck-warzone/login/resources/css/tailwind.css -o ./potluck-warzone/login/resources/css/styles.css --watch
 ```
 
 **Built-in themes should not be modified directly, instead a custom theme should be created.**

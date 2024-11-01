@@ -50,7 +50,6 @@
     <span class="<#if error?has_content></#if>">
         <input class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full" id="${name}" name="${name}" value="${value}" type="text" autocomplete="${autocomplete}" <#if autofocus>autofocus</#if> aria-invalid="<#if error?has_content>true</#if>"/>
     </span>
-    <#--  <@errorIcon error=error/>  -->
   </@group>
 </#macro>
 
@@ -62,7 +61,6 @@
       <div class="w-full">
         <span class="<#if error?has_content>${properties.kcError}</#if>">
           <input class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full" id="${name}" name="${name}" value="${value}" type="password" autocomplete="${autocomplete}" <#if autofocus>autofocus</#if> aria-invalid="<#if error?has_content>true</#if>"/>
-          <@errorIcon error=error/>
         </span>
       </div>
       <div class="${properties.kcInputGroupItemClass}">

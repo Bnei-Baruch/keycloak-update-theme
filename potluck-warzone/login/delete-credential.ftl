@@ -13,7 +13,7 @@
 
         <form class="${properties.kcFormClass!}" action="${url.loginAction}" method="POST">
             <@buttons.actionGroup>
-                <@buttons.button name="cancel-aia" id="kc-decline" label="doDecline" class=[""]/>
+                <@buttons.buttonOutline name="cancel-aia" id="kc-decline" label="doDecline" class=[""]/>
                 <@buttons.button name="accept" id="kc-accept" label="doConfirmDelete" class=["kcButtonPrimaryClass"]/>
             </@buttons.actionGroup>
         </form

@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ["./customs/**/*.{html,js,ftl}"],
+    content: ["./potluck-warzone/**/*.{html,js,ftl}"],
     theme: {
         extend: {},
     },

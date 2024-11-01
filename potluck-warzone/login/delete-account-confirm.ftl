@@ -29,9 +29,9 @@
       <p class="delete-account-text">${msg("finalDeletionConfirmation")}</p>
 
       <@buttons.actionGroup>
-        <@buttons.button label="doConfirmDelete" class=["kcButtonPrimaryClass"]/>
+        <@buttons.button label="doConfirmDelete" class=[]/>
         <#if triggered_from_aia>
-          <@buttons.button name="cancel-aia" label="doCancel" class=["kcButtonSecondaryClass"]/>
+          <@buttons.buttonOutline name="cancel-aia" label="doCancel" class=[]/>
         </#if>
       </@buttons.actionGroup>
     </form>
