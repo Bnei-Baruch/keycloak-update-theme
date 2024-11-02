@@ -96,7 +96,7 @@
 
 <div class="grid lg:grid-cols-2 h-full w-full">
   <div class="text-gray-800 content-end pb-24 hidden lg:block bg-[url(../img/hero.webp)] bg-cover bg-no-repeat">
-    <h1 class="text-center text-4xl font-semibold text-white">Fairness For You</h1>
+    <h1 class="text-center text-4xl font-semibold text-white">${msg("companyTagLineTitle")}</h1>
   </div>
   <div class="p-4 w-full flex flex-col justify-center bg-[url(../img/hero-pattern.svg)]">
     <main class="max-w-md w-full mx-auto">
