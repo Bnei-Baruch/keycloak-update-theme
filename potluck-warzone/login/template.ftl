@@ -7,13 +7,11 @@
     <#if !realm.loginWithEmailAllowed>${msg("username")}<#elseif !realm.registrationEmailAsUsername>${msg("usernameOrEmail")}<#else>${msg("email")}</#if>
   </#assign>
   <@field.group name="username" label=label>
-    <div class="flex item-center gap-4 mt-2">
+    <div class="flex item-center mt-2">
       <div class="w-full">
-        <span class="w-full">
           <input class="px-4 py-2.5 bg-white text-gray-800 rounded-lg outline-none border-purple-300 border-dashed ring-1 ring-offset-2 ring-purple-500 w-full focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500" id="kc-attempted-username" value="${auth.attemptedUsername}" readonly>
-        </span>
       </div>
-      <div class="${properties.kcInputGroupItemClass}">
+      <div class="ml-4">
         <button id="reset-login" class="py-2.5 px-4 rounded-lg border-2 border-purple-400 text-center text-purple-600 w-max" type="button" 
               aria-label="${msg('restartLoginTooltip')}" onclick="location.href='${url.loginRestartFlowUrl}'">
             <i class="fa-sync-alt fas" aria-hidden="true"></i>
@@ -101,15 +99,15 @@
   <div class="p-4 w-full flex flex-col justify-center bg-[url(../img/hero-pattern.svg)]">
     <main class="max-w-md w-full mx-auto">
       <header id="kc-header-custom" class="mb-10 font-semibold">
-        <p class="text-gray-800 text-4xl">${kcSanitize(msg("loginTitleHtml",(realm.displayNameHtml!'')))?no_esc}</p>
+        <p class="text-purple-800 text-2xl">${kcSanitize(msg("loginTitleHtml",(realm.displayNameHtml!'')))?no_esc}</p>
       </header>
       <div class="text-slate-700">
         <h1 class="text-2xl font-medium">Auth</h1>
         <h2 class="text-purple-500" id="kc-page-title-custom"><#nested "header"></h1>
         <#if realm.internationalizationEnabled  && locale.supported?size gt 1>
-          <div class="">
-            <div class="">
+            <div class="w-full flex justify-end">
               <select
+                class="px-2 py-1 text-sm bg-white text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-max"
                 aria-label="${msg("languages")}"
                 id="login-select-toggle"
                 onchange="if (this.value) window.location.href=this.value"
@@ -123,29 +121,10 @@
                   </option>
                 </#list>
               </select>
-              <span class="${properties.kcFormControlUtilClass}">
-                <span class="${properties.kcFormControlToggleIcon!}">
-                  <svg
-                    class="pf-v5-svg"
-                    viewBox="0 0 320 512"
-                    fill="currentColor"
-                    aria-hidden="true"
-                    role="img"
-                    width="1em"
-                    height="1em"
-                  >
-                    <path
-                      d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-                    >
-                    </path>
-                  </svg>
-                </span>
-              </span>
-            </div>
           </div>
         </#if>
       </div>
-      <div class="${properties.kcLoginMainBody!}">
+      <div id="main-body" class="${properties.kcLoginMainBody!}">
         <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
             <#if displayRequiredFields>
                 <div class="${properties.kcContentWrapperClass!} hidden">
