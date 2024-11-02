@@ -91,7 +91,7 @@
   <div>
     <label for="${name}">
       <input
-        class="rounded mb-0.5 focus:outline-none outline-none border border-purple-400 text-purple-600 ring-1 ring-purple-300/25 focus:ring-purple-300"
+        class="rounded mb-1 focus:outline-none outline-none border border-purple-400 text-purple-600 ring-1 ring-purple-300/25 focus:ring-purple-300"
         type="checkbox"
         id="${name}"
         name="${name}"
