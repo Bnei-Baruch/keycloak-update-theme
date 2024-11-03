@@ -1189,6 +1189,14 @@ select{
   background-image: url(../img/question.svg);
 }
 
+.bg-\[url\(\$\{url\.resourcesPath\}\/img\/hero-pattern\.svg\)\]{
+  background-image: url(${url.resourcesPath}/img/hero-pattern.svg);
+}
+
+.bg-\[url\(\$\{url\.resourcesPath\}\/img\/hero\.webp\)\]{
+  background-image: url(${url.resourcesPath}/img/hero.webp);
+}
+
 .bg-cover{
   background-size: cover;
 }
@@ -1652,11 +1660,6 @@ select{
   --tw-shadow: var(--tw-shadow-colored);
 }
 
-.hover\:border-purple-500:hover{
-  --tw-border-opacity: 1;
-  border-color: rgb(168 85 247 / var(--tw-border-opacity));
-}
-
 .hover\:bg-gray-50:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
@@ -1670,11 +1673,6 @@ select{
 .hover\:text-purple-600:hover{
   --tw-text-opacity: 1;
   color: rgb(147 51 234 / var(--tw-text-opacity));
-}
-
-.hover\:text-purple-500:hover{
-  --tw-text-opacity: 1;
-  color: rgb(168 85 247 / var(--tw-text-opacity));
 }
 
 .focus\:border-dashed:focus{
