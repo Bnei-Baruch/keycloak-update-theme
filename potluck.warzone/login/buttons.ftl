@@ -20,6 +20,6 @@
 
 <#macro loginButton>
   <@buttons.actionGroup>
-    <@buttons.button id="kc-login" name="login" label="doLogIn" class=["kcButtonPrimaryClass", "kcButtonBlockClass"] />
+    <@buttons.button id="kc-login" name="login" label="doLogIn" class=[] />
   </@buttons.actionGroup>
 </#macro>

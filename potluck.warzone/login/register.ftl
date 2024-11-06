@@ -38,7 +38,7 @@
 
             <div id="kc-form-buttons" class="flex item-center space-x-4 justify-end">
                 <@buttons.buttonLink href=url.loginUrl label="backToLogin" class=[]/>
-                <input class="px-8 py-2.5 transition bg-purple-600 hover:bg-purple-500 text-white w-max float-right rounded-lg" type="submit" value="${msg("doRegister")}"/>
+                <@buttons.button label="doRegister" name="doRegister" id="doRegister" class=[]/>
             </div>
         </form>
 
