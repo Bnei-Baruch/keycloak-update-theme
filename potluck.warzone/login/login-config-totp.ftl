@@ -1,6 +1,8 @@
 <#import "template.ftl" as layout>
 <#import "field.ftl" as field>
+<#import "buttons.ftl" as buttons>
 <#import "password-commons.ftl" as passwordCommons>
+
 <@layout.registrationLayout displayRequiredFields=false displayMessage=!messagesPerField.existsError('totp','userLabel'); section>
 <!-- template: login-config-totp.ftl -->
     <#if section = "header">
@@ -108,19 +110,10 @@
             <div class="pf-v5-c-form__group pf-m-action">
                 <div class="pf-v5-c-form__actions float-right">
                     <#if isAppInitiatedAction??>
-                        <button type="submit"
-                            class="w-max py-2.5 px-4 rounded-lg border-2 border-purple-400 text-center text-purple-600 w-full"
-                            id="cancelTOTPBtn" name="cancel-aia" value="true" />${msg("doCancel")}
-                        </button>
-                        <input type="submit"
-                            class="w-max px-4 py-2.5 bg-purple-600 hover:bg-purple-500 text-white w-full rounded-lg"
-                            id="saveTOTPBtn" value="${msg("doSubmit")}"
-                        />
+                        <@buttons.buttonOutline id="cancelTOTPBtn" name="cancel-aia" label="doCancel" class=[]/>
+                        <@buttons.button id="saveTOTPBtn" label="doSubmit" class=[]/>
                     <#else>
-                        <input type="submit"
-                            class="px-4 py-2.5 bg-purple-600 hover:bg-purple-500 text-white w-full rounded-lg"
-                            id="saveTOTPBtn" value="${msg("doSubmit")}"
-                        />
+                        <@buttons.button id="saveTOTPBtn" label="doSubmit" class=[]/>
                     </#if>
                 </div>
             </div>

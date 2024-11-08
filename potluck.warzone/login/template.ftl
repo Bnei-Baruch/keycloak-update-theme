@@ -72,102 +72,97 @@
     </script>
 </head>
 
-<body id="keycloak-bg-custom" class="bg-white">
-  <div class="grid lg:grid-cols-2 h-full w-full">
-    <div class="text-gray-800 content-end pb-24 hidden lg:block bg-[url(../img/hero.webp)] bg-cover object-cover">
-      <h1 class="text-center text-4xl font-semibold text-white">${msg("companyTagLineTitle")}</h1>
-    </div>
-    <div class="p-4 w-full flex flex-col justify-center bg-[url(../img/hero-pattern.svg)]">
-      <main class="max-w-md w-full mx-auto">
-        <header id="kc-header-custom" class="mb-10 font-semibold">
-          <p class="text-purple-800 text-2xl">${kcSanitize(msg("loginTitleHtml",(realm.displayNameHtml!'')))?no_esc}</p>
-        </header>
-        <div class="text-slate-700">
-          <h1 class="text-2xl font-medium">Auth</h1>
-          <h2 class="text-purple-500" id="kc-page-title-custom"><#nested "header"></h1>
-          <#if realm.internationalizationEnabled  && locale.supported?size gt 1>
-              <div class="w-full flex justify-end">
-                <select
-                  class="px-2 py-1 text-sm bg-white text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-max"
-                  aria-label="${msg("languages")}"
-                  id="login-select-toggle"
-                  onchange="if (this.value) window.location.href=this.value"
-                >
-                  <#list locale.supported?sort_by("label") as l>
-                    <option
-                      value="${l.url}"
-                      ${(l.languageTag == locale.currentLanguageTag)?then('selected','')}
-                    >
-                      ${l.label}
-                    </option>
-                  </#list>
-                </select>
-            </div>
-          </#if>
-        </div>
-        <div id="main-body" class="${properties.kcLoginMainBody!}">
-          <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
-              <#if displayRequiredFields>
-                  <div class="${properties.kcContentWrapperClass!} hidden">
-                      <div class="${properties.kcLabelWrapperClass!} subtitle text-gray-800">
-                          <span class="${properties.kcInputHelperTextItemTextClass!}">
-                            <span class="${properties.kcInputRequiredClass!}">*</span> ${msg("requiredFields")}
-                          </span>
-                      </div>
-                  </div>
-              </#if>
-          <#else>
-              <#if displayRequiredFields>
-                  <div class="${properties.kcContentWrapperClass!} hidden">
-                      <div class="${properties.kcLabelWrapperClass!} subtitle text-gray-800">
-                          <span class="${properties.kcInputHelperTextItemTextClass!}">
-                            <span class="${properties.kcInputRequiredClass!}">*</span> ${msg("requiredFields")}
-                          </span>
-                      </div>
-                      <div class="${properties.kcFormClass} ${properties.kcContentWrapperClass}">
-                          <#nested "show-username">
-                          <@username />
-                      </div>
-                  </div>
-              <#else>
-                  <div class="${properties.kcFormClass} ${properties.kcContentWrapperClass}">
-                    <#nested "show-username">
-                    <@username />
-                  </div>
-              </#if>
-          </#if>
-
-          <#-- App-initiated actions should not see warning messages about the need to complete the action -->
-          <#-- during login.                                                                               -->
-          <#if displayMessage && message?has_content && (message.type != 'warning' || !isAppInitiatedAction??)>
-              <@loginAlert.alert message=message />
-          </#if>
-          
-          <div class="my-5"><#nested "form"></div>
-
-          <#if auth?has_content && auth.showTryAnotherWayLink()>
-            <form id="kc-select-try-another-way-form" action="${url.loginAction}" method="post" novalidate="novalidate">
-                <input type="hidden" name="tryAnotherWay" value="on"/>
-                <a id="try-another-way" href="javascript:document.forms['kc-select-try-another-way-form'].submit()"
-                    class="${properties.kcButtonSecondaryClass} ${properties.kcButtonBlockClass} ${properties.kcMarginTopClass}">
-                      ${kcSanitize(msg("doTryAnotherWay"))?no_esc}
-                </a>
-            </form>
-          </#if>
-          <#if displayInfo>
-            <div id="kc-info" class="${properties.kcSignUpClass!}">
-                <div id="kc-info-wrapper" class="${properties.kcInfoAreaWrapperClass!}">
-                    <#nested "info">
+<body id="keycloak-bg-custom" class="bg-white max-w-screen-2xl">
+  <div class="p-6 w-full flex flex-col justify-center bg-[url(../img/hero-pattern.svg)]">
+    <main class="max-w-md w-full mx-auto">
+      <header id="kc-header-custom" class="mb-10 font-semibold">
+        <p class="text-purple-800 text-2xl">${kcSanitize(msg("loginTitleHtml",(realm.displayNameHtml!'')))?no_esc}</p>
+      </header>
+      <div class="text-slate-700">
+        <h1 class="text-2xl font-medium">Auth</h1>
+        <h2 class="text-purple-500" id="kc-page-title-custom"><#nested "header"></h1>
+        <#if realm.internationalizationEnabled  && locale.supported?size gt 1>
+            <div class="w-full flex justify-end">
+              <select
+                class="px-2 py-1 text-sm bg-white text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-max"
+                aria-label="${msg("languages")}"
+                id="login-select-toggle"
+                onchange="if (this.value) window.location.href=this.value"
+              >
+                <#list locale.supported?sort_by("label") as l>
+                  <option
+                    value="${l.url}"
+                    ${(l.languageTag == locale.currentLanguageTag)?then('selected','')}
+                  >
+                    ${l.label}
+                  </option>
+                </#list>
+              </select>
+          </div>
+        </#if>
+      </div>
+      <div id="main-body" class="${properties.kcLoginMainBody!}">
+        <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
+            <#if displayRequiredFields>
+                <div class="${properties.kcContentWrapperClass!} hidden">
+                    <div class="${properties.kcLabelWrapperClass!} subtitle text-gray-800">
+                        <span class="${properties.kcInputHelperTextItemTextClass!}">
+                          <span class="${properties.kcInputRequiredClass!}">*</span> ${msg("requiredFields")}
+                        </span>
+                    </div>
                 </div>
-            </div>
-          </#if>
-        </div>
-        <div class="pf-v5-c-login__main-footer">
-          <#nested "socialProviders">
-        </div>
-      </main>
-      <@loginFooter.content/>
-    </div>
+            </#if>
+        <#else>
+            <#if displayRequiredFields>
+                <div class="${properties.kcContentWrapperClass!} hidden">
+                    <div class="${properties.kcLabelWrapperClass!} subtitle text-gray-800">
+                        <span class="${properties.kcInputHelperTextItemTextClass!}">
+                          <span class="${properties.kcInputRequiredClass!}">*</span> ${msg("requiredFields")}
+                        </span>
+                    </div>
+                    <div class="${properties.kcFormClass} ${properties.kcContentWrapperClass}">
+                        <#nested "show-username">
+                        <@username />
+                    </div>
+                </div>
+            <#else>
+                <div class="${properties.kcFormClass} ${properties.kcContentWrapperClass}">
+                  <#nested "show-username">
+                  <@username />
+                </div>
+            </#if>
+        </#if>
+
+        <#-- App-initiated actions should not see warning messages about the need to complete the action -->
+        <#-- during login.                                                                               -->
+        <#if displayMessage && message?has_content && (message.type != 'warning' || !isAppInitiatedAction??)>
+            <@loginAlert.alert message=message />
+        </#if>
+        
+        <div class="my-5"><#nested "form"></div>
+
+        <#if auth?has_content && auth.showTryAnotherWayLink()>
+          <form id="kc-select-try-another-way-form" action="${url.loginAction}" method="post" novalidate="novalidate">
+              <input type="hidden" name="tryAnotherWay" value="on"/>
+              <a id="try-another-way" href="javascript:document.forms['kc-select-try-another-way-form'].submit()"
+                  class="${properties.kcButtonSecondaryClass} ${properties.kcButtonBlockClass} ${properties.kcMarginTopClass}">
+                    ${kcSanitize(msg("doTryAnotherWay"))?no_esc}
+              </a>
+          </form>
+        </#if>
+        <#if displayInfo>
+          <div id="kc-info" class="${properties.kcSignUpClass!}">
+              <div id="kc-info-wrapper" class="${properties.kcInfoAreaWrapperClass!}">
+                  <#nested "info">
+              </div>
+          </div>
+        </#if>
+      </div>
+      <div class="pf-v5-c-login__main-footer">
+        <#nested "socialProviders">
+      </div>
+    </main>
+    <@loginFooter.content/>
   </div>
 </body>
 </html>
