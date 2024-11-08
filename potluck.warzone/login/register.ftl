@@ -16,8 +16,6 @@
         <form id="kc-register-form" class="${properties.kcFormClass!}" action="${url.registrationAction}" method="post" novalidate="novalidate">
             <@userProfileCommons.userProfileFormFields; callback, attribute>
                 <#if callback = "afterField">
-                    <@field.password name="password" label=msg("password") autocomplete="new-password" />
-                    <@field.password name="password-confirm" label=msg("passwordConfirm") autocomplete="new-password" />
                 <#-- render password fields just under the username or email (if used as username) -->
                     <#if passwordRequired?? && (attribute.name == 'username' || (attribute.name == 'email' && realm.registrationEmailAsUsername))>
                         <@field.password name="password" label=msg("password") autocomplete="new-password" />

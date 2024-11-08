@@ -1,90 +1,98 @@
 <#import "field.ftl" as field>
 <#macro userProfileFormFields>
-	<#assign attributes=profile.attributes >
+	<#assign currentGroup="">
+	
+	<#list profile.attributes as attribute>
+		<#assign group = (attribute.group)!"">
 
-	<@field.group name=attributes[0].name label=advancedMsg(attributes[0].displayName!'') error=kcSanitize(messagesPerField.get('${attributes[0].name}'))?no_esc required=attributes[0].required>
-		<div class="${properties.kcInputWrapperClass!}">
-			<#if attributes[0].annotations.inputHelperTextBefore??>
-				<div class="${properties.kcInputHelperTextBeforeClass!}" id="form-help-text-before-${attribute.name}" aria-live="polite">${kcSanitize(advancedMsg(attribute.annotations.inputHelperTextBefore))?no_esc}</div>
+		<#if group != currentGroup>
+			<#assign currentGroup=group>
+
+			<#if currentGroup != "">
+				<div class="text-gray-800" <#list group.html5DataAnnotations as key, value>data-${key}="${value}"</#list> >
+					<#assign groupDisplayHeader=group.displayHeader!"">
+
+					<#if groupDisplayHeader != "">
+						<#assign groupHeaderText=advancedMsg(groupDisplayHeader)!group>
+					<#else>
+						<#assign groupHeaderText=group.name!"">
+					</#if>
+
+					<div class="font-semibold">
+						<label id="header-${attribute.group.name}">${groupHeaderText}</label>
+					</div>
+
+					<#assign groupDisplayDescription=group.displayDescription!"">
+
+					<#if groupDisplayDescription != "">
+						<#assign groupDescriptionText=advancedMsg(groupDisplayDescription)!"">
+
+						<div class="text-gray-600 text-sm">
+							<label id="description-${group.name}">${groupDescriptionText}</label>
+						</div>
+					</#if>
+				</div>
 			</#if>
-			<@inputFieldByType attribute=attributes[0]/>
-			<#if attributes[0].annotations.inputHelperTextAfter??>
-				<div class="${properties.kcInputHelperTextAfterClass!}" id="form-help-text-after-${attributes[0].name}" aria-live="polite">${kcSanitize(advancedMsg(attributes[0].annotations.inputHelperTextAfter))?no_esc}</div>
+		</#if>
+
+		<#nested "beforeField" attribute>
+
+		<@field.group name=attribute.name label=advancedMsg(attribute.displayName!'') error=kcSanitize(messagesPerField.get('${attribute.name}'))?no_esc required=attribute.required>
+			<#assign inputWrapperClass = "">
+			<#if attribute.annotations.inputType?? && (attribute.annotations.inputType == "select-radiobuttons" || attribute.annotations.inputType == "multiselect-checkboxes")>
+				<#assign inputWrapperClass = "flex item-center gap-2">
 			</#if>
-		</div>
-	</@field.group>
-	<@field.group name=attributes[1].name label=advancedMsg(attributes[1].displayName!'') error=kcSanitize(messagesPerField.get('${attributes[1].name}'))?no_esc required=attributes[1].required>
-		<div class="${properties.kcInputWrapperClass!}">
-			<#if attributes[1].annotations.inputHelperTextBefore??>
-				<div class="${properties.kcInputHelperTextBeforeClass!}" id="form-help-text-before-${attribute.name}" aria-live="polite">${kcSanitize(advancedMsg(attribute.annotations.inputHelperTextBefore))?no_esc}</div>
-			</#if>
-			<@inputFieldByType attribute=attributes[1]/>
-			<#if attributes[1].annotations.inputHelperTextAfter??>
-				<div class="${properties.kcInputHelperTextAfterClass!}" id="form-help-text-after-${attributes[1].name}" aria-live="polite">${kcSanitize(advancedMsg(attributes[1].annotations.inputHelperTextAfter))?no_esc}</div>
-			</#if>
-		</div>
-	</@field.group>
-	<div class="grid lg:grid-cols-2 gap-4">
-		<@field.group name=attributes[2].name label=advancedMsg(attributes[2].displayName!'') error=kcSanitize(messagesPerField.get('${attributes[2].name}'))?no_esc required=attributes[2].required>
-			<div class="${properties.kcInputWrapperClass!}">
-				<#if attributes[2].annotations.inputHelperTextBefore??>
-					<div class="${properties.kcInputHelperTextBeforeClass!}" id="form-help-text-before-${attribute.name}" aria-live="polite">${kcSanitize(advancedMsg(attribute.annotations.inputHelperTextBefore))?no_esc}</div>
+
+			<div class="${inputWrapperClass}">
+				<#if attribute.annotations.inputHelperTextBefore??>
+					<span class="text-sm text-gray-500" id="form-help-text-before-${attribute.name}" aria-live="polite">${kcSanitize(advancedMsg(attribute.annotations.inputHelperTextBefore))?no_esc}</span>
 				</#if>
-				<@inputFieldByType attribute=attributes[2]/>
-				<#if attributes[2].annotations.inputHelperTextAfter??>
-					<div class="${properties.kcInputHelperTextAfterClass!}" id="form-help-text-after-${attributes[2].name}" aria-live="polite">${kcSanitize(advancedMsg(attributes[2].annotations.inputHelperTextAfter))?no_esc}</div>
+				<@inputFieldByType attribute=attribute/>
+				<#if attribute.annotations.inputHelperTextAfter??>
+					<span class="text-sm text-gray-500" id="form-help-text-after-${attribute.name}" aria-live="polite">${kcSanitize(advancedMsg(attribute.annotations.inputHelperTextAfter))?no_esc}</span>
 				</#if>
 			</div>
 		</@field.group>
-		<@field.group name=attributes[3].name label=advancedMsg(attributes[3].displayName!'') error=kcSanitize(messagesPerField.get('${attributes[3].name}'))?no_esc required=attributes[3].required>
-			<div class="${properties.kcInputWrapperClass!}">
-				<#if attributes[3].annotations.inputHelperTextBefore??>
-					<div class="${properties.kcInputHelperTextBeforeClass!}" id="form-help-text-before-${attribute.name}" aria-live="polite">${kcSanitize(advancedMsg(attribute.annotations.inputHelperTextBefore))?no_esc}</div>
-				</#if>
-				<@inputFieldByType attribute=attributes[3]/>
-				<#if attributes[3].annotations.inputHelperTextAfter??>
-					<div class="${properties.kcInputHelperTextAfterClass!}" id="form-help-text-after-${attributes[3].name}" aria-live="polite">${kcSanitize(advancedMsg(attributes[3].annotations.inputHelperTextAfter))?no_esc}</div>
-				</#if>
-			</div>
-		</@field.group>
-	</div>
 
-	<#--  Showing Field Password and Confirm Password  -->
-	<#nested "beforeField" attributes[0]>
-	<#nested "afterField" attributes[1]>
+		<#nested "afterField" attribute>
+	</#list>
 
 	<#list profile.html5DataAnnotations?keys as key>
         <script type="module" src="${url.resourcesPath}/js/${key}.js"></script>
     </#list>
 </#macro>
 
+
 <#macro inputFieldByType attribute>
 	<#switch attribute.annotations.inputType!''>
-	<#case 'textarea'>
-		<@textareaTag attribute=attribute/>
-		<#break>
-	<#case 'select'>
-	<#case 'multiselect'>
-		<@selectTag attribute=attribute/>
-		<#break>
-	<#case 'select-radiobuttons'>
-	<#case 'multiselect-checkboxes'>
-		<@inputTagSelects attribute=attribute/>
-		<#break>
-	<#default>
-		<#if attribute.multivalued && attribute.values?has_content>
-			<#list attribute.values as value>
-				<@inputTag attribute=attribute value=value!''/>
-			</#list>
-		<#else>
-			<@inputTag attribute=attribute value=attribute.value!''/>
-		</#if>
+		<#case 'textarea'>
+			<@textareaTag attribute=attribute/>
+			<#break>
+		<#case 'select'>
+		<#case 'multiselect'>
+			<@selectTag attribute=attribute/>
+			<#break>
+		<#case 'select-radiobuttons'>
+		<#case 'multiselect-checkboxes'>
+			<@inputTagSelects attribute=attribute/>
+			<#break>
+		<#default>
+			<#if attribute.multivalued && attribute.values?has_content>
+				<#list attribute.values as value>
+					<@inputTag attribute=attribute value=value!''/>
+				</#list>
+			<#else>
+				<@inputTag attribute=attribute value=attribute.value!''/>
+			</#if>
 	</#switch>
 </#macro>
 
 <#macro inputTag attribute value>
-	<span class="<#if error?has_content>${properties.kcError}</#if>">
-		<input type="<@inputTagType attribute=attribute/>" id="${attribute.name}" name="${attribute.name}" value="${(value!'')}" 
+	<span class="text-gray-800">
+		<input 
+			type="<@inputTagType attribute=attribute/>" 
+			id="${attribute.name}" name="${attribute.name}" 
+			value="${(value!'')}" 
 			class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full"
 			aria-invalid="<#if messagesPerField.existsError('${attribute.name}')>true</#if>"
 			<#if attribute.readOnly>disabled</#if>
@@ -107,20 +115,23 @@
 
 <#macro inputTagType attribute>
 	<#compress>
-	<#if attribute.annotations.inputType??>
-		<#if attribute.annotations.inputType?starts_with("html5-")>
-			${attribute.annotations.inputType[6..]}
+		<#if attribute.annotations.inputType??>
+			<#if attribute.annotations.inputType?starts_with("html5-")>
+				${attribute.annotations.inputType[6..]}
+			<#else>
+				${attribute.annotations.inputType}
+			</#if>
 		<#else>
-			${attribute.annotations.inputType}
+		text
 		</#if>
-	<#else>
-	text
-	</#if>
 	</#compress>
 </#macro>
 
 <#macro textareaTag attribute>
-	<textarea id="${attribute.name}" name="${attribute.name}" class="${properties.kcInputClass!}"
+	<textarea 
+		id="${attribute.name}" 
+		name="${attribute.name}" 
+		class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full"
 		aria-invalid="<#if messagesPerField.existsError('${attribute.name}')>true</#if>"
 		<#if attribute.readOnly>disabled</#if>
 		<#if attribute.annotations.inputTypeCols??>cols="${attribute.annotations.inputTypeCols}"</#if>
@@ -130,61 +141,44 @@
 </#macro>
 
 <#macro selectTag attribute>
-	<div class="${properties.kcInputClass!}">
-		<select id="${attribute.name}" name="${attribute.name}"
-			aria-invalid="<#if messagesPerField.existsError('${attribute.name}')>true</#if>"
-			<#if attribute.readOnly>disabled</#if>
-			<#if attribute.annotations.inputType=='multiselect'>multiple</#if>
-			<#if attribute.annotations.inputTypeSize??>size="${attribute.annotations.inputTypeSize}"</#if>
-		>
-			<#if attribute.annotations.inputType=='select'>
-				<option value=""></option>
-			</#if>
+	<select 
+		id="${attribute.name}" 
+		name="${attribute.name}"
+		class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full"
+		aria-invalid="<#if messagesPerField.existsError('${attribute.name}')>true</#if>"
+		<#if attribute.readOnly>disabled</#if>
+		<#if attribute.annotations.inputType=='multiselect'>multiple</#if>
+		<#if attribute.annotations.inputTypeSize??>size="${attribute.annotations.inputTypeSize}"</#if>
+	>
+		<#if attribute.annotations.inputType=='select'>
+			<option value=""></option>
+		</#if>
 
-			<#if attribute.annotations.inputOptionsFromValidation?? && attribute.validators[attribute.annotations.inputOptionsFromValidation]?? && attribute.validators[attribute.annotations.inputOptionsFromValidation].options??>
-				<#assign options=attribute.validators[attribute.annotations.inputOptionsFromValidation].options>
-			<#elseif attribute.validators.options?? && attribute.validators.options.options??>
-				<#assign options=attribute.validators.options.options>
-			<#else>
-				<#assign options=[]>
-			</#if>
+		<#if attribute.annotations.inputOptionsFromValidation?? && attribute.validators[attribute.annotations.inputOptionsFromValidation]?? && attribute.validators[attribute.annotations.inputOptionsFromValidation].options??>
+			<#assign options=attribute.validators[attribute.annotations.inputOptionsFromValidation].options>
+		<#elseif attribute.validators.options?? && attribute.validators.options.options??>
+			<#assign options=attribute.validators.options.options>
+		<#else>
+			<#assign options=[]>
+		</#if>
 
-			<#list options as option>
-				<option value="${option}" <#if attribute.values?seq_contains(option)>selected</#if>><@selectOptionLabelText attribute=attribute option=option/></option>
-			</#list>
-		</select>
-		<span class="${properties.kcFormControlUtilClass}">
-			<span class="${properties.kcFormControlToggleIcon!}">
-				<svg
-					class="pf-v5-svg"
-					viewBox="0 0 320 512"
-					fill="currentColor"
-					aria-hidden="true"
-					role="img"
-					width="1em"
-					height="1em"
-				>
-					<path
-						d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-					>
-					</path>
-				</svg>
-			</span>
-		</span>
-	</div>
+		<#list options as option>
+			<option value="${option}" <#if attribute.values?seq_contains(option)>selected</#if>><@selectOptionLabelText attribute=attribute option=option/></option>
+		</#list>
+	</select>
 </#macro>
 
 <#macro inputTagSelects attribute>
 	<#if attribute.annotations.inputType=='select-radiobuttons'>
 		<#assign inputType='radio'>
 		<#assign classDiv=properties.kcInputClassRadio!>
-		<#assign classInput=properties.kcInputClassRadioInput!>
-		<#assign classLabel=properties.kcInputClassRadioLabel!>
+		<#assign classInput="text-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500">
+		<#assign classLabel="cursor-pointer">
 	<#else>	
 		<#assign inputType='checkbox'>
 		<#assign classDiv=properties.kcInputClassCheckbox!>
-		<#assign classInput=properties.kcInputClassCheckboxInput!>
-		<#assign classLabel=properties.kcInputClassCheckboxLabel!>
+		<#assign classInput="rounded mb-1 focus:outline-none outline-none border border-purple-400 text-purple-600 ring-1 ring-purple-300/25 focus:ring-purple-300">
+		<#assign classLabel="cursor-pointer">
 	</#if>
 	
 	<#if attribute.annotations.inputOptionsFromValidation?? && attribute.validators[attribute.annotations.inputOptionsFromValidation]?? && attribute.validators[attribute.annotations.inputOptionsFromValidation].options??>
@@ -196,8 +190,13 @@
     </#if>
 
     <#list options as option>
-        <div class="${classDiv}">
-            <input type="${inputType}" id="${attribute.name}-${option}" name="${attribute.name}" value="${option}" class="${classInput}"
+        <div class=w-max>
+            <input 
+				type="${inputType}" 
+				id="${attribute.name}-${option}" 
+				name="${attribute.name}" 
+				value="${option}" 
+				class="${classInput}"
                 aria-invalid="<#if messagesPerField.existsError('${attribute.name}')>true</#if>"
                 <#if attribute.readOnly>disabled</#if>
                 <#if attribute.values?seq_contains(option)>checked</#if>
@@ -209,14 +208,14 @@
 
 <#macro selectOptionLabelText attribute option>
 	<#compress>
-	<#if attribute.annotations.inputOptionLabels??>
-		${advancedMsg(attribute.annotations.inputOptionLabels[option]!option)}
-	<#else>
-		<#if attribute.annotations.inputOptionLabelsI18nPrefix??>
-			${msg(attribute.annotations.inputOptionLabelsI18nPrefix + '.' + option)}
+		<#if attribute.annotations.inputOptionLabels??>
+			${advancedMsg(attribute.annotations.inputOptionLabels[option]!option)}
 		<#else>
-			${option}
+			<#if attribute.annotations.inputOptionLabelsI18nPrefix??>
+				${msg(attribute.annotations.inputOptionLabelsI18nPrefix + '.' + option)}
+			<#else>
+				${option}
+			</#if>
 		</#if>
-	</#if>
 	</#compress>
 </#macro>

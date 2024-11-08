@@ -51,6 +51,7 @@ function onMutate(mutations) {
 
   for (const descriptor of descriptors) {
     for (const node of addedNodes) {
+      // @ts-ignore
       const input = node.querySelector('input');
       if (input.hasAttribute(`data-${descriptor.name}`)) {
         handleNewElement(input, descriptor);
