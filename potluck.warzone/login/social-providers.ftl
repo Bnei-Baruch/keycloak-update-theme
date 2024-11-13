@@ -1,5 +1,5 @@
 <#macro show social>
-    <div class="pf-v5-c-login__main-footer-band">
+    <div class="text-center">
         <p class="py-3 text-sm text-gray-500">
             ${msg("identity-provider-login-label")}
         </p>
@@ -91,7 +91,7 @@
                                 </span>
                         </#switch>
                     </span>
-                    <span class="${properties.kcFormSocialAccountNameClass!}">${p.displayName!}</span></a>
+                    <span>${p.displayName!}</span></a>
         </#list>
     </div>
 </#macro>

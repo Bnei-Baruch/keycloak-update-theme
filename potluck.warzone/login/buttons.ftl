@@ -1,8 +1,6 @@
 <#macro actionGroup>
-  <div class="${properties.kcFormGroupClass}">
-    <div class="flex item-center justify-end gap-4">
-      <#nested>
-    </div>
+  <div class="flex flex-wrap item-center justify-end gap-4 mt-6">
+    <#nested>
   </div>
 </#macro>
 

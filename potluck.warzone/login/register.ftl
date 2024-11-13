@@ -22,15 +22,16 @@
                         <@field.password name="password-confirm" label=msg("passwordConfirm") autocomplete="new-password" />
                     </#if>
                 </#if>
-            </@userProfileCommons.userProfileFormFields>
+                
+            <div class="flex flex-col gap-3">
+                </@userProfileCommons.userProfileFormFields>
+            </div>
 
             <@registerCommons.termsAcceptance/>
 
             <#if recaptchaRequired??>
                 <div class="form-group">
-                    <div class="${properties.kcInputWrapperClass!}">
-                        <div class="g-recaptcha" data-size="compact" data-sitekey="${recaptchaSiteKey}"></div>
-                    </div>
+                    <div class="g-recaptcha" data-size="compact" data-sitekey="${recaptchaSiteKey}"></div>
                 </div>
             </#if>
 

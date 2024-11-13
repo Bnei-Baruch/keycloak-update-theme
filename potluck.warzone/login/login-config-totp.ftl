@@ -8,13 +8,13 @@
     <#if section = "header">
         ${msg("loginTotpTitle")}
     <#elseif section = "form">
-        <ol id="kc-totp-settings" class="pf-v5-c-list pf-v5-u-mb-md text-gray-800 list-[square]">
+        <ol id="kc-totp-settings" class="px-4 text-gray-800 list-disc">
             <li>
                 <p>${msg("loginTotpStep1")}</p>
 
-                <ul id="kc-totp-supported-apps" class="list-disc">
+                <ul id="kc-totp-supported-apps" class="ml-2">
                     <#list totp.supportedApplications as app>
-                        <li>${msg(app)}</li>
+                        <li> - ${msg(app)}</li>
                     </#list>
                 </ul>
             </li>
@@ -53,11 +53,11 @@
             </li>
         </ol>
 
-        <form action="${url.loginAction}" class="${properties.kcFormClass!}" id="kc-totp-settings-form" method="post" novalidate="novalidate">
-            <div class="${properties.kcFormGroupClass!}">
-                <div class="${properties.kcLabelClass!} mb-2">
-                    <label class="pf-v5-c-form__label" for="form-vertical-name">
-                        <span class="text-gray-700">${msg("authenticatorCode")}</span>&nbsp;<span class="pf-v5-c-form__label-required" aria-hidden="true">&#42;</span>
+        <form action="${url.loginAction}" class="mt-3" id="kc-totp-settings-form" method="post" novalidate="novalidate">
+            <div id="inp-otp-code">
+                <div class="mb-2">
+                    <label for="form-vertical-name">
+                        <span class="text-gray-700 text-sm">${msg("authenticatorCode")}</span>&nbsp;<span class="pf-v5-c-form__label-required" aria-hidden="true">&#42;</span>
                     </label>
                 </div>
                 <div class="<#if messagesPerField.existsError('totp')>text-red-600</#if>">
@@ -69,8 +69,7 @@
                 </div>
                 <#if messagesPerField.existsError('totp')>
                     <div class="inline-flex item-center space-x-2 mt-1 text-sm">
-                        <@field.errorIcon error=kcSanitize(messagesPerField.get('totp'))?no_esc/>
-                        <span id="input-error-otp-code" class="${properties.kcInputErrorMessageClass!} text-gray-700" aria-live="polite">
+                        <span id="input-error-otp-code" class="text-red-600" aria-live="polite">
                             ${kcSanitize(messagesPerField.get('totp'))?no_esc}
                         </span>
                     </div>
@@ -78,21 +77,17 @@
                 <input type="hidden" id="totpSecret" name="totpSecret" value="${totp.totpSecret}" />
                 <#if mode??><input type="hidden" id="mode" name="mode" value="${mode}"/></#if>
             </div>
-            <div class="${properties.kcFormGroupClass!}">
-                <div class="${properties.kcLabelClass!} mb-2">
-                    <label class="pf-v5-c-form__label" for="form-vertical-name">
-                        <span class="text-gray-700">${msg("loginTotpDeviceName")}</span><#if totp.otpCredentials?size gte 1>&nbsp;<span class="pf-v5-c-form__label-required" aria-hidden="true">&#42;</span></#if>
+            <div id="inp-device-name" class="mt-3">
+                <div class="mb-2">
+                    <label for="form-vertical-name">
+                        <span class="text-gray-700 text-sm">${msg("loginTotpDeviceName")}</span><#if totp.otpCredentials?size gte 1>&nbsp;<span class="pf-v5-c-form__label-required" aria-hidden="true">&#42;</span></#if>
                     </label>
                 </div>
-
-                <div class="">
-                    <input type="text" id="userLabel" name="userLabel" autocomplete="off"
-                           aria-invalid="<#if messagesPerField.existsError('userLabel')>true</#if>"
-                           dir="ltr"
-                           class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full"
-                    />
-
-                </div>
+                <input type="text" id="userLabel" name="userLabel" autocomplete="off"
+                        aria-invalid="<#if messagesPerField.existsError('userLabel')>true</#if>"
+                        dir="ltr"
+                        class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full"
+                />
                 <#if messagesPerField.existsError('userLabel')>
                     <div class="inline-flex item-center space-x-2 mt-1 text-sm">
                         <@field.errorIcon error=kcSanitize(messagesPerField.get('userLabel'))?no_esc/>
@@ -103,19 +98,15 @@
                 </#if>
             </div>
 
-            <div class="${properties.kcFormGroupClass!}">
-                <@passwordCommons.logoutOtherSessions/>
-            </div>
+            <@passwordCommons.logoutOtherSessions/>
 
-            <div class="pf-v5-c-form__group pf-m-action">
-                <div class="pf-v5-c-form__actions float-right">
-                    <#if isAppInitiatedAction??>
-                        <@buttons.buttonOutline id="cancelTOTPBtn" name="cancel-aia" label="doCancel" class=[]/>
-                        <@buttons.button id="saveTOTPBtn" label="doSubmit" class=[]/>
-                    <#else>
-                        <@buttons.button id="saveTOTPBtn" label="doSubmit" class=[]/>
-                    </#if>
-                </div>
+            <div class="flex items-center justify-end gap-4 mt-4">
+                <#if isAppInitiatedAction??>
+                    <@buttons.buttonOutline id="cancelTOTPBtn" name="cancel-aia" label="doCancel" class=[]/>
+                    <@buttons.button id="saveTOTPBtn" label="doSubmit" class=[]/>
+                <#else>
+                    <@buttons.button id="saveTOTPBtn" label="doSubmit" class=[]/>
+                </#if>
             </div>
         </form>
     </#if>

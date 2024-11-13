@@ -42,8 +42,7 @@
 			<#if attribute.annotations.inputType?? && (attribute.annotations.inputType == "select-radiobuttons" || attribute.annotations.inputType == "multiselect-checkboxes")>
 				<#assign inputWrapperClass = "flex item-center gap-2">
 			</#if>
-
-			<div class="${inputWrapperClass}">
+			<div>
 				<#if attribute.annotations.inputHelperTextBefore??>
 					<span class="text-sm text-gray-500" id="form-help-text-before-${attribute.name}" aria-live="polite">${kcSanitize(advancedMsg(attribute.annotations.inputHelperTextBefore))?no_esc}</span>
 				</#if>
@@ -171,12 +170,12 @@
 <#macro inputTagSelects attribute>
 	<#if attribute.annotations.inputType=='select-radiobuttons'>
 		<#assign inputType='radio'>
-		<#assign classDiv=properties.kcInputClassRadio!>
+		<#assign classDiv="flex items-center" >
 		<#assign classInput="text-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500">
 		<#assign classLabel="cursor-pointer">
 	<#else>	
 		<#assign inputType='checkbox'>
-		<#assign classDiv=properties.kcInputClassCheckbox!>
+		<#assign classDiv="flex items-center">
 		<#assign classInput="rounded mb-1 focus:outline-none outline-none border border-purple-400 text-purple-600 ring-1 ring-purple-300/25 focus:ring-purple-300">
 		<#assign classLabel="cursor-pointer">
 	</#if>
@@ -188,9 +187,9 @@
     <#else>
         <#assign options=[]>
     </#if>
-
+ <#--  TODO TO BE UPDATED  -->
     <#list options as option>
-        <div class=w-max>
+        <div class="w-max flex items-center">
             <input 
 				type="${inputType}" 
 				id="${attribute.name}-${option}" 

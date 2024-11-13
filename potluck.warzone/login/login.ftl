@@ -11,7 +11,7 @@
         <div id="kc-form" class="w-full">
           <div id="kc-form-wrapper" class="w-full">
             <#if realm.password>
-                <form id="kc-form-login" class="${properties.kcFormClass!}" onsubmit="login.disabled = true; return true;" action="${url.loginAction}" method="post" novalidate="novalidate">
+                <form id="kc-form-login" onsubmit="login.disabled = true; return true;" action="${url.loginAction}" method="post" novalidate="novalidate">
                     <#if !usernameHidden??>
                         <#assign label>
                             <#if !realm.loginWithEmailAllowed>${msg("username")}<#elseif !realm.registrationEmailAsUsername>${msg("usernameOrEmail")}<#else>${msg("email")}</#if>
@@ -19,13 +19,15 @@
                         <@field.input name="username" label=label autofocus=true autocomplete="username" value=login.username!'' />
                     </#if>
 
-                    <@field.password name="password" label=msg("password") forgotPassword=realm.resetPasswordAllowed autofocus=usernameHidden?? autocomplete="current-password" />
-
-                    <div class="${properties.kcFormGroupClass!}">
-                        <#if realm.rememberMe && !usernameHidden??>
-                            <@field.checkbox name="rememberMe" label=msg("rememberMe") value=login.rememberMe?? />
-                        </#if>
+                    <div class="mt-3">
+                        <@field.password name="password" label=msg("password") forgotPassword=realm.resetPasswordAllowed autofocus=usernameHidden?? autocomplete="current-password" />
                     </div>
+
+                    <#if realm.rememberMe && !usernameHidden??>
+                        <div class="mt-4">
+                            <@field.checkbox name="rememberMe" label=msg("rememberMe") value=login.rememberMe?? />
+                        </div>
+                    </#if>
 
                     <input type="hidden" id="id-hidden-input" name="credentialId" <#if auth.selectedCredential?has_content>value="${auth.selectedCredential}"</#if>/>
                     <@buttons.loginButton />
@@ -35,9 +37,9 @@
         </div>
     <#elseif section = "info" >
         <#if realm.password && realm.registrationAllowed && !registrationDisabled??>
-            <div id="kc-registration-container" class="${properties.kcLoginFooterBand!} text-gray-600">
-                <div id="kc-registration" class="${properties.kcLoginFooterBandItem!}">
-                    <span>${msg("noAccount")} <a href="${url.registrationUrl}" class="text-gray-500 hover:text-purple-600 transition">${msg("doRegister")}</a></span>
+            <div id="kc-registration-container" class="text-gray-600 text-center">
+                <div id="kc-registration">
+                    <span>${msg("noAccount")} <a href="${url.registrationUrl}" class="text-purple-600">${msg("doRegister")}</a></span>
                 </div>
             </div>
         </#if>
@@ -46,5 +48,4 @@
             <@identityProviders.show social=social/>
         </#if>
     </#if>
-
 </@layout.registrationLayout>

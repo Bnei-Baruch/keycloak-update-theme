@@ -72,10 +72,10 @@
     </script>
 </head>
 
-<body id="keycloak-bg-custom" class="bg-white max-w-screen-2xl">
-  <div class="p-6 w-full flex flex-col justify-center bg-[url(../img/hero-pattern.svg)]">
-    <main class="max-w-md w-full mx-auto">
-      <header id="kc-header-custom" class="mb-10 font-semibold">
+<body id="keycloak-bg-custom" class="max-w-screen-2xl min-h-screen h-full bg-[url(../img/hero-pattern.svg)] bg-fixed">
+  <div class="p-6 w-full mx-auto flex flex-col justify-center min-h-screen bg-gradient-to-b from-white/5 to-white/75">
+    <main class="max-w-sm w-full mx-auto">
+      <header id="kc-header-custom" class="mb-10 font-semibold text-3xl">
         <p class="text-purple-800 text-2xl">${kcSanitize(msg("loginTitleHtml",(realm.displayNameHtml!'')))?no_esc}</p>
       </header>
       <div class="text-slate-700">
@@ -101,32 +101,28 @@
           </div>
         </#if>
       </div>
-      <div id="main-body" class="${properties.kcLoginMainBody!}">
+      <div id="main-body">
         <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
             <#if displayRequiredFields>
-                <div class="${properties.kcContentWrapperClass!} hidden">
-                    <div class="${properties.kcLabelWrapperClass!} subtitle text-gray-800">
-                        <span class="${properties.kcInputHelperTextItemTextClass!}">
-                          <span class="${properties.kcInputRequiredClass!}">*</span> ${msg("requiredFields")}
-                        </span>
-                    </div>
+                <div class="text-purple-800 mt-3">
+                    <span class="border border-purple-400 px-3 font-medium py-1 rounded-md text-sm bg-purple-50/75">
+                      <span class="text-red-600">*</span> ${msg("requiredFields")}
+                    </span>
                 </div>
             </#if>
         <#else>
             <#if displayRequiredFields>
-                <div class="${properties.kcContentWrapperClass!} hidden">
-                    <div class="${properties.kcLabelWrapperClass!} subtitle text-gray-800">
-                        <span class="${properties.kcInputHelperTextItemTextClass!}">
-                          <span class="${properties.kcInputRequiredClass!}">*</span> ${msg("requiredFields")}
+                    <div class="text-purple-800 mt-3">
+                        <span class="border border-purple-400 px-3 font-medium py-1 rounded-md text-sm bg-purple-50">
+                          <span class="text-red-600">*</span> ${msg("requiredFields")}
                         </span>
                     </div>
-                    <div class="${properties.kcFormClass} ${properties.kcContentWrapperClass}">
+                    <div>
                         <#nested "show-username">
                         <@username />
                     </div>
-                </div>
             <#else>
-                <div class="${properties.kcFormClass} ${properties.kcContentWrapperClass}">
+                <div>
                   <#nested "show-username">
                   <@username />
                 </div>
@@ -144,15 +140,14 @@
         <#if auth?has_content && auth.showTryAnotherWayLink()>
           <form id="kc-select-try-another-way-form" action="${url.loginAction}" method="post" novalidate="novalidate">
               <input type="hidden" name="tryAnotherWay" value="on"/>
-              <a id="try-another-way" href="javascript:document.forms['kc-select-try-another-way-form'].submit()"
-                  class="${properties.kcButtonSecondaryClass} ${properties.kcButtonBlockClass} ${properties.kcMarginTopClass}">
-                    ${kcSanitize(msg("doTryAnotherWay"))?no_esc}
+              <a id="try-another-way" href="javascript:document.forms['kc-select-try-another-way-form'].submit()">
+                ${kcSanitize(msg("doTryAnotherWay"))?no_esc}
               </a>
           </form>
         </#if>
         <#if displayInfo>
-          <div id="kc-info" class="${properties.kcSignUpClass!}">
-              <div id="kc-info-wrapper" class="${properties.kcInfoAreaWrapperClass!}">
+          <div id="kc-info">
+              <div id="kc-info-wrapper"">
                   <#nested "info">
               </div>
           </div>

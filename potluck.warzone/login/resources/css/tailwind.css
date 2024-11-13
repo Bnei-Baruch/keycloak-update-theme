@@ -16,8 +16,9 @@ textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
 textarea:-webkit-autofill:focus,
 textarea:-webkit-autofill:active {
-  -webkit-transition-delay: 9999s;
-  transition-delay: 9999s;
+  -webkit-transition-delay: 9999s !important;
+  transition-delay: 9999s !important;
+  background-color: white !important;
 }
 
 @layer utilities {

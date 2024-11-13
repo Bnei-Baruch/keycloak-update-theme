@@ -7,14 +7,14 @@
     <#if section = "header">
         ${msg("deleteCredentialTitle", credentialLabel)}
     <#elseif section = "form">
-        <div id="kc-delete-text" class="${properties.kcContentWrapperClass!} text-gray-700">
+        <div id="kc-delete-text" class="text-gray-700">
             ${msg("deleteCredentialMessage", credentialLabel)}
         </div>
 
-        <form class="${properties.kcFormClass!}" action="${url.loginAction}" method="POST">
+        <form action="${url.loginAction}" method="POST">
             <@buttons.actionGroup>
-                <@buttons.buttonOutline name="cancel-aia" id="kc-decline" label="doDecline" class=[""]/>
-                <@buttons.button name="accept" id="kc-accept" label="doConfirmDelete" class=["kcButtonPrimaryClass"]/>
+                <@buttons.buttonOutline name="cancel-aia" id="kc-decline" label="doDecline" class=[]/>
+                <@buttons.button name="accept" id="kc-accept" label="doConfirmDelete" class=[]/>
             </@buttons.actionGroup>
         </form
     </#if>

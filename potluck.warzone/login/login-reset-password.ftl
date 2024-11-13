@@ -5,7 +5,7 @@
     <#if section = "header">
         ${msg("emailForgotTitle")}
     <#elseif section = "form">
-        <form id="kc-reset-password-form" class="${properties.kcFormClass!}" action="${url.loginAction}" method="post">
+        <form id="kc-reset-password-form" action="${url.loginAction}" method="post">
             <#assign label>
                 <#if !realm.loginWithEmailAllowed>${msg("username")}<#elseif !realm.registrationEmailAsUsername>${msg("usernameOrEmail")}<#else>${msg("email")}</#if>
             </#assign>
@@ -18,9 +18,9 @@
         </form>
     <#elseif section = "info" >
         <#if realm.duplicateEmailsAllowed>
-            <p class="text-gray-600 text-sm">${msg("emailInstructionUsername")}</p>
+            <p class="text-gray-600">${msg("emailInstructionUsername")}</p>
         <#else>
-            <p class="text-gray-600 text-sm">${msg("emailInstruction")}</p>
+            <p class="text-gray-600">${msg("emailInstruction")}</p>
         </#if>
     </#if>
 </@layout.registrationLayout>
