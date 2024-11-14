@@ -13,7 +13,7 @@
             ${msg("registerTitle")}
         </#if>
     <#elseif section = "form">
-        <form id="kc-register-form" class="${properties.kcFormClass!}" action="${url.registrationAction}" method="post" novalidate="novalidate">
+        <form id="kc-register-form" action="${url.registrationAction}" method="post" novalidate="novalidate">
             <@userProfileCommons.userProfileFormFields; callback, attribute>
                 <#if callback = "afterField">
                 <#-- render password fields just under the username or email (if used as username) -->
@@ -23,7 +23,7 @@
                     </#if>
                 </#if>
                 
-            <div class="flex flex-col gap-3">
+            <div class="flex flex-col gap-y-4">
                 </@userProfileCommons.userProfileFormFields>
             </div>
 
@@ -35,21 +35,14 @@
                 </div>
             </#if>
 
-            <div id="kc-form-buttons" class="flex item-center space-x-4 justify-end">
+            <div id="kc-form-buttons" class="flex item-center space-x-4 justify-end mt-3">
                 <@buttons.buttonLink href=url.loginUrl label="backToLogin" class=[]/>
                 <@buttons.button label="doRegister" name="doRegister" id="doRegister" class=[]/>
             </div>
         </form>
 
         <template id="errorTemplate">
-            <div class="${properties.kcFormHelperTextClass}" aria-live="polite">
-                <div class="${properties.kcInputHelperTextClass}">
-                    <div class="${properties.kcInputHelperTextItemClass} ${properties.kcError}">
-                        <ul class="${properties.kcInputErrorMessageClass}">
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <ul class="text-red-600"></ul>
         </template>
         <template id="errorItemTemplate">
             <li></li>

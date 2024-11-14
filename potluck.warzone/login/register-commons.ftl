@@ -1,14 +1,12 @@
 <#macro termsAcceptance>
     <#if termsAcceptanceRequired??>
         <div class="form-group text-gray-800">
-            <div class="${properties.kcInputWrapperClass!}">
-                <div id="kc-registration-terms-text">
-                    ${msg("termsTitle")}, <a class="text-gray-500 hover:text-purple-600 transition" href="${msg('termsLink')}">${kcSanitize(msg("termsText"))?no_esc}</a>
-                </div>
+            <div id="kc-registration-terms-text">
+                ${msg("termsTitle")}, <a class="text-gray-500 hover:text-purple-600 transition" href="${msg('termsLink')}">${kcSanitize(msg("termsText"))?no_esc}</a>
             </div>
         </div>
         <div class="form-group text-gray-800">
-            <div class="${properties.kcLabelWrapperClass!}">
+            <div>
                 <input 
                     type="checkbox" 
                     id="termsAccepted" 

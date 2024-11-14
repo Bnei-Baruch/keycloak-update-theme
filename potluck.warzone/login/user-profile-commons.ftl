@@ -9,7 +9,7 @@
 			<#assign currentGroup=group>
 
 			<#if currentGroup != "">
-				<div class="text-gray-800" <#list group.html5DataAnnotations as key, value>data-${key}="${value}"</#list> >
+				<div class="text-gray-800 mt-3" <#list group.html5DataAnnotations as key, value>data-${key}="${value}"</#list> >
 					<#assign groupDisplayHeader=group.displayHeader!"">
 
 					<#if groupDisplayHeader != "">
@@ -187,22 +187,24 @@
     <#else>
         <#assign options=[]>
     </#if>
- <#--  TODO TO BE UPDATED  -->
-    <#list options as option>
-        <div class="w-max flex items-center">
-            <input 
-				type="${inputType}" 
-				id="${attribute.name}-${option}" 
-				name="${attribute.name}" 
-				value="${option}" 
-				class="${classInput}"
-                aria-invalid="<#if messagesPerField.existsError('${attribute.name}')>true</#if>"
-                <#if attribute.readOnly>disabled</#if>
-                <#if attribute.values?seq_contains(option)>checked</#if>
-            />
-            <label for="${attribute.name}-${option}" class="${classLabel}<#if attribute.readOnly> ${properties.kcInputClassRadioCheckboxLabelDisabled!}</#if>"><@selectOptionLabelText attribute=attribute option=option/></label>
-        </div>
-    </#list>
+
+    <div class="flex items-center gap-3">
+		<#list options as option>
+			<div class="w-max flex items-center gap-1">
+				<input 
+						type="${inputType}" 
+						id="${attribute.name}-${option}" 
+						name="${attribute.name}" 
+						value="${option}" 
+						class="${classInput}"
+					aria-invalid="<#if messagesPerField.existsError('${attribute.name}')>true</#if>"
+					<#if attribute.readOnly>disabled</#if>
+					<#if attribute.values?seq_contains(option)>checked</#if>
+				/>
+				<label for="${attribute.name}-${option}" class="${classLabel} <#if attribute.readOnly>text-gray-500</#if>"><@selectOptionLabelText attribute=attribute option=option/></label>
+			</div>
+		</#list>
+	</div>
 </#macro>
 
 <#macro selectOptionLabelText attribute option>

@@ -11,23 +11,23 @@
         <div id="kc-form">
             <div id="kc-form-wrapper">
                 <#if realm.password>
-                    <form id="kc-form-login" class="${properties.kcFormClass!}" onsubmit="login.disabled = true; return true;" action="${url.loginAction}" method="post">
+                    <form id="kc-form-login" onsubmit="login.disabled = true; return true;" action="${url.loginAction}" method="post">
                         <#if !usernameHidden??>
-                            <div class="${properties.kcFormGroupClass!}">
+                            <div>
                                 <#assign label>
                                     <#if !realm.loginWithEmailAllowed>${msg("username")}<#elseif !realm.registrationEmailAsUsername>${msg("usernameOrEmail")}<#else>${msg("email")}</#if>
                                 </#assign>
                                 <@field.input name="username" label=label value=login.username!'' autofocus=true autocomplete="username" />
 
                                 <#if messagesPerField.existsError('username')>
-                                    <span id="input-error-username" class="${properties.kcInputErrorMessageClass!}" aria-live="polite">
+                                    <span id="input-error-username" class="text-red-600" aria-live="polite">
                                         ${kcSanitize(messagesPerField.get('username'))?no_esc}
                                     </span>
                                 </#if>
                             </div>
                         </#if>
 
-                        <div class="${properties.kcFormGroupClass!}">
+                        <div>
                             <#if realm.rememberMe && !usernameHidden??>
                                 <@field.checkbox name="rememberMe" label=msg("rememberMe") value=login.rememberMe?? />
                             </#if>
