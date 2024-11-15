@@ -153,7 +153,7 @@
           </div>
         </#if>
       </div>
-      <div class="pf-v5-c-login__main-footer">
+      <div>
         <#nested "socialProviders">
       </div>
     </main>

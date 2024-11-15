@@ -1,8 +1,10 @@
 <#macro termsAcceptance>
     <#if termsAcceptanceRequired??>
+
+        <#--  TODO HERE  -->
         <div class="form-group text-gray-800">
             <div id="kc-registration-terms-text">
-                ${msg("termsTitle")}, <a class="text-gray-500 hover:text-purple-600 transition" href="${msg('termsLink')}">${kcSanitize(msg("termsText"))?no_esc}</a>
+                ${msg("termsTitle")}, <a class="text-gray-500 hover:text-purple-600 transition" href=client.attributes.tosUri >${kcSanitize(msg("termsText", client.name))?no_esc}</a>
             </div>
         </div>
         <div class="form-group text-gray-800">

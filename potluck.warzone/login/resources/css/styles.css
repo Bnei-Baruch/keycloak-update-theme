@@ -771,6 +771,10 @@ select{
   float: right;
 }
 
+.m-3{
+  margin: 0.75rem;
+}
+
 .mx-auto{
   margin-left: auto;
   margin-right: auto;
@@ -1116,6 +1120,16 @@ select{
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-pink-300{
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 168 212 / var(--tw-bg-opacity));
+}
+
+.bg-pink-400{
+  --tw-bg-opacity: 1;
+  background-color: rgb(244 114 182 / var(--tw-bg-opacity));
+}
+
 .bg-\[url\(\.\.\/img\/hero-pattern\.svg\)\]{
   background-image: url(../img/hero-pattern.svg);
 }
@@ -1259,6 +1273,10 @@ select{
   font-weight: 600;
 }
 
+.capitalize{
+  text-transform: capitalize;
+}
+
 .text-blue-500{
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity));
@@ -1352,6 +1370,11 @@ select{
 .text-yellow-800{
   --tw-text-opacity: 1;
   color: rgb(133 77 14 / var(--tw-text-opacity));
+}
+
+.text-purple-700{
+  --tw-text-opacity: 1;
+  color: rgb(126 34 206 / var(--tw-text-opacity));
 }
 
 .underline{
