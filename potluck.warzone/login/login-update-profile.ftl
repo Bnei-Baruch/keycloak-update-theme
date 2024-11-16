@@ -5,7 +5,7 @@
     <#if section = "header">
         ${msg("loginProfileTitle")}
     <#elseif section = "form">
-        <form id="kc-update-profile-form" class="${properties.kcFormClass!}" action="${url.loginAction}" method="post">
+        <form id="kc-update-profile-form" action="${url.loginAction}" method="post">
             <div class="flex flex-col gap-y-4">
                 <@userProfileCommons.userProfileFormFields/>
             </div>
