@@ -8,7 +8,23 @@
         ${msg("termsTitle")}
     <#elseif section = "form">
     <div>
-        ${kcSanitize(msg("termsText", client.name))?no_esc}
+        <p>${kcSanitize(msg("termsText", client.name))?no_esc}</p>
+        <#if client.attributes.policyUri?? || client.attributes.tosUri??>
+            <p class="mt-4">
+                <#if client.attributes.tosUri?? || client.attributes.policyUri??>
+                    ${msg("oauthGrantReview")}
+                </#if>
+                <#if client.attributes.tosUri??>
+                    <a class="text-purple-600 capitalize" href="${client.attributes.tosUri}" target="_blank">${msg("oauthGrantTos")}</a>
+                </#if>
+                <#if client.attributes.tosUri?? && client.attributes.policyUri??>
+                    &
+                </#if>
+                <#if client.attributes.policyUri??>
+                    <a class="text-purple-600 capitalize" href="${client.attributes.policyUri}" target="_blank">${msg("oauthGrantPolicy")}</a>
+                </#if>
+            </p>
+        </#if>
     </div>
     <form action="${url.loginAction}" method="POST">
         <@buttons.actionGroup>
