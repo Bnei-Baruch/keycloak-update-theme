@@ -140,7 +140,7 @@
         <#if auth?has_content && auth.showTryAnotherWayLink()>
           <form id="kc-select-try-another-way-form" action="${url.loginAction}" method="post" novalidate="novalidate">
               <input type="hidden" name="tryAnotherWay" value="on"/>
-              <a id="try-another-way" href="javascript:document.forms['kc-select-try-another-way-form'].submit()">
+              <a id="try-another-way" class="text-purple-600 transition ring-1 ring-purple-300 hover:ring-purple-600 py-1 px-2 rounded-md text-sm" href="javascript:document.forms['kc-select-try-another-way-form'].submit()">
                 ${kcSanitize(msg("doTryAnotherWay"))?no_esc}
               </a>
           </form>
