@@ -2,7 +2,24 @@
     <#if termsAcceptanceRequired??>
         <div class="form-group text-gray-800">
             <div id="kc-registration-terms-text">
-                ${msg("termsTitle")}, <a class="text-gray-500 hover:text-purple-600 transition" href="${msg('termsLink')}">${kcSanitize(msg("termsText"))?no_esc}</a>
+                <p class="font-semibold">${msg("termsTitle")}</p> 
+                <p class="my-4">${kcSanitize(msg("termsText", realm.displayName))?no_esc}</p>
+                <#if client.attributes.policyUri?? || client.attributes.tosUri??>
+                    <p>
+                        <#if client.attributes.tosUri?? || client.attributes.policyUri??>
+                            ${msg("oauthGrantReview")}
+                        </#if>
+                        <#if client.attributes.tosUri??>
+                            <a class="text-purple-600 capitalize" href="${client.attributes.tosUri}" target="_blank">${msg("oauthGrantTos")}</a>
+                        </#if>
+                        <#if client.attributes.tosUri?? && client.attributes.policyUri??>
+                            &
+                        </#if>
+                        <#if client.attributes.policyUri??>
+                            <a class="text-purple-600 capitalize" href="${client.attributes.policyUri}" target="_blank">${msg("oauthGrantPolicy")}</a>
+                        </#if>
+                    </p>
+                </#if>
             </div>
         </div>
         <div class="form-group text-gray-800">

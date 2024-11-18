@@ -8,30 +8,28 @@
         </#if>
     <#elseif section = "form">
 
-    <ul class="${properties.kcSelectAuthListClass!}" role="list">
+    <ul class="flex flex-col gap-4" role="list">
         <#list auth.authenticationSelections as authenticationSelection>
-            <li class="${properties.kcSelectAuthListItemWrapperClass!}">
-                <form id="kc-select-credential-form" class="${properties.kcFormClass!}" action="${url.loginAction}" method="post">
+            <li class="w-full">
+                <form id="kc-select-credential-form" action="${url.loginAction}" method="post">
                     <input type="hidden" name="authenticationExecution" value="${authenticationSelection.authExecId}">
                 </form>
-                <div class="${properties.kcSelectAuthListItemClass!}" onclick="document.forms[${authenticationSelection?index}].submit()">
-                    <div class="pf-v5-c-data-list__item-content">
-                        <div class="${properties.kcSelectAuthListItemIconClass!}">
-                            <i class="${properties['${authenticationSelection.iconCssClass}']!authenticationSelection.iconCssClass} ${properties.kcSelectAuthListItemIconPropertyClass!}"></i>
-                        </div>
-                        <div class="${properties.kcSelectAuthListItemBodyClass!}">
-                            <h2 class="${properties.kcSelectAuthListItemHeadingClass!}">
-                                ${msg('${authenticationSelection.displayName}')}
-                            </h2>
-                        </div>
-                        <div class="${properties.kcSelectAuthListItemDescriptionClass!}">
-                            ${msg('${authenticationSelection.helpText}')}
-                        </div>
+                <button type="button" class="w-full group text-left ring-1 ring-purple-200 hover:ring-transparent p-2 rounded-lg hover:bg-purple-500 hover:text-white hover:shadow-xl hover:shadow-purple-300/50 transition" onclick="document.forms[${authenticationSelection?index}].submit()">
+                    <div class="font-medium inline-flex items-center gap-2">
+                        <span>
+                            <#if authenticationSelection.displayName == "otp-display-name" >
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-5 h-5" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 17v4m-2-1l4-2m-4 0l4 2m-9-3v4m-2-1l4-2m-4 0l4 2m12-3v4m-2-1l4-2m-4 0l4 2M7 14V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8m-6-9h2m-1 12v.01"/></svg>
+                            <#else>
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-5 h-5" viewBox="0 0 24 24"><path fill="currentColor" d="M2 19v-2h20v2zm1.15-6.05l-1.3-.75l.85-1.5H1V9.2h1.7l-.85-1.45L3.15 7L4 8.45L4.85 7l1.3.75L5.3 9.2H7v1.5H5.3l.85 1.5l-1.3.75l-.85-1.5zm8 0l-1.3-.75l.85-1.5H9V9.2h1.7l-.85-1.45l1.3-.75l.85 1.45l.85-1.45l1.3.75l-.85 1.45H15v1.5h-1.7l.85 1.5l-1.3.75l-.85-1.5zm8 0l-1.3-.75l.85-1.5H17V9.2h1.7l-.85-1.45l1.3-.75l.85 1.45l.85-1.45l1.3.75l-.85 1.45H23v1.5h-1.7l.85 1.5l-1.3.75l-.85-1.5z"/></svg>
+                            </#if>
+                        </span>
+
+                        <p>${msg('${authenticationSelection.displayName}')}</p>
                     </div>
-                    <div class="${properties.kcSelectAuthListItemFillClass!}">
-                        <i class="${properties.kcSelectAuthListItemArrowIconClass!}" aria-hidden="true"></i>
+                    <div class="text-sm text-gray-500 group-hover:text-gray-100">
+                        ${msg('${authenticationSelection.helpText}')}
                     </div>
-                </div>
+                </button>
             </li>
         </#list>
     </ul>

@@ -82,7 +82,7 @@
         <h1 class="text-2xl font-medium">Auth</h1>
         <h2 class="text-purple-500" id="kc-page-title-custom"><#nested "header"></h1>
         <#if realm.internationalizationEnabled  && locale.supported?size gt 1>
-            <div class="w-full flex justify-end">
+            <div class="w-full flex justify-end mt-4">
               <select
                 class="px-2 py-1 text-sm bg-white text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-max"
                 aria-label="${msg("languages")}"
@@ -140,7 +140,7 @@
         <#if auth?has_content && auth.showTryAnotherWayLink()>
           <form id="kc-select-try-another-way-form" action="${url.loginAction}" method="post" novalidate="novalidate">
               <input type="hidden" name="tryAnotherWay" value="on"/>
-              <a id="try-another-way" href="javascript:document.forms['kc-select-try-another-way-form'].submit()">
+              <a id="try-another-way" class="text-purple-600 transition ring-1 ring-purple-300 hover:ring-purple-600 py-1 px-2 rounded-md text-sm" href="javascript:document.forms['kc-select-try-another-way-form'].submit()">
                 ${kcSanitize(msg("doTryAnotherWay"))?no_esc}
               </a>
           </form>
@@ -153,7 +153,7 @@
           </div>
         </#if>
       </div>
-      <div class="pf-v5-c-login__main-footer">
+      <div>
         <#nested "socialProviders">
       </div>
     </main>
