@@ -27,11 +27,11 @@
                             </div>
                         </#if>
 
-                        <div>
-                            <#if realm.rememberMe && !usernameHidden??>
+                        <#if realm.rememberMe && !usernameHidden??>
+                            <div class="mt-4">
                                 <@field.checkbox name="rememberMe" label=msg("rememberMe") value=login.rememberMe?? />
-                            </#if>
-                        </div>
+                            </div>
+                        </#if>
 
                         <@buttons.loginButton />
                     </form>
