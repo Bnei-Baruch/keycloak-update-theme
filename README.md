@@ -14,11 +14,16 @@ Customized Page:
 - Register
 - Forgot/Reset Password
 - Email Verification
+- Update Email (Keycloak Preview Feature)
+- Passcode (Keycloak Preview Feature)
+- Recovery Code (Keycloak Preview Feature)
 - Update Password
 - Setup 2FA OTP
-- Login With OTP
+- Setup Recovery Code
+- Setup Passkey
+- Login With (OTP, Recovery Code, Passkey)
 - Update Profile when new atribute required
-- Alert and Error message Card
+- Alert Style (Custom)
 - Social Provider layout and Button style
 
 ## Preview Page

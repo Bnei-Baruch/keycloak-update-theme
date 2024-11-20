@@ -54,7 +54,27 @@
         </ol>
 
         <form action="${url.loginAction}" class="mt-3" id="kc-totp-settings-form" method="post" novalidate="novalidate">
-            <div id="inp-otp-code">
+            <div id="inp-device-name">
+                <div class="mb-2">
+                    <label for="form-vertical-name">
+                        <span class="text-gray-700 text-sm">${msg("loginTotpDeviceName")}</span><#if totp.otpCredentials?size gte 1>&nbsp;<span class="pf-v5-c-form__label-required" aria-hidden="true">&#42;</span></#if>
+                    </label>
+                </div>
+                <input type="text" id="userLabel" name="userLabel" autocomplete="off"
+                        aria-invalid="<#if messagesPerField.existsError('userLabel')>true</#if>"
+                        dir="ltr"
+                        class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full"
+                />
+                <#if messagesPerField.existsError('userLabel')>
+                    <div class="inline-flex item-center space-x-2 mt-1 text-sm">
+                        <@field.errorIcon error=kcSanitize(messagesPerField.get('userLabel'))?no_esc/>
+                        <span id="input-error-otp-label" class="${properties.kcInputErrorMessageClass!} text-gray-700" aria-live="polite">
+                            ${kcSanitize(messagesPerField.get('userLabel'))?no_esc}
+                        </span>
+                    </div>
+                </#if>
+            </div>
+            <div id="inp-otp-code" class="mt-3">
                 <div class="mb-2">
                     <label for="form-vertical-name">
                         <span class="text-gray-700 text-sm">${msg("authenticatorCode")}</span>&nbsp;<span class="pf-v5-c-form__label-required" aria-hidden="true">&#42;</span>
@@ -77,27 +97,6 @@
                 <input type="hidden" id="totpSecret" name="totpSecret" value="${totp.totpSecret}" />
                 <#if mode??><input type="hidden" id="mode" name="mode" value="${mode}"/></#if>
             </div>
-            <div id="inp-device-name" class="mt-3">
-                <div class="mb-2">
-                    <label for="form-vertical-name">
-                        <span class="text-gray-700 text-sm">${msg("loginTotpDeviceName")}</span><#if totp.otpCredentials?size gte 1>&nbsp;<span class="pf-v5-c-form__label-required" aria-hidden="true">&#42;</span></#if>
-                    </label>
-                </div>
-                <input type="text" id="userLabel" name="userLabel" autocomplete="off"
-                        aria-invalid="<#if messagesPerField.existsError('userLabel')>true</#if>"
-                        dir="ltr"
-                        class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full"
-                />
-                <#if messagesPerField.existsError('userLabel')>
-                    <div class="inline-flex item-center space-x-2 mt-1 text-sm">
-                        <@field.errorIcon error=kcSanitize(messagesPerField.get('userLabel'))?no_esc/>
-                        <span id="input-error-otp-label" class="${properties.kcInputErrorMessageClass!} text-gray-700" aria-live="polite">
-                            ${kcSanitize(messagesPerField.get('userLabel'))?no_esc}
-                        </span>
-                    </div>
-                </#if>
-            </div>
-
             <@passwordCommons.logoutOtherSessions/>
 
             <div class="flex items-center justify-end gap-4 mt-4">

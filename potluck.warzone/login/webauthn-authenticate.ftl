@@ -7,7 +7,7 @@
     <#elseif section = "header">
         ${kcSanitize(msg("webauthn-login-title"))?no_esc}
     <#elseif section = "form">
-        <div id="kc-form-webauthn" class="${properties.kcFormClass!}">
+        <div id="kc-form-webauthn">
             <form id="webauth" action="${url.loginAction}" method="post">
                 <input type="hidden" id="clientDataJSON" name="clientDataJSON"/>
                 <input type="hidden" id="authenticatorData" name="authenticatorData"/>
@@ -17,101 +17,92 @@
                 <input type="hidden" id="error" name="error"/>
             </form>
 
-            <div class="${properties.kcFormGroupClass!} no-bottom-margin">
-                <#if authenticators??>
-                    <form id="authn_select" class="${properties.kcFormClass!}">
-                        <#list authenticators.authenticators as authenticator>
-                            <input type="hidden" name="authn_use_chk" value="${authenticator.credentialId}"/>
-                        </#list>
-                    </form>
-
-                    <#if shouldDisplayAuthenticators?? && shouldDisplayAuthenticators>
-                        <#if authenticators.authenticators?size gt 1>
-                            <p class="${properties.kcSelectAuthListItemTitle!}">${kcSanitize(msg("webauthn-available-authenticators"))?no_esc}</p>
-                        </#if>
-
-                        <ul class="${properties.kcSelectAuthListClass!}" role="list">
-                            <#list authenticators.authenticators as authenticator>
-                                <li class="${properties.kcSelectAuthListItemWrapperClass!}">
-                                    <div id="kc-webauthn-authenticator-item-${authenticator?index}" class="${properties.kcSelectAuthListItemClass!}">
-                                        <div class="${properties.kcSelectAuthListItemIconClass!}">
-                                            <div class="${properties.kcWebAuthnDefaultIcon!}">
-                                            <#switch authenticator.transports.iconClass>
-                                                <#case "kcWebAuthnBLE">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 217.499 217.499" xml:space="preserve"><path d="m123.264 108.749 45.597-44.488a8.997 8.997 0 0 0 0-12.882l-50.038-48.82A9 9 0 0 0 103.538 9v80.504l-42.331-41.3a9 9 0 1 0-12.57 12.883l48.851 47.663-48.851 47.663a9 9 0 1 0 12.57 12.883l42.331-41.3V208.5a9 9 0 0 0 15.285 6.441l50.038-48.82a8.997 8.997 0 0 0 0-12.882l-45.597-44.49zm-1.725-78.395 28.15 27.465-28.15 27.465v-54.93zm0 156.789v-54.93l28.15 27.465-28.15 27.465z"/></svg>
-                                                    <#break>
-                                                <#case "kcWebAuthnNFC">
-                                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 19a1 1 0 1 0 0 2v-2Zm.01 2a1 1 0 1 0 0-2v2Zm2.68-3.96a1 1 0 0 0 1.347-1.48l-1.346 1.48Zm3.364-3.7a1 1 0 0 0 1.346-1.48l-1.346 1.48Zm-10.09 2.22a1 1 0 0 0 1.346 1.48l-1.346-1.48ZM4.6 11.86a1 1 0 1 0 1.345 1.48l-1.345-1.48ZM12 21h.01v-2H12v2Zm0-5c1.036 0 1.979.393 2.69 1.04l1.345-1.48A5.982 5.982 0 0 0 12 14v2Zm0-5c2.331 0 4.454.886 6.053 2.34l1.346-1.48A10.964 10.964 0 0 0 12 9v2ZM9.31 17.04A3.982 3.982 0 0 1 12 16v-2a5.982 5.982 0 0 0-4.036 1.56l1.346 1.48Zm-3.364-3.7A8.964 8.964 0 0 1 12 11V9a10.964 10.964 0 0 0-7.4 2.86l1.346 1.48Z" fill="#000"/></svg>
-                                                    <#break>
-                                                <#case "kcWebAuthnUSB">
-                                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1.25a.75.75 0 0 1 .624.334l2 3a.75.75 0 1 1-1.248.832l-.626-.939v10.515c.121-.062.248-.115.38-.16l3.265-1.088c.51-.17.855-.647.855-1.185v-1.85a1.195 1.195 0 0 1-.634-.325 1.239 1.239 0 0 1-.341-.735 4.845 4.845 0 0 1-.025-.615v-.068c0-.206 0-.427.025-.615.03-.219.105-.5.341-.735.236-.236.516-.311.735-.341.188-.025.41-.025.615-.025h.069c.205 0 .426 0 .614.025.219.03.5.105.735.341.236.236.311.516.341.735.025.188.025.41.025.615v.068c0 .206 0 .427-.025.615-.03.219-.105.5-.341.735-.2.2-.434.285-.634.324v1.85a2.75 2.75 0 0 1-1.88 2.61l-3.265 1.088a1.25 1.25 0 0 0-.855 1.186v.703a2 2 0 1 1-1.5 0v-3.704a1.25 1.25 0 0 0-.855-1.185L7.13 12.167a2.75 2.75 0 0 1-1.88-2.609V7.582a1.75 1.75 0 1 1 1.5 0v1.976c0 .539.344 1.016.855 1.186l3.265 1.089c.132.044.259.097.38.159V4.477l-.626.939a.75.75 0 1 1-1.248-.832l2-3A.75.75 0 0 1 12 1.25Z" fill="#000"/></svg>
-                                                    <#break>
-                                                <#default>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M336 352a176 176 0 1 0-167.7-122.3L7 391a24 24 0 0 0-7 17v80a24 24 0 0 0 24 24h80a24 24 0 0 0 24-24v-40h40a24 24 0 0 0 24-24v-40h40a24 24 0 0 0 17-7l33.3-33.3c16.9 5.4 35 8.3 53.7 8.3zm40-256a40 40 0 1 1 0 80 40 40 0 1 1 0-80z"/></svg>
-                                                    <#break>
-                                            </#switch>
-                                            </div>
-                                        </div>
-                                        <div class="${properties.kcSelectAuthListItemBodyClass!}">
-                                            <div id="kc-webauthn-authenticator-label-${authenticator?index}"
-                                                class="${properties.kcSelectAuthListItemHeadingClass!}">
-                                                ${kcSanitize(msg('${authenticator.label}'))?no_esc}
-                                            </div>
-
-                                            <#if authenticator.transports?? && authenticator.transports.displayNameProperties?has_content>
-                                                <div id="kc-webauthn-authenticator-transport-${authenticator?index}">
-                                                    <#list authenticator.transports.displayNameProperties as nameProperty>
-                                                        <span>${kcSanitize(msg('${nameProperty!}'))?no_esc}</span>
-                                                        <#if nameProperty?has_next>
-                                                            <span>, </span>
-                                                        </#if>
-                                                    </#list>
-                                                </div>
-                                            </#if>
-
-                                            <span id="kc-webauthn-authenticator-createdlabel-${authenticator?index}">
-                                                <i>${kcSanitize(msg('webauthn-createdAt-label'))?no_esc}</i>
-                                            </span>
-                                            <span id="kc-webauthn-authenticator-created-${authenticator?index}">
-                                                <i>${kcSanitize(authenticator.createdAt)?no_esc}</i>
-                                            </span>
-                                        </div>
-                                        <div class="${properties.kcSelectAuthListItemFillClass!}"></div>
-                                    </div>
-                                </li>
-                            </#list>
-                        </div>
+            <#if authenticators??>
+                <form id="authn_select">
+                    <#list authenticators.authenticators as authenticator>
+                        <input type="hidden" name="authn_use_chk" value="${authenticator.credentialId}"/>
+                    </#list>
+                </form>
+                <#if shouldDisplayAuthenticators?? && shouldDisplayAuthenticators>
+                    <#if authenticators.authenticators?size gt 1>
+                        <p class="text-lg font-semibold">${kcSanitize(msg("webauthn-available-authenticators"))?no_esc}</p>
                     </#if>
-                </#if>
 
-                <div id="kc-form-buttons" class="${properties.kcFormButtonsClass!}">
-                    <input id="authenticateWebAuthnButton" type="button" autofocus="autofocus"
-                           value="${kcSanitize(msg("webauthn-doAuthenticate"))}"
-                           class="${properties.kcButtonClass!} ${properties.kcButtonPrimaryClass!} ${properties.kcButtonBlockClass!} ${properties.kcButtonLargeClass!}"/>
-                </div>
+                    <ul role="list" class="flex flex-col gap-4 w-full my-4">
+                        <#list authenticators.authenticators as authenticator>
+                            <li id="kc-webauthn-authenticator-item-${authenticator?index}" class="ring-1 ring-purple-200 p-2 rounded-md">
+                                <div id="kc-webauthn-authenticator-label-${authenticator?index}" class="font-medium inline-flex items-center gap-1">
+                                    <div>
+                                        <#switch authenticator.transports.iconClass>
+                                            <#case "kcWebAuthnBLE">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="m14.91 2.774l1.833 1.301c.54.384 1.012.719 1.341 1.034c.351.335.666.764.666 1.35c0 .584-.315 1.013-.666 1.349c-.33.315-.801.65-1.341 1.033L12.295 12l4.448 3.158c.54.383 1.012.718 1.341 1.034c.351.335.666.764.666 1.349s-.315 1.014-.666 1.35c-.33.314-.801.65-1.341 1.033l-1.833 1.302c-.73.518-1.345.955-1.856 1.216c-.52.265-1.156.465-1.79.14c-.638-.326-.845-.96-.93-1.536c-.084-.566-.084-1.319-.084-2.21V13.44l-3.82 2.674a.75.75 0 1 1-.86-1.229L9.692 12L5.57 9.114a.75.75 0 1 1 .86-1.229l3.82 2.674V5.163c0-.891 0-1.644.084-2.21c.085-.576.292-1.21.93-1.535c.634-.325 1.27-.126 1.79.14c.51.26 1.126.698 1.856 1.216m-3.16 10.678v5.323c0 .969.002 1.609.068 2.051c.031.214.071.327.1.383q.021.034.023.034l.005.003l.007.003q.002.002.044-.002c.064-.009.181-.043.375-.142c.4-.204.926-.575 1.72-1.138l1.737-1.234c.599-.425.978-.697 1.218-.927a1 1 0 0 0 .187-.22c.016-.029.016-.039.016-.044v-.002c0-.006 0-.016-.016-.044a1 1 0 0 0-.187-.22c-.24-.23-.62-.502-1.218-.927zm0-2.905V5.224c0-.969.002-1.609.068-2.05c.031-.215.071-.327.1-.384a.2.2 0 0 1 .023-.034l.005-.003l.007-.003a.2.2 0 0 1 .044.002c.064.01.181.043.375.142c.4.204.926.575 1.72 1.138l1.737 1.234c.599.425.978.697 1.218.927a1 1 0 0 1 .187.22c.016.029.016.039.016.044v.002c0 .006 0 .016-.016.045a1 1 0 0 1-.187.22c-.24.23-.62.501-1.218.926z" clip-rule="evenodd"/></svg>
+                                                <#break>
+                                            <#case "kcWebAuthnNFC">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" aria-hidden="true" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><rect width="7" height="12" x="2" y="6" rx="1"/><path d="M13 8.32a7.43 7.43 0 0 1 0 7.36m3.46-9.47a11.76 11.76 0 0 1 0 11.58M19.91 4.1a15.91 15.91 0 0 1 .01 15.8"/></g></svg>
+                                                <#break>
+                                            <#case "kcWebAuthnUSB">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 1.25a.75.75 0 0 1 .624.334l2 3a.75.75 0 1 1-1.248.832l-.626-.939v10.515q.182-.093.38-.16l3.265-1.088c.51-.17.855-.647.855-1.185v-1.85a1.2 1.2 0 0 1-.634-.325a1.24 1.24 0 0 1-.341-.735a5 5 0 0 1-.025-.615v-.068c0-.206 0-.427.025-.615c.03-.219.105-.5.341-.735c.236-.236.516-.312.735-.341c.188-.025.41-.025.615-.025h.068c.206 0 .427 0 .615.025c.219.03.5.105.735.341c.236.236.311.516.341.735c.025.188.025.41.025.615v.068c0 .206 0 .427-.025.615c-.03.219-.105.5-.341.735c-.2.2-.434.285-.634.324v1.85a2.75 2.75 0 0 1-1.88 2.61l-3.265 1.088a1.25 1.25 0 0 0-.852 1.098a2.751 2.751 0 1 1-1.503 0v-2.912a1.25 1.25 0 0 0-.855-1.186L7.13 12.167a2.75 2.75 0 0 1-1.88-2.609V7.582a1.75 1.75 0 1 1 1.5 0v1.976c0 .539.344 1.016.855 1.186l3.265 1.089q.198.066.38.159V4.477l-.626.939a.75.75 0 1 1-1.248-.832l2-3A.75.75 0 0 1 12 1.25m6 8l.249-.001L18.25 9l-.001-.249a16 16 0 0 0-.498 0L17.75 9l.001.249zM10.75 20a1.25 1.25 0 1 1 2.5 0a1.25 1.25 0 0 1-2.5 0M6 6.25a.25.25 0 1 0 0-.5a.25.25 0 0 0 0 .5" clip-rule="evenodd"/></svg>
+                                                <#break>
+                                            <#default>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" aria-hidden="true" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></g></svg>
+                                                <#break>
+                                        </#switch>
+                                    </div>
+                                    <span>${kcSanitize(msg('${authenticator.label}'))?no_esc}</span>
+                                </div>
+                                <p class="text-xs text-gray-500">
+                                    <span id="kc-webauthn-authenticator-createdlabel-${authenticator?index}">
+                                        ${kcSanitize(msg('webauthn-createdAt-label'))?no_esc}
+                                    </span>
+                                    <span id="kc-webauthn-authenticator-created-${authenticator?index}">
+                                        ${kcSanitize(authenticator.createdAt)?no_esc}
+                                    </span>
+                                </p>
+
+                                <#if authenticator.transports?? && authenticator.transports.displayNameProperties?has_content>
+                                    <div class="flex items-center justify-end gap-1" id="kc-webauthn-authenticator-transport-${authenticator?index}">
+                                        <#list authenticator.transports.displayNameProperties as nameProperty>
+                                            <span class="text-xs border border-purple-300 bg-purple-50 text-purple-800 px-2 py-0.5 rounded-md">${kcSanitize(msg('${nameProperty!}'))?no_esc}</span>
+                                        </#list>
+                                    </div>
+                                </#if>    
+                            </li>
+                        </#list>
+                    </div>
+                </#if>
+            </#if>
+
+            <div id="kc-form-buttons" class="w-full flex items-center justify-end">
+                <button id="authenticateWebAuthnButton" type="button" autofocus="autofocus"
+                        value="${kcSanitize(msg("webauthn-doAuthenticate"))}"
+                        class="px-8 py-2.5 focus:outline-none transition bg-purple-600 hover:bg-purple-500 text-white w-max float-right rounded-lg">
+                        ${kcSanitize(msg("webauthn-doAuthenticate"))}
+                </button>
             </div>
         </div>
 
-    <script type="module">
-        import { authenticateByWebAuthn } from "${url.resourcesPath}/js/webauthnAuthenticate.js";
-        const authButton = document.getElementById('authenticateWebAuthnButton');
-        authButton.addEventListener("click", function() {
-            const input = {
-                isUserIdentified : ${isUserIdentified},
-                challenge : '${challenge}',
-                userVerification : '${userVerification}',
-                rpId : '${rpId}',
-                createTimeout : ${createTimeout},
-                errmsg : "${msg("webauthn-unsupported-browser-text")?no_esc}"
-            };
-            authenticateByWebAuthn(input);
-        });
-    </script>
+        <script type="module">
+            import { authenticateByWebAuthn } from "${url.resourcesPath}/js/webauthnAuthenticate.js";
+            const authButton = document.getElementById('authenticateWebAuthnButton');
+            authButton.addEventListener("click", function() {
+                const input = {
+                    isUserIdentified : ${isUserIdentified},
+                    challenge : '${challenge}',
+                    userVerification : '${userVerification}',
+                    rpId : '${rpId}',
+                    createTimeout : ${createTimeout},
+                    errmsg : "${msg("webauthn-unsupported-browser-text")?no_esc}"
+                };
+                authenticateByWebAuthn(input);
+            });
+        </script>
 
     <#elseif section = "info">
         <#if realm.registrationAllowed && !registrationDisabled??>
-            <div id="kc-registration">
-                <span>${msg("noAccount")} <a href="${url.registrationUrl}">${msg("doRegister")}</a></span>
+            <div id="kc-registration-container" class="text-gray-600 text-center mt-4">
+                <div id="kc-registration">
+                    <span>${msg("noAccount")} <a href="${url.registrationUrl}" class="text-purple-600">${msg("doRegister")}</a></span>
+                </div>
             </div>
         </#if>
     </#if>

@@ -41,8 +41,10 @@
 
     <#elseif section = "info" >
         <#if realm.password && realm.registrationAllowed && !registrationDisabled??>
-            <div id="kc-registration">
-                <span>${msg("noAccount")} <a href="${url.registrationUrl}">${msg("doRegister")}</a></span>
+            <div id="kc-registration-container" class="text-gray-600 text-center mt-4">
+                <div id="kc-registration">
+                    <span>${msg("noAccount")} <a href="${url.registrationUrl}" class="text-purple-600">${msg("doRegister")}</a></span>
+                </div>
             </div>
         </#if>
     <#elseif section = "socialProviders" >
