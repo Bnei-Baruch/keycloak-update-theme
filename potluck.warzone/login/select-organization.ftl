@@ -4,6 +4,7 @@
         <form action="${url.loginAction}" class="form-vertical" method="post">
             <div id="kc-user-organizations" class="${properties.kcFormGroupClass!}">
                 <h2>${msg("organization.select")}</h2>
+                ssslsl
 
                 <ul class="${properties.kcFormSocialAccountListClass!} <#if user.organizations?size gt 3>${properties.kcFormSocialAccountListGridClass!}</#if>">
                     <#list user.organizations as organization>

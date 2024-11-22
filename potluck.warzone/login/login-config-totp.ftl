@@ -68,7 +68,7 @@
                 <#if messagesPerField.existsError('userLabel')>
                     <div class="inline-flex item-center space-x-2 mt-1 text-sm">
                         <@field.errorIcon error=kcSanitize(messagesPerField.get('userLabel'))?no_esc/>
-                        <span id="input-error-otp-label" class="${properties.kcInputErrorMessageClass!} text-gray-700" aria-live="polite">
+                        <span id="input-error-otp-label" class="text-gray-700" aria-live="polite">
                             ${kcSanitize(messagesPerField.get('userLabel'))?no_esc}
                         </span>
                     </div>

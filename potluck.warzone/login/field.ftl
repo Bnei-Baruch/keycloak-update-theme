@@ -25,11 +25,7 @@
 
 <#macro errorIcon error="">
   <#if error?has_content>
-    <span class="${properties.kcFormControlUtilClass} text-red-600 flex">
-        <span class="${properties.kcInputErrorIconStatusClass}">
-          <i class="${properties.kcInputErrorIconClass}" aria-hidden="true"></i>
-        </span>
-    </span>
+    <span class="text-red-600 flex">*</span>
   </#if>
 </#macro>
 
