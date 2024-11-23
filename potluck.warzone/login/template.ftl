@@ -9,10 +9,10 @@
   <@field.group name="username" label=label>
     <div class="flex item-center mt-2">
       <div class="w-full">
-          <input class="px-4 py-2.5 bg-white text-gray-800 rounded-lg outline-none border-purple-300 border-dashed ring-1 ring-offset-2 ring-purple-500 w-full focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500" id="kc-attempted-username" value="${auth.attemptedUsername}" readonly>
+          <input class="px-4 py-2.5 bg-white text-gray-800 rounded-lg outline-none border-brand-300 border-dashed ring-1 ring-offset-2 ring-brand-500 w-full focus:outline-none focus:border-brand-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-brand-500" id="kc-attempted-username" value="${auth.attemptedUsername}" readonly>
       </div>
       <div class="ml-4">
-        <button id="reset-login" class="py-2.5 px-4 rounded-lg border-2 border-purple-400 text-center text-purple-600 w-max" type="button" 
+        <button id="reset-login" class="py-2.5 px-4 rounded-lg border-2 border-brand-400 text-center text-brand-600 w-max" type="button" 
               aria-label="${msg('restartLoginTooltip')}" onclick="location.href='${url.loginRestartFlowUrl}'">
             <i class="fa-sync-alt fas" aria-hidden="true"></i>
             <span class="kc-tooltip-text">${msg("restartLoginTooltip")}</span>
@@ -23,7 +23,7 @@
 
 <#macro registrationLayout bodyClass="" displayInfo=false displayMessage=true displayRequiredFields=false>
 <!DOCTYPE html>
-<html class="scroll-smooth" <#if realm.internationalizationEnabled> lang="${locale.currentLanguageTag}"</#if>>
+<html class="scroll-smooth" <#if realm.internationalizationEnabled> lang="${locale.currentLanguageTag}" <#else>lang="en"</#if>>
 
 <head>
     <meta charset="utf-8">
@@ -76,15 +76,15 @@
   <div class="p-6 w-full mx-auto flex flex-col justify-center min-h-screen bg-gradient-to-b from-white/5 to-white/75">
     <main class="max-w-sm w-full mx-auto">
       <header id="kc-header-custom" class="mb-10 font-semibold text-3xl">
-        <p class="text-purple-800 text-2xl">${kcSanitize(msg("loginTitleHtml",(realm.displayNameHtml!'')))?no_esc}</p>
+        <p class="text-brand-800 text-2xl">${kcSanitize(msg("loginTitleHtml",(realm.displayNameHtml!'')))?no_esc}</p>
       </header>
       <div class="text-slate-700">
         <h1 class="text-2xl font-medium">Auth</h1>
-        <h2 class="text-purple-500" id="kc-page-title-custom"><#nested "header"></h1>
+        <h2 class="text-brand-500" id="kc-page-title-custom"><#nested "header"></h1>
         <#if realm.internationalizationEnabled  && locale.supported?size gt 1>
             <div class="w-full flex justify-end mt-4">
               <select
-                class="px-2 py-1 text-sm bg-white text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-max"
+                class="px-2 py-1 text-sm bg-white text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:border-brand-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-brand-500 w-max"
                 aria-label="${msg("languages")}"
                 id="login-select-toggle"
                 onchange="if (this.value) window.location.href=this.value"
@@ -104,16 +104,16 @@
       <div id="main-body">
         <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
             <#if displayRequiredFields>
-                <div class="text-purple-800 mt-3">
-                    <span class="border border-purple-400 px-3 font-medium py-1 rounded-md text-sm bg-purple-50/75">
+                <div class="text-brand-800 mt-3">
+                    <span class="border border-brand-400 px-3 font-medium py-1 rounded-md text-sm bg-brand-50/75">
                       <span class="text-red-600">*</span> ${msg("requiredFields")}
                     </span>
                 </div>
             </#if>
         <#else>
             <#if displayRequiredFields>
-                    <div class="text-purple-800 mt-3">
-                        <span class="border border-purple-400 px-3 font-medium py-1 rounded-md text-sm bg-purple-50">
+                    <div class="text-brand-800 mt-3">
+                        <span class="border border-brand-400 px-3 font-medium py-1 rounded-md text-sm bg-brand-50">
                           <span class="text-red-600">*</span> ${msg("requiredFields")}
                         </span>
                     </div>
@@ -140,7 +140,7 @@
         <#if auth?has_content && auth.showTryAnotherWayLink()>
           <form id="kc-select-try-another-way-form" action="${url.loginAction}" method="post" novalidate="novalidate">
               <input type="hidden" name="tryAnotherWay" value="on"/>
-              <a id="try-another-way" class="text-purple-600 transition ring-1 ring-purple-300 hover:ring-purple-600 py-1 px-2 rounded-md text-sm" href="javascript:document.forms['kc-select-try-another-way-form'].submit()">
+              <a id="try-another-way" class="text-brand-600 transition ring-1 ring-brand-300 hover:ring-brand-600 py-1 px-2 rounded-md text-sm" href="javascript:document.forms['kc-select-try-another-way-form'].submit()">
                 ${kcSanitize(msg("doTryAnotherWay"))?no_esc}
               </a>
           </form>

@@ -8,11 +8,11 @@
     <#if section = "header">
         ${msg("loginTotpTitle")}
     <#elseif section = "form">
-        <ol id="kc-totp-settings" class="px-4 text-gray-800 list-disc">
+        <ol id="kc-totp-settings" class="pl-4 flex flex-col gap-2 text-gray-800 list-disc">
             <li>
                 <p>${msg("loginTotpStep1")}</p>
 
-                <ul id="kc-totp-supported-apps" class="ml-2">
+                <ul id="kc-totp-supported-apps" class="pl-2">
                     <#list totp.supportedApplications as app>
                         <li> - ${msg(app)}</li>
                     </#list>
@@ -23,12 +23,12 @@
                 <li>
                     <p>${msg("loginTotpManualStep2")}</p>
                     <p><span id="kc-totp-secret-key" class="font-semibold">${totp.totpSecretEncoded}</span></p>
-                    <p><a class="text-purple-500 hover:text-purple-600 transition font-semibold" href="${totp.qrUrl}" id="mode-barcode">${msg("loginTotpScanBarcode")}</a></p>
+                    <p><a class="text-brand-500 hover:text-brand-600 transition font-semibold" href="${totp.qrUrl}" id="mode-barcode">${msg("loginTotpScanBarcode")}</a></p>
                 </li>
-                <li>
+                <li class="list-disc">
                     <p>${msg("loginTotpManualStep3")}</p>
-                    <p>
-                    <ul>
+                    
+                    <ul class="mt-2">
                         <li id="kc-totp-type">${msg("loginTotpType")}: ${msg("loginTotp." + totp.policy.type)}</li>
                         <li id="kc-totp-algorithm">${msg("loginTotpAlgorithm")}: ${totp.policy.getAlgorithmKey()}</li>
                         <li id="kc-totp-digits">${msg("loginTotpDigits")}: ${totp.policy.digits}</li>
@@ -38,13 +38,12 @@
                             <li id="kc-totp-counter">${msg("loginTotpCounter")}: ${totp.policy.initialCounter}</li>
                         </#if>
                     </ul>
-                    </p>
                 </li>
             <#else>
                 <li>
                     <p>${msg("loginTotpStep2")}</p>
                     <img id="kc-totp-secret-qr-code" src="data:image/png;base64, ${totp.totpSecretQrCode}" alt="Figure: Barcode"><br/>
-                    <p><a class="text-purple-500 hover:text-purple-600 transition font-semibold" href="${totp.manualUrl}" id="mode-manual">${msg("loginTotpUnableToScan")}</a></p>
+                    <p><a class="text-brand-500 hover:text-brand-600 transition font-semibold" href="${totp.manualUrl}" id="mode-manual">${msg("loginTotpUnableToScan")}</a></p>
                 </li>
             </#if>
             <li>
@@ -63,7 +62,7 @@
                 <input type="text" id="userLabel" name="userLabel" autocomplete="off"
                         aria-invalid="<#if messagesPerField.existsError('userLabel')>true</#if>"
                         dir="ltr"
-                        class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full"
+                        class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-brand-500 w-full"
                 />
                 <#if messagesPerField.existsError('userLabel')>
                     <div class="inline-flex item-center space-x-2 mt-1 text-sm">
@@ -84,7 +83,7 @@
                     <input type="text" required id="totp" name="totp" autocomplete="off"
                            aria-invalid="<#if messagesPerField.existsError('totp')>true</#if>"
                            dir="ltr"
-                           class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full"
+                           class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-brand-500 w-full"
                     />
                 </div>
                 <#if messagesPerField.existsError('totp')>

@@ -15,13 +15,13 @@
                     ${msg("oauthGrantReview")}
                 </#if>
                 <#if client.attributes.tosUri??>
-                    <a class="text-purple-600 capitalize" href="${client.attributes.tosUri}" target="_blank">${msg("oauthGrantTos")}</a>
+                    <a class="text-brand-600 capitalize" href="${client.attributes.tosUri}" target="_blank">${msg("oauthGrantTos")}</a>
                 </#if>
                 <#if client.attributes.tosUri?? && client.attributes.policyUri??>
                     &
                 </#if>
                 <#if client.attributes.policyUri??>
-                    <a class="text-purple-600 capitalize" href="${client.attributes.policyUri}" target="_blank">${msg("oauthGrantPolicy")}</a>
+                    <a class="text-brand-600 capitalize" href="${client.attributes.policyUri}" target="_blank">${msg("oauthGrantPolicy")}</a>
                 </#if>
             </p>
         </#if>

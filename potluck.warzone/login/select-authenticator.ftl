@@ -14,7 +14,7 @@
                 <form id="kc-select-credential-form" action="${url.loginAction}" method="post">
                     <input type="hidden" name="authenticationExecution" value="${authenticationSelection.authExecId}">
                 </form>
-                <button type="button" class="w-full group text-left ring-1 ring-purple-200 hover:ring-transparent p-2 rounded-lg hover:bg-purple-500 hover:text-white hover:shadow-xl hover:shadow-purple-300/50 transition" onclick="document.forms[${authenticationSelection?index}].submit()">
+                <button type="button" class="w-full group text-left ring-1 ring-brand-200 hover:ring-transparent p-2 rounded-lg hover:bg-brand-500 hover:text-white hover:shadow-xl hover:shadow-brand-300/50 transition" onclick="document.forms[${authenticationSelection?index}].submit()">
                     <div class="font-medium inline-flex items-center gap-2">
                         <span>
                             <#if authenticationSelection.displayName == "otp-display-name" >

@@ -30,7 +30,7 @@
 
                     <ul role="list" class="flex flex-col gap-4 w-full my-4">
                         <#list authenticators.authenticators as authenticator>
-                            <li id="kc-webauthn-authenticator-item-${authenticator?index}" class="ring-1 ring-purple-200 p-2 rounded-md">
+                            <li id="kc-webauthn-authenticator-item-${authenticator?index}" class="ring-1 ring-brand-200 p-2 rounded-md">
                                 <div id="kc-webauthn-authenticator-label-${authenticator?index}" class="font-medium inline-flex items-center gap-1">
                                     <div>
                                         <#switch authenticator.transports.iconClass>
@@ -62,7 +62,7 @@
                                 <#if authenticator.transports?? && authenticator.transports.displayNameProperties?has_content>
                                     <div class="flex items-center justify-end gap-1" id="kc-webauthn-authenticator-transport-${authenticator?index}">
                                         <#list authenticator.transports.displayNameProperties as nameProperty>
-                                            <span class="text-xs border border-purple-300 bg-purple-50 text-purple-800 px-2 py-0.5 rounded-md">${kcSanitize(msg('${nameProperty!}'))?no_esc}</span>
+                                            <span class="text-xs border border-brand-300 bg-brand-50 text-brand-800 px-2 py-0.5 rounded-md">${kcSanitize(msg('${nameProperty!}'))?no_esc}</span>
                                         </#list>
                                     </div>
                                 </#if>    
@@ -75,7 +75,7 @@
             <div id="kc-form-buttons" class="w-full flex items-center justify-end">
                 <button id="authenticateWebAuthnButton" type="button" autofocus="autofocus"
                         value="${kcSanitize(msg("webauthn-doAuthenticate"))}"
-                        class="px-8 py-2.5 focus:outline-none transition bg-purple-600 hover:bg-purple-500 text-white w-max float-right rounded-lg">
+                        class="px-8 py-2.5 focus:outline-none transition bg-brand-600 hover:bg-brand-500 text-white w-max float-right rounded-lg">
                         ${kcSanitize(msg("webauthn-doAuthenticate"))}
                 </button>
             </div>
@@ -101,7 +101,7 @@
         <#if realm.registrationAllowed && !registrationDisabled??>
             <div id="kc-registration-container" class="text-gray-600 text-center mt-4">
                 <div id="kc-registration">
-                    <span>${msg("noAccount")} <a href="${url.registrationUrl}" class="text-purple-600">${msg("doRegister")}</a></span>
+                    <span>${msg("noAccount")} <a href="${url.registrationUrl}" class="text-brand-600">${msg("doRegister")}</a></span>
                 </div>
             </div>
         </#if>

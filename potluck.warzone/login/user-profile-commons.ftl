@@ -92,7 +92,7 @@
 			type="<@inputTagType attribute=attribute/>" 
 			id="${attribute.name}" name="${attribute.name}" 
 			value="${(value!'')}" 
-			class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full"
+			class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-brand-500 w-full"
 			aria-invalid="<#if messagesPerField.existsError('${attribute.name}')>true</#if>"
 			<#if attribute.readOnly>disabled</#if>
 			<#if attribute.autocomplete??>autocomplete="${attribute.autocomplete}"</#if>
@@ -130,7 +130,7 @@
 	<textarea 
 		id="${attribute.name}" 
 		name="${attribute.name}" 
-		class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full"
+		class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-brand-500 w-full"
 		aria-invalid="<#if messagesPerField.existsError('${attribute.name}')>true</#if>"
 		<#if attribute.readOnly>disabled</#if>
 		<#if attribute.annotations.inputTypeCols??>cols="${attribute.annotations.inputTypeCols}"</#if>
@@ -143,7 +143,7 @@
 	<select 
 		id="${attribute.name}" 
 		name="${attribute.name}"
-		class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-purple-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-purple-500 w-full"
+		class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-brand-500 w-full"
 		aria-invalid="<#if messagesPerField.existsError('${attribute.name}')>true</#if>"
 		<#if attribute.readOnly>disabled</#if>
 		<#if attribute.annotations.inputType=='multiselect'>multiple</#if>
@@ -171,12 +171,12 @@
 	<#if attribute.annotations.inputType=='select-radiobuttons'>
 		<#assign inputType='radio'>
 		<#assign classDiv="flex items-center" >
-		<#assign classInput="text-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500">
+		<#assign classInput="text-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500">
 		<#assign classLabel="cursor-pointer">
 	<#else>	
 		<#assign inputType='checkbox'>
 		<#assign classDiv="flex items-center">
-		<#assign classInput="rounded mb-1 focus:outline-none outline-none border border-purple-400 text-purple-600 ring-1 ring-purple-300/25 focus:ring-purple-300">
+		<#assign classInput="rounded mb-1 focus:outline-none outline-none border border-brand-400 text-brand-600 ring-1 ring-brand-300/25 focus:ring-brand-300">
 		<#assign classLabel="cursor-pointer">
 	</#if>
 	

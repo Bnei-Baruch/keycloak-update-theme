@@ -22,14 +22,14 @@
                 <form action="${url.loginAction}" id="kc-webauthn-settings-form" method="post">
                     <button 
                         type="submit"
-                        class="px-8 py-2.5 transition rounded-lg border-2 hover:bg-purple-50 border-purple-400 text-center text-purple-600 w-max"
+                        class="px-8 py-2.5 transition rounded-lg border-2 hover:bg-brand-50 border-brand-400 text-center text-brand-600 w-max"
                         id="cancelWebAuthnAIA" name="cancel-aia" value="true">
                             ${msg("doCancel")}
                     </button>
                 </form>
             </#if>
             <input tabindex="4" onclick="refreshPage()" type="button"
-                   class="px-8 py-2.5 transition bg-purple-600 hover:bg-purple-500 text-white w-max rounded-lg"
+                   class="px-8 py-2.5 transition bg-brand-600 hover:bg-brand-500 text-white w-max rounded-lg"
                    name="try-again" id="kc-try-again" value="${kcSanitize(msg("doTryAgain"))?no_esc}"
             />
         </div>

@@ -2,7 +2,7 @@
     <div id="kc-form-options" class="mt-3">
         <div>
             <input 
-                class="rounded mb-0.5 focus:outline-none outline-none border border-purple-400 text-purple-600 ring-1 ring-purple-300/25 focus:ring-purple-300"
+                class="rounded mb-0.5 focus:outline-none outline-none border border-brand-400 text-brand-600 ring-1 ring-brand-300/25 focus:ring-brand-300"
                 type="checkbox" 
                 id="logout-sessions" 
                 name="logout-sessions" 

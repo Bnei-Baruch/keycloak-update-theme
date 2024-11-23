@@ -21,7 +21,7 @@
                 <#if oauth.clientScopesRequested??>
                     <#list oauth.clientScopesRequested as clientScope>
                         <li >
-                            <div class="py-0.5 px-2 border border-purple-400 text-purple-700 bg-purple-50 rounded-md text-sm">
+                            <div class="py-0.5 px-2 border border-brand-400 text-brand-700 bg-brand-50 rounded-md text-sm">
                                 <#if !clientScope.dynamicScopeParameter??>
                                         ${advancedMsg(clientScope.consentScreenText)}
                                     <#else>
@@ -46,13 +46,13 @@
                         ${msg("oauthGrantReview")}
                     </#if>
                     <#if client.attributes.tosUri??>
-                        <a class="text-purple-600 capitalize" href="${client.attributes.tosUri}" target="_blank">${msg("oauthGrantTos")}</a>
+                        <a class="text-brand-600 capitalize" href="${client.attributes.tosUri}" target="_blank">${msg("oauthGrantTos")}</a>
                     </#if>
                     <#if client.attributes.tosUri?? && client.attributes.policyUri??>
                         &
                     </#if>
                     <#if client.attributes.policyUri??>
-                        <a class="text-purple-600 capitalize" href="${client.attributes.policyUri}" target="_blank">${msg("oauthGrantPolicy")}</a>
+                        <a class="text-brand-600 capitalize" href="${client.attributes.policyUri}" target="_blank">${msg("oauthGrantPolicy")}</a>
                     </#if>
                 </p>
             </#if>

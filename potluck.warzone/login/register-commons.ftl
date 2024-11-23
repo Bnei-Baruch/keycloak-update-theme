@@ -10,13 +10,13 @@
                             ${msg("oauthGrantReview")}
                         </#if>
                         <#if client.attributes.tosUri??>
-                            <a class="text-purple-600 capitalize" href="${client.attributes.tosUri}" target="_blank">${msg("oauthGrantTos")}</a>
+                            <a class="text-brand-600 capitalize" href="${client.attributes.tosUri}" target="_blank">${msg("oauthGrantTos")}</a>
                         </#if>
                         <#if client.attributes.tosUri?? && client.attributes.policyUri??>
                             &
                         </#if>
                         <#if client.attributes.policyUri??>
-                            <a class="text-purple-600 capitalize" href="${client.attributes.policyUri}" target="_blank">${msg("oauthGrantPolicy")}</a>
+                            <a class="text-brand-600 capitalize" href="${client.attributes.policyUri}" target="_blank">${msg("oauthGrantPolicy")}</a>
                         </#if>
                     </p>
                 </#if>
@@ -28,7 +28,7 @@
                     type="checkbox" 
                     id="termsAccepted" 
                     name="termsAccepted" 
-                    class="rounded mb-1 focus:outline-none outline-none border border-purple-400 text-purple-600 ring-1 ring-purple-300/25 focus:ring-purple-300"
+                    class="rounded mb-1 focus:outline-none outline-none border border-brand-400 text-brand-600 ring-1 ring-brand-300/25 focus:ring-brand-300"
                     aria-invalid="<#if messagesPerField.existsError('termsAccepted')>true</#if>"
                 />
                 <label for="termsAccepted">${msg("acceptTerms")}</label>
