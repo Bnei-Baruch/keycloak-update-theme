@@ -21,10 +21,23 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.3.0</version>
                 <configuration>
                     <archive>
                         <addMavenDescriptor>false</addMavenDescriptor>
+                        <index>true</index>
+
+                        <manifestEntries>
+                            <Author>Eko Sutrisno</Author>
+                            <GitHub>https://github.com/ekosutrisno/keycloak-potluck-warzone-theme</GitHub>
+                            <Version>${project.version}</Version>
+                            <Build-Time>${maven.build.timestamp}</Build-Time>
+                            <Company>Kelas Pondok</Company>
+                            <Website>https://kelaspondok.com</Website>
+                            <Description>Modern Keycloak login theme build with TailwindCSS</Description>
+                            <License>MIT</License>
+                            <Java-Version>${java.version}</Java-Version>
+                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
