@@ -1,81 +1,149 @@
-# Potluck Warzone Keycloak Theme (WIP)
+# Potluck Warzone Keycloak Theme
 
 Author: **Eko Sutrisno** [Github](https://github.com/ekosutrisno)
 
-This theme focus on customize for Standard Login Theme page with full responsive:
+* This theme structure is based on the `keycloak.v2` theme.
+* Supported Keycloak versions: `v26+`
+* Tested on `Chromium-based` browsers, `Firefox`, and `Safari`.
+* Generated Jar file size under `350kb`.
 
-CSS Framework:
+This theme focuses on customizing the Standard Login Theme page with full `responsive` support.
 
-- TailwindCSS
+CSS Framework: **TailwindCSS**
 
-Customized Page:
+Customized Pages:
 
-- Login
-- Register
-- Forgot/Reset Password
-- Email Verification
-- Update Email (Keycloak Preview Feature)
-- Passcode (Keycloak Preview Feature)
-- Recovery Code (Keycloak Preview Feature)
-- Update Password
-- Setup 2FA OTP
-- Setup Recovery Code
-- Setup Passkey
-- Login With (OTP, Recovery Code, Passkey)
-- Update Profile when new atribute required
-- Alert Style (Custom)
-- Social Provider layout and Button style
+* Login
+* Register (Include )
+* Forgot/Reset Password
+* Email Verification
+* Update Email (Keycloak Preview Feature)
+* Passcode (Keycloak Preview Feature)
+* Recovery Code (Keycloak Preview Feature)
+* Update Password
+* Setup 2FA OTP
+* Setup Recovery Code
+* Setup Passkey
+* Login with (OTP, Recovery Code, Passkey)
+* OAuth Grant Login
+* Update Profile when new attributes are required
+* Custom Alert Style
+* Social Provider Layout and Button Style
+
+## Local Development
+
+* Clone this repo
+
+```sh
+git clone https://github.com/ekosutrisno/keycloak-potluck-warzone-theme.git
+```
+
+* Copy all theme files and folders to the `themes` directory in your Keycloak installation
+
+* Go to `themes` directory and install all TailwindCSS dependency
+
+```sh
+npm run install
+```
+
+* Run and Generate (Watch Mode)
+
+```sh
+npm run dev
+```
+
+## Build JAR
+
+* If you make any changes and run `npm run dev`, you need to copy and replace the `potluck.warzone` folder from the root directory to `theme/potluck.warzone`.
+* Ensure that Java (`java -version`) and Maven (`mvn -version`) are installed on your machine.
+* Run `mvn clean package`.
+
+## Use Theme with Docker (Docker Compose)
+
+This Docker Compose file assumes that `potluck-warzone-1.0.0.jar` is in the same directory as `docker-compose.yml`. If it is in a different folder, please adjust the paths accordingly.
+
+If you want to use email functionaly in local development you can use config below for testing.
+
+<http://localhost:5000> to go to Web Email Client
+
+```txt
+From: auth@local.com
+From display name: Your App Name
+Host: host.docker.internal
+Port: 2525
+
+
+*Note: Make sure your admin user in Master real have an email (you can use random email on local development)
+
+```
+
+```docker-compose
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0.0
+    container_name: keycloak
+    volumes:
+      - ./potluck-warzone-1.0.0.jar:/opt/keycloak/providers/potluck-warzone-1.0.0.jar
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin123
+    ports:
+      - "8080:8080"
+    command: 
+      - start-dev
+      - --features=preview
+  smptpdev:
+    image: rnwood/smtp4dev
+    container_name: smptpdev
+    ports:
+      - "5000:80"
+      - "2525:25"
+```
 
 ## Preview Page
 
-<!-- - Login Page
-![Login Page](./public/login_page.webp)
-- Login With OTP Page
-![Login Page](./public/input_otp_page.webp)
-- Register Page
-![Login Page](./public/register_page.webp)
-- Forgot Password Page
-![Login Page](./public/forgot_password_page.webp)
-- Update Password Page
-![Login Page](./public/update_password_page.webp)
-- Setup 2FA OTP Page
-![Login Page](./public/setup_otp_page.webp) -->
+### Login Page
 
-## Creating Themes
+![Login Page](./public/login.webp)
 
----
+### Login With OTP Page
 
-Themes are used to configure the look and feel of login pages and the account management console.
+![Login Page](./public/otp.webp)
 
-Custom themes packaged in a JAR file should be deployed to the `${kc.home.dir}/providers` directory. After that, run
-the `build` command to install them before starting the server.
+### Update Password Page
 
-You are also able to create your custom themes in this directory, directly. Themes within this directory do not require
-the `build` command to be installed.
+![Login Page](./public/update_password.webp)
 
-When running the server in development mode using `start-dev`, themes are not cached so that you can easily work on them without a need to restart
-the server when making changes.
+### Setup 2FA OTP Page
 
-See the theme section in the [Server Developer Guide](https://www.keycloak.org/docs/latest/server_development/#_themes) for more details about how to create custom themes.
+![Login Page](./public/2fa_config.webp)
 
-## Overriding the built-in indexs
+### Setup Passkeys
 
----
+![Login Page](./public/passkeys.webp)
 
-While creating custom themes, especially when overriding indexs, it may be useful to use the built-in indexs as
-a reference. These can be found within the theme directory of `../lib/lib/main/org.keycloak.keycloak-themes-26.0.2.jar`, which can be opened using any
-standard ZIP archive tool.
+### Setup Recovery Code
 
-- TailwindCSS Build and Watch during development
+![Login Page](./public/recovery_codes.webp)
 
-    ```sh
-    npx tailwindcss -i ./potluck.warzone/login/resources/css/tailwind.css -o ./potluck.warzone/login/resources/css/styles.css --watch
-    ```
+### Reauthenticate
 
-- HTML Display name
+![Login Page](./public/re_authentication.webp)
 
-    ```html
-    <div class="text-gray-800 text-2xl"><span> &bull; Potluck Warzone</span></div>
-    ```
+### Update Email
 
-**Built-in themes should not be modified directly, instead a custom theme should be created.**
+![Login Page](./public/update_email.webp)
+
+### Select 2FA
+
+![Login Page](./public/select_login_auth.webp)
+
+### OAuth Consent and Grant
+
+![Login Page](./public/oauth_consent_grant.webp)
+
+### Delete Account
+
+![Login Page](./public/delete_account.webp)
+
+For the Register, forgot password, and others, you can try it out by yourself.
