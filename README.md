@@ -7,6 +7,26 @@ Author: **Eko Sutrisno** [Github](https://github.com/ekosutrisno)
 * Tested on `Chromium-based` browsers, `Firefox`, and `Safari`.
 * Generated Jar file size under `350kb`.
 
+## Change Theme
+
+Via Realm (Will used by all client by default)
+
+* Realm Settings -> Themes -> Login Theme
+
+Via Specific Client
+
+* Clients -> YOUR_CLIENT -> Login Settings -> Login Theme
+
+Enable Login feature (optional)
+
+* Realm Settings -> Login
+
+Enable some Authentcation feature (optional)
+
+* Configure Meny -> Authentication -> Required Action
+
+## Intro
+
 This theme focuses on customizing the Standard Login Theme page with full `responsive` support.
 
 CSS Framework: **TailwindCSS**
@@ -61,6 +81,8 @@ npm run dev
 ## Use Theme with Docker (Docker Compose)
 
 This Docker Compose file assumes that `potluck-warzone-1.0.0.jar` is in the same directory as `docker-compose.yml`. If it is in a different folder, please adjust the paths accordingly.
+
+Or you can go to `docker` folder and then run `docker compose up -d`. It will run docker for you.
 
 If you want to use email functionaly in local development you can use config below for testing.
 
