@@ -1,0 +1,22 @@
+# After cloning this repo go to `/docker` folder and run command `docker compose up -d`
+
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0.0
+    container_name: keycloak
+    volumes:
+      - ./potluck-warzone-1.0.0.jar:/opt/keycloak/providers/potluck-warzone-1.0.0.jar
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin123
+    ports:
+      - "8080:8080"
+    command:
+      - start-dev
+      - --features=preview
+  smptpdev:
+    image: rnwood/smtp4dev
+    container_name: smptpdev
+    ports:
+      - "5000:80"
+      - "2525:25"
