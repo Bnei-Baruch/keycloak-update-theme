@@ -15,11 +15,11 @@
         <table role="presentation" style="width: 100%; border-collapse: collapse; border: 0px; border-spacing: 0px; font-family: 'Roboto', sans-serif;">
             <tbody>
                 <tr>
-                    <td align="center" style="background-size:100% 100%;background-repeat:no-repeat;background-position:top center; padding-top: 50px;padding-bottom: 50px;">
+                    <td align="center" style="background-size: cover;background-repeat:no-repeat;background-position:top center; padding: 50px 10px;">
                         <table role="presentation" style="max-width: 600px; border-collapse: separate; border: 0px; border-spacing: 0px; text-align: left;">
                             <tbody>
                                 <tr>
-                                    <td style="background-color: white; border-radius: 10px; padding: 20px; border: 1.5px solid #f4f4f4;box-shadow: 0 0px 25px rgba(44, 44, 44, 0.1);">
+                                    <td style="background-color: white; border-radius: 10px; padding: 20px; border: 1.5px solid #ECECEC;box-shadow: 0 0px 25px rgba(44, 44, 44, 0.1);">
                                         <div style="text-align: left;">
                                             <div style="padding-bottom: 25px;">
                                                 <img src="https://res.cloudinary.com/ekosutrisno/image/upload/v1623832497/Libox/maskable_icon_f3zasu.png" alt="Company Logo" style="width: 56px; border-radius: 100%;">
