@@ -23,7 +23,7 @@ Enable Login feature (optional)
 
 Enable some Authentcation feature (optional)
 
-* Configure Meny -> Authentication -> Required Action
+* Configure Menu -> Authentication -> Required Action
 
 ## Intro
 
