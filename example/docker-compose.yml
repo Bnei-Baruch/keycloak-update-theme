@@ -2,7 +2,7 @@
 
 services:
   keycloak:
-    image: quay.io/keycloak/keycloak:26.0.0
+    image: quay.io/keycloak/keycloak:26.1.2
     container_name: keycloak
     volumes:
       - ./potluck-warzone-1.0.0.jar:/opt/keycloak/providers/potluck-warzone-1.0.0.jar

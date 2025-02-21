@@ -3,7 +3,8 @@
         {
             "name": "potluck.warzone",
             "types": [
-                "login"
+                "login",
+                "email"
             ]
         }
     ]
