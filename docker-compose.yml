@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.1
+    container_name: keycloak
+    command: start-dev
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_THEME: potluck.warzone
+      KC_SPI_LOGIN_THEME: potluck.warzone
+    volumes:
+      - ./potluck.warzone:/opt/keycloak/themes/potluck.warzone
+    ports:
+      - "8080:8080"
