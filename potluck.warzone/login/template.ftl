@@ -70,36 +70,64 @@
         import { checkCookiesAndSetTimer } from "${url.resourcesPath}/js/authChecker.js";
         checkCookiesAndSetTimer("${url.ssoLoginInOtherTabsUrl?no_esc}");
     </script>
+    <style>
+      .text-brand-500 { color: #000000 !important; }
+      .text-brand-600 { color: #00a6b4 !important; }
+      .text-brand-700 { color: #005385 !important; }
+      .text-brand-800 { color: #005385 !important; }
+      .bg-brand-600 { background-color: #00a6b4 !important; }
+      .border-brand-300 { border-color: #00a6b4 !important; }
+      .border-brand-400 { border-color: #005385 !important; }
+      .ring-brand-300 { --tw-ring-color: #00a6b4 !important; }
+      .ring-brand-500 { --tw-ring-color: #005385 !important; }
+      .ring-brand-600 { --tw-ring-color: #005385 !important; }
+      .shadow-brand-600 { --tw-shadow-color: #005385 !important; }
+      .hover\:bg-brand-500:hover { background-color: #005385 !important; }
+      .hover\:text-brand-600:hover { color: #005385 !important; }
+      .hover\:ring-brand-600:hover { --tw-ring-color: #005385 !important; }
+      .focus\:border-brand-300:focus { border-color: #00a6b4 !important; }
+      .focus\:ring-brand-300:focus { --tw-ring-color: #00a6b4 !important; }
+      .focus\:ring-brand-500:focus { --tw-ring-color: #005385 !important; }
+      .alert-error { border-color: #dc2626 !important; background-color: #fef2f2 !important; color: #991b1b !important; }
+      .alert-error .text-red-500 { color: #dc2626 !important; }
+      .alert-general { border-color: #dc2626 !important; background-color: #fef2f2 !important; color: #991b1b !important; }
+      .alert-general .text-red-500 { color: #dc2626 !important; }
+      .alert-general { --tw-shadow-color: rgb(220 38 38 / 0.2) !important; --tw-shadow: var(--tw-shadow-colored) !important; }
+      .alert-error { --tw-shadow-color: rgb(220 38 38 / 0.2) !important; --tw-shadow: var(--tw-shadow-colored) !important; }
+    </style>
 </head>
 
-<body id="keycloak-bg-custom" class="max-w-screen-2xl min-h-screen h-full bg-[url(../img/hero-pattern.svg)] bg-fixed">
-  <div class="p-6 w-full mx-auto flex flex-col justify-center min-h-screen bg-gradient-to-b from-white/5 to-white/75">
+<body id="keycloak-bg-custom" class="min-h-screen h-full bg-white">
+  <div class="p-6 w-full mx-auto flex flex-col justify-center min-h-screen">
     <main class="max-w-sm w-full mx-auto">
-      <header id="kc-header-custom" class="mb-10 font-semibold text-3xl">
-        <p class="text-brand-800 text-2xl">${kcSanitize(msg("loginTitleHtml",(realm.displayNameHtml!'')))?no_esc}</p>
-      </header>
-      <div class="text-slate-700">
-        <h1 class="text-2xl font-medium">Auth</h1>
-        <h2 class="text-brand-500" id="kc-page-title-custom"><#nested "header"></h1>
-        <#if realm.internationalizationEnabled  && locale.supported?size gt 1>
-            <div class="w-full flex justify-end mt-4">
-              <select
-                class="px-2 py-1 text-sm bg-white text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:border-brand-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-brand-500 w-max"
-                aria-label="${msg("languages")}"
-                id="login-select-toggle"
-                onchange="if (this.value) window.location.href=this.value"
+      <#if realm.internationalizationEnabled  && locale.supported?size gt 1>
+        <div class="w-full flex justify-end mb-4">
+          <select
+            class="px-2 py-1 text-sm bg-white text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:border-brand-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-brand-500 w-auto"
+            aria-label="${msg("languages")}"
+            id="login-select-toggle"
+            onchange="if (this.value) window.location.href=this.value"
+          >
+            <#list locale.supported?sort_by("label") as l>
+              <option
+                value="${l.url}"
+                ${(l.languageTag == locale.currentLanguageTag)?then('selected','')}
               >
-                <#list locale.supported?sort_by("label") as l>
-                  <option
-                    value="${l.url}"
-                    ${(l.languageTag == locale.currentLanguageTag)?then('selected','')}
-                  >
-                    ${l.label}
-                  </option>
-                </#list>
-              </select>
-          </div>
-        </#if>
+                ${l.label}
+              </option>
+            </#list>
+          </select>
+        </div>
+      </#if>
+      <header id="kc-header-custom" class="mb-10 text-3xl text-center" style="font-family: 'Assistant', sans-serif; font-weight: 700;">
+        <div class="flex items-center justify-center gap-4">
+          <img src="${url.resourcesPath}/img/logo.jpg" alt="Logo" class="w-11 h-11 object-scale-down">
+          <p class="text-2xl" style="font-family: 'Assistant', sans-serif; font-weight: 700; color: #005385;">BNEI BARUCH</p>
+        </div>
+      </header>
+      <div class="border border-gray-200 rounded-lg p-6">
+        <div class="text-slate-700">
+          <h2 class="text-brand-500" id="kc-page-title-custom"><#nested "header"></h1>
       </div>
       <div id="main-body">
         <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
@@ -152,9 +180,9 @@
               </div>
           </div>
         </#if>
-      </div>
-      <div>
-        <#nested "socialProviders">
+        <div>
+          <#nested "socialProviders">
+        </div>
       </div>
     </main>
     <@loginFooter.content/>
