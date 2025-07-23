@@ -37,7 +37,7 @@
         </#list>
     </#if>
     <title>${msg("loginTitle",(realm.displayName!''))}</title>
-    <link rel="icon" href="${url.resourcesPath}/img/favicon.svg" />
+    <link rel="icon" href="${url.resourcesPath}/img/logo.png" />
     <#if properties.stylesCommon?has_content>
         <#list properties.stylesCommon?split(' ') as style>
             <link href="${url.resourcesCommonPath}/${style}" rel="stylesheet" type="text/css" />
@@ -71,6 +71,9 @@
         checkCookiesAndSetTimer("${url.ssoLoginInOtherTabsUrl?no_esc}");
     </script>
     <style>
+      body {
+        background-color: #f9fafb !important;
+      }
       .text-brand-500 { color: #000000 !important; }
       .text-brand-600 { color: #00a6b4 !important; }
       .text-brand-700 { color: #005385 !important; }
@@ -97,7 +100,7 @@
     </style>
 </head>
 
-<body id="keycloak-bg-custom" class="min-h-screen h-full bg-white">
+<body id="keycloak-bg-custom" class="min-h-screen h-full">
   <div class="p-6 w-full mx-auto flex flex-col justify-center min-h-screen">
     <main class="max-w-sm w-full mx-auto">
       <#if realm.internationalizationEnabled  && locale.supported?size gt 1>
@@ -119,17 +122,34 @@
           </select>
         </div>
       </#if>
-      <header id="kc-header-custom" class="mb-10 text-3xl text-center" style="font-family: 'Assistant', sans-serif; font-weight: 700;">
+      <header id="kc-header-custom" class="mb-12 text-3xl text-center" style="font-family: 'Assistant', sans-serif; font-weight: 700; transform: translateX(-50px);">
         <div class="flex items-center justify-center gap-4">
-          <img src="${url.resourcesPath}/img/logo.jpg" alt="Logo" class="w-11 h-11 object-scale-down">
+          <img src="${url.resourcesPath}/img/logo.png" alt="Logo" class="w-11 h-11 object-scale-down">
           <p class="text-2xl" style="font-family: 'Assistant', sans-serif; font-weight: 700; color: #005385;">BNEI BARUCH</p>
         </div>
       </header>
-      <div class="border border-gray-200 rounded-lg p-6">
-        <div class="text-slate-700">
-          <h2 class="text-brand-500" id="kc-page-title-custom"><#nested "header"></h1>
-      </div>
-      <div id="main-body">
+            <div class="border border-gray-200 rounded-lg p-6 bg-white shadow-lg">
+                                            <div class="text-slate-700" style="margin-bottom: 20px;">
+                    <h2 class="text-brand-500" id="kc-page-title-custom"><#nested "header"></h1>
+                  </div>
+
+                  <!-- Social Login First -->
+                  <div style="margin-bottom: 20px;">
+                    <#nested "socialProviders">
+                  </div>
+
+                  <!-- Divider -->
+                  <div class="relative my-8">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-300"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+                                <span class="px-2 bg-white text-gray-500">Or sign in with username and password</span>
+          </div>
+        </div>
+        
+        <!-- Traditional Login Form -->
+        <div id="main-body">
         <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
             <#if displayRequiredFields>
                 <div class="text-brand-800 mt-3">
@@ -180,9 +200,6 @@
               </div>
           </div>
         </#if>
-        <div>
-          <#nested "socialProviders">
-        </div>
       </div>
     </main>
     <@loginFooter.content/>

@@ -4,7 +4,11 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.1
     container_name: keycloak
-    command: start-dev
+    command:
+      - start-dev
+      - --spi-theme-static-max-age=0
+      - --spi-theme-cache-themes=false
+      - --spi-theme-cache-templates=false
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
@@ -14,3 +18,4 @@ services:
       - ./potluck.warzone:/opt/keycloak/themes/potluck.warzone
     ports:
       - "8080:8080"
+
