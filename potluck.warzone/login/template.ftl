@@ -106,7 +106,8 @@
       <#if realm.internationalizationEnabled  && locale.supported?size gt 1>
         <div class="w-full flex justify-end mb-4">
           <select
-            class="px-2 py-1 text-sm bg-white text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:border-brand-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-brand-500 w-auto"
+            class="px-3 py-1.5 text-sm bg-white text-gray-800 rounded-md border border-gray-300 focus:outline-none focus:border-brand-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-brand-500 pr-8"
+            style="width: 120px !important; min-width: 100px !important;"
             aria-label="${msg("languages")}"
             id="login-select-toggle"
             onchange="if (this.value) window.location.href=this.value"
