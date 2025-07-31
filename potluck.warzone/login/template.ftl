@@ -138,7 +138,8 @@
                     <#nested "socialProviders">
                   </div>
 
-                  <!-- Divider -->
+                  <!-- Divider - Only show for login pages, not logout -->
+                  <#if !(message?? && message.summary?? && message.summary == msg("successLogout"))>
                   <div class="relative my-8">
           <div class="absolute inset-0 flex items-center">
             <div class="w-full border-t border-gray-300"></div>
@@ -147,6 +148,7 @@
                                 <span class="px-2 bg-white text-gray-500">Or sign in with username and password</span>
           </div>
         </div>
+                  </#if>
         
         <!-- Traditional Login Form -->
         <div id="main-body">
@@ -183,7 +185,10 @@
             <@loginAlert.alert message=message />
         </#if>
         
+        <!-- Only show form content for login pages, not logout -->
+        <#if !(message?? && message.summary?? && message.summary == msg("successLogout"))>
         <div class="my-5"><#nested "form"></div>
+        </#if>
 
         <#if auth?has_content && auth.showTryAnotherWayLink()>
           <form id="kc-select-try-another-way-form" action="${url.loginAction}" method="post" novalidate="novalidate">

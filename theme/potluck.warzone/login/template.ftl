@@ -135,7 +135,10 @@
             <@loginAlert.alert message=message />
         </#if>
         
+        <!-- Only show form content for login pages, not logout -->
+        <#if !(message?? && message.summary?? && message.summary == msg("successLogout"))>
         <div class="my-5"><#nested "form"></div>
+        </#if>
 
         <#if auth?has_content && auth.showTryAnotherWayLink()>
           <form id="kc-select-try-another-way-form" action="${url.loginAction}" method="post" novalidate="novalidate">
