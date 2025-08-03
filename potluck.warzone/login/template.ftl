@@ -97,6 +97,37 @@
       .alert-general .text-red-500 { color: #dc2626 !important; }
       .alert-general { --tw-shadow-color: rgb(220 38 38 / 0.2) !important; --tw-shadow: var(--tw-shadow-colored) !important; }
       .alert-error { --tw-shadow-color: rgb(220 38 38 / 0.2) !important; --tw-shadow: var(--tw-shadow-colored) !important; }
+      
+      /* Custom styles for login toggle */
+      .login-toggle-btn {
+        background-color: #ffffff;
+        border: 1px solid #d1d5db;
+        color: #374151;
+        padding: 12px 16px;
+        border-radius: 8px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+      
+      .login-toggle-btn:hover {
+        background-color: #f9fafb;
+        border-color: #9ca3af;
+      }
+      
+      .traditional-login-form {
+        display: none;
+      }
+      
+      .traditional-login-form.show {
+        display: block;
+      }
     </style>
 </head>
 
@@ -135,24 +166,28 @@
                   </div>
 
                   <!-- Social Login First -->
-                  <div style="margin-bottom: 20px;">
+                  <div style="margin-bottom: 10px;">
                     <#nested "socialProviders">
                   </div>
 
-                  <!-- Divider - Only show for login pages, not logout -->
+                  <!-- Or text - Only show in initial state -->
+                  <div id="or-divider" class="text-center">
+                    <span class="text-gray-500 text-sm">${msg("or")}</span>
+                  </div>
+
+                  <!-- Traditional Login Toggle Button -->
                   <#if !(message?? && message.summary?? && message.summary == msg("successLogout"))>
-                  <div class="relative my-8">
-          <div class="absolute inset-0 flex items-center">
-            <div class="w-full border-t border-gray-300"></div>
-          </div>
-          <div class="relative flex justify-center text-sm">
-                                <span class="px-2 bg-white text-gray-500">Or sign in with username and password</span>
-          </div>
-        </div>
+                  <div style="margin-top: 10px; margin-bottom: 0px;">
+                    <button id="show-traditional-login" class="login-toggle-btn" onclick="toggleTraditionalLogin()" 
+                            data-show-text="${msg("loginToggleShowForm")}" 
+                            data-hide-text="${msg("loginToggleHideForm")}">
+                      ${msg("loginToggleShowForm")}
+                    </button>
+                  </div>
                   </#if>
         
         <!-- Traditional Login Form -->
-        <div id="main-body">
+        <div id="main-body" class="traditional-login-form">
         <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
             <#if displayRequiredFields>
                 <div class="text-brand-800 mt-3">
@@ -199,17 +234,50 @@
               </a>
           </form>
         </#if>
-        <#if displayInfo>
-          <div id="kc-info">
-              <div id="kc-info-wrapper"">
-                  <#nested "info">
-              </div>
-          </div>
-        </#if>
       </div>
+      
+      <!-- Registration Link - Always Visible -->
+      <#if displayInfo>
+        <div id="kc-info" class="mt-6">
+            <div id="kc-info-wrapper" class="text-gray-600 text-center">
+                <#nested "info">
+            </div>
+        </div>
+      </#if>
     </main>
     <@loginFooter.content/>
   </div>
+  
+  <script>
+    function toggleTraditionalLogin() {
+      const form = document.getElementById('main-body');
+      const button = document.getElementById('show-traditional-login');
+      const socialProviders = document.getElementById('kc-social-providers');
+      const orDivider = document.getElementById('or-divider');
+      
+      if (form.classList.contains('show')) {
+        // Hide traditional form and show social providers
+        form.classList.remove('show');
+        if (socialProviders) {
+          socialProviders.style.display = 'block';
+        }
+        if (orDivider) {
+          orDivider.style.display = 'block';
+        }
+        button.innerHTML = button.dataset.showText;
+      } else {
+        // Show traditional form and hide social providers
+        form.classList.add('show');
+        if (socialProviders) {
+          socialProviders.style.display = 'none';
+        }
+        if (orDivider) {
+          orDivider.style.display = 'none';
+        }
+        button.innerHTML = button.dataset.hideText;
+      }
+    }
+  </script>
 </body>
 </html>
 </#macro>

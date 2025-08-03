@@ -95,7 +95,7 @@
                                 </span>
                         </#switch>
                     </span>
-                    <span class="ml-3">Sign in with ${p.displayName!}</span></a>
+                    <span class="ml-3">${msg("socialSignInWith")} ${p.displayName!}</span></a>
         </#list>
     </div>
 </#macro>
