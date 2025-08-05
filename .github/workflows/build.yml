@@ -1,0 +1,42 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Set version
+        id: vars
+        run: echo "version=1.0.${{ github.run_number }}" >> $GITHUB_OUTPUT
+        
+      - name: Build with Maven
+        run: mvn clean package -Drevision=${{ steps.vars.outputs.version }}
+
+      - name: Get output JAR path
+        id: get-jar
+        run: |
+          JAR_PATH=$(find target -name "*.jar" | head -n 1)
+          echo "jar=$JAR_PATH" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ github.run_number }}
+          name: Release v${{ github.run_number }}
+          files: ${{ steps.get-jar.outputs.jar }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

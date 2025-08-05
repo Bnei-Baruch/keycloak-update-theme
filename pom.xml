@@ -5,7 +5,11 @@
 
     <groupId>com.potluck.warzone</groupId>
     <artifactId>potluck-warzone</artifactId>
-    <version>1.0.0</version>
+    <version>${revision}</version> <!-- placeholder for version -->
+
+    <properties>
+        <revision>0.0.1-SNAPSHOT</revision> <!-- default fallback version -->
+    </properties>
 
     <build>
         <resources>
@@ -28,12 +32,12 @@
                         <index>true</index>
 
                         <manifestEntries>
-                            <Author>Eko Sutrisno</Author>
-                            <GitHub>https://github.com/ekosutrisno/keycloak-theme</GitHub>
+                            <Author>Hila Shor</Author>
+                            <GitHub>https://github.com/Bnei-Baruch/keycloak-update-theme</GitHub>
                             <Version>${project.version}</Version>
                             <Build-Time>${maven.build.timestamp}</Build-Time>
-                            <Company>Kelas Pondok</Company>
-                            <Website>https://kelaspondok.com</Website>
+                            <Company>Bnei Baruch</Company>
+                            <Website>https://kli.one</Website>
                             <Description>Modern Keycloak login theme build with TailwindCSS</Description>
                             <License>MIT</License>
                             <Java-Version>${java.version}</Java-Version>
