@@ -188,8 +188,8 @@
                   </#if>
         
         <!-- Traditional Login Form -->
-        <#if pageId == "login" || pageId == "register">
-          <div id="main-body" class="traditional-login-form">
+        <#if pageId == "login" || pageId == "register" || pageId == "reset-password">
+          <div id="main-body" class="traditional-login-form <#if pageId == "reset-password">show</#if>">
             <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
               <#if displayRequiredFields>
                 <div class="text-brand-800 mt-3">
