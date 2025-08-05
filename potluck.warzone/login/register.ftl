@@ -3,28 +3,31 @@
 <#import "user-profile-commons.ftl" as userProfileCommons>
 <#import "register-commons.ftl" as registerCommons>
 <#import "buttons.ftl" as buttons>
+
 <@layout.registrationLayout displayMessage=messagesPerField.exists('global') displayRequiredFields=true; section>
 <!-- template: register.ftl -->
 
-    <#if section = "header">
+    <#if section == "socialProviders">
+        <#-- intentionally empty to override default social login section in template -->
+    
+    <#elseif section == "header">
         <#if messageHeader??>
             ${kcSanitize(msg("${messageHeader}"))?no_esc}
         <#else>
             ${msg("registerTitle")}
         </#if>
-    <#elseif section = "form">
+
+    <#elseif section == "form">
         <form id="kc-register-form" action="${url.registrationAction}" method="post" novalidate="novalidate">
             <@userProfileCommons.userProfileFormFields; callback, attribute>
-                <#if callback = "afterField">
-                <#-- render password fields just under the username or email (if used as username) -->
+                <#if callback == "afterField">
                     <#if passwordRequired?? && (attribute.name == 'username' || (attribute.name == 'email' && realm.registrationEmailAsUsername))>
                         <@field.password name="password" label=msg("password") autocomplete="new-password" />
                         <@field.password name="password-confirm" label=msg("passwordConfirm") autocomplete="new-password" />
                     </#if>
                 </#if>
-                
             <div class="flex flex-col gap-y-4">
-                </@userProfileCommons.userProfileFormFields>
+            </@userProfileCommons.userProfileFormFields>
             </div>
 
             <@registerCommons.termsAcceptance/>
@@ -48,6 +51,7 @@
             <li></li>
         </template>
 
+        <#if passwordPolicies??>
         <script type="module">
             import { validatePassword } from "${url.resourcesPath}/js/password-policy.js";
 
@@ -69,7 +73,7 @@
                 }
                 const errors = validatePassword(event.target.value, activePolicies);
                 const errorList = template.querySelector("ul");
-                const htmlErrors = errors.forEach((e) => {
+                errors.forEach((e) => {
                     const row = document.querySelector("#errorItemTemplate").content.cloneNode(true);
                     const li = row.querySelector("li");
                     li.textContent = e;
@@ -78,5 +82,6 @@
                 document.getElementById("input-error-client-password").appendChild(template);
             });
         </script>
+        </#if>
     </#if>
 </@layout.registrationLayout>

@@ -128,6 +128,11 @@
       .traditional-login-form.show {
         display: block;
       }
+      
+      /* Show form automatically on registration page */
+      body:has(#kc-register-form) .traditional-login-form {
+        display: block;
+      }
     </style>
 </head>
 
@@ -221,7 +226,7 @@
             <@loginAlert.alert message=message />
         </#if>
         
-        <!-- Only show form content for login pages, not logout -->
+        <!-- Show form content for login and registration pages, not logout -->
         <#if !(message?? && message.summary?? && message.summary == msg("successLogout"))>
         <div class="my-5"><#nested "form"></div>
         </#if>
