@@ -1,5 +1,5 @@
 <#import "template.ftl" as layout>
-<@layout.registrationLayout displayInfo=true; section>
+<@layout.registrationLayout pageId="login" displayInfo=true; section>
     <#if section = "header">
         ${msg("emailVerifyTitle")}
     <#elseif section = "form">

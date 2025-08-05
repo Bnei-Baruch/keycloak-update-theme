@@ -2,7 +2,7 @@
 <#import "password-commons.ftl" as passwordCommons>
 <#import "field.ftl" as field>
 <#import "buttons.ftl" as buttons>
-<@layout.registrationLayout displayMessage=!messagesPerField.existsError('password','password-confirm'); section>
+<@layout.registrationLayout pageId="login" displayMessage=!messagesPerField.existsError('password','password-confirm'); section>
 <!-- template: login-update-password.ftl -->
     <#if section = "header">
         ${msg("updatePasswordTitle")}

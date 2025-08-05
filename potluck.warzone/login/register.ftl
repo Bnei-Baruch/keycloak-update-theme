@@ -4,7 +4,7 @@
 <#import "register-commons.ftl" as registerCommons>
 <#import "buttons.ftl" as buttons>
 
-<@layout.registrationLayout displayMessage=messagesPerField.exists('global') displayRequiredFields=true; section>
+<@layout.registrationLayout pageId="register" displayMessage=messagesPerField.exists('global') displayRequiredFields=true; section>
 <!-- template: register.ftl -->
 
     <#if section == "socialProviders">

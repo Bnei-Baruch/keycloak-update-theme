@@ -1,7 +1,7 @@
 <#import "template.ftl" as layout>
 <#import "field.ftl" as field>
 <#import "buttons.ftl" as buttons>
-<@layout.registrationLayout displayMessage=!messagesPerField.existsError('recoveryCodeInput'); section>
+<@layout.registrationLayout pageId="login" displayMessage=!messagesPerField.existsError('recoveryCodeInput'); section>
 <!-- template: login-recovery-authn-code-input.ftl -->
     <#if section = "header">
         ${msg("auth-recovery-code-header")}

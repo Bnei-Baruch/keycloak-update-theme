@@ -1,7 +1,7 @@
 <#import "template.ftl" as layout>
 <#import "field.ftl" as field>
 <#import "buttons.ftl" as buttons>
-<@layout.registrationLayout displayMessage=!messagesPerField.existsError('password'); section>
+<@layout.registrationLayout pageId="login" displayMessage=!messagesPerField.existsError('password'); section>
 <!-- template: login-password.ftl -->
     <#if section = "header">
         ${msg("doLogIn")}

@@ -21,7 +21,7 @@
     </@field.group>
 </#macro>
 
-<#macro registrationLayout bodyClass="" displayInfo=false displayMessage=true displayRequiredFields=false>
+<#macro registrationLayout pageId bodyClass="" displayInfo=false displayMessage=true displayRequiredFields=false>
 <!DOCTYPE html>
 <html class="scroll-smooth" <#if realm.internationalizationEnabled> lang="${locale.currentLanguageTag}" <#else>lang="en"</#if>>
 
@@ -171,78 +171,76 @@
                   </div>
 
                   <!-- Social Login First -->
-                  <div style="margin-bottom: 10px;">
-                    <#nested "socialProviders">
-                  </div>
-
-                  <!-- Or text - Only show in initial state -->
-                  <div id="or-divider" class="text-center">
-                    <span class="text-gray-500 text-sm">${msg("or")}</span>
-                  </div>
-
-                  <!-- Traditional Login Toggle Button -->
-                  <#if !(message?? && message.summary?? && message.summary == msg("successLogout"))>
-                  <div style="margin-top: 10px; margin-bottom: 0px;">
-                    <button id="show-traditional-login" class="login-toggle-btn" onclick="toggleTraditionalLogin()" 
-                            data-show-text="${msg("loginToggleShowForm")}" 
-                            data-hide-text="${msg("loginToggleHideForm")}">
-                      ${msg("loginToggleShowForm")}
-                    </button>
-                  </div>
+                  <#if pageId == "login">
+                    <div style="margin-bottom: 10px;">
+                      <#nested "socialProviders">
+                    </div>
+                    <div id="or-divider" class="text-center">
+                      <span class="text-gray-500 text-sm">${msg("or")}</span>
+                    </div>
+                    <div style="margin-top: 10px; margin-bottom: 0px;">
+                      <button id="show-traditional-login" class="login-toggle-btn" onclick="toggleTraditionalLogin()" 
+                              data-show-text="${msg("loginToggleShowForm")}" 
+                              data-hide-text="${msg("loginToggleHideForm")}">
+                        ${msg("loginToggleShowForm")}
+                      </button>
+                    </div>
                   </#if>
         
         <!-- Traditional Login Form -->
-        <div id="main-body" class="traditional-login-form">
-        <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
-            <#if displayRequiredFields>
+        <#if pageId == "login" || pageId == "register">
+          <div id="main-body" class="traditional-login-form">
+            <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
+              <#if displayRequiredFields>
                 <div class="text-brand-800 mt-3">
-                    <span class="border border-brand-400 px-3 font-medium py-1 rounded-md text-sm bg-brand-50/75">
-                      <span class="text-red-600">*</span> ${msg("requiredFields")}
-                    </span>
+                  <span class="border border-brand-400 px-3 font-medium py-1 rounded-md text-sm bg-brand-50/75">
+                    <span class="text-red-600">*</span> ${msg("requiredFields")}
+                  </span>
                 </div>
-            </#if>
-        <#else>
-            <#if displayRequiredFields>
-                    <div class="text-brand-800 mt-3">
-                        <span class="border border-brand-400 px-3 font-medium py-1 rounded-md text-sm bg-brand-50">
-                          <span class="text-red-600">*</span> ${msg("requiredFields")}
-                        </span>
-                    </div>
-                    <div>
-                        <#nested "show-username">
-                        <@username />
-                    </div>
+              </#if>
             <#else>
+              <#if displayRequiredFields>
+                <div class="text-brand-800 mt-3">
+                  <span class="border border-brand-400 px-3 font-medium py-1 rounded-md text-sm bg-brand-50">
+                    <span class="text-red-600">*</span> ${msg("requiredFields")}
+                  </span>
+                </div>
                 <div>
                   <#nested "show-username">
                   <@username />
                 </div>
+              <#else>
+                <div>
+                  <#nested "show-username">
+                  <@username />
+                </div>
+              </#if>
             </#if>
-        </#if>
 
-        <#-- App-initiated actions should not see warning messages about the need to complete the action -->
-        <#-- during login.                                                                               -->
-        <#if displayMessage && message?has_content && (message.type != 'warning' || !isAppInitiatedAction??)>
-            <@loginAlert.alert message=message />
-        </#if>
-        
-        <!-- Show form content for login and registration pages, not logout -->
-        <#if !(message?? && message.summary?? && message.summary == msg("successLogout"))>
-        <div class="my-5"><#nested "form"></div>
-        </#if>
+            <#-- Show alerts if needed -->
+            <#if displayMessage && message?has_content && (message.type != 'warning' || !isAppInitiatedAction??)>
+              <@loginAlert.alert message=message />
+            </#if>
 
-        <#if auth?has_content && auth.showTryAnotherWayLink()>
-          <form id="kc-select-try-another-way-form" action="${url.loginAction}" method="post" novalidate="novalidate">
-              <input type="hidden" name="tryAnotherWay" value="on"/>
-              <a id="try-another-way" class="text-brand-600 transition ring-1 ring-brand-300 hover:ring-brand-600 py-1 px-2 rounded-md text-sm" href="javascript:document.forms['kc-select-try-another-way-form'].submit()">
-                ${kcSanitize(msg("doTryAnotherWay"))?no_esc}
-              </a>
-          </form>
+            <#-- Render the main form if not logout success -->
+            <#if !(message?? && message.summary?? && message.summary == msg("successLogout"))>
+              <div class="my-5"><#nested "form"></div>
+            </#if>
+
+            <#-- Try another way link -->
+            <#if auth?has_content && auth.showTryAnotherWayLink()>
+              <form id="kc-select-try-another-way-form" action="${url.loginAction}" method="post" novalidate="novalidate">
+                <input type="hidden" name="tryAnotherWay" value="on"/>
+                <a id="try-another-way" class="text-brand-600 transition ring-1 ring-brand-300 hover:ring-brand-600 py-1 px-2 rounded-md text-sm" href="javascript:document.forms['kc-select-try-another-way-form'].submit()">
+                  ${kcSanitize(msg("doTryAnotherWay"))?no_esc}
+                </a>
+              </form>
+            </#if>
+          </div>
         </#if>
-      </div>
       
       <!-- Registration Link - Always Visible -->
-      <#if displayInfo>
+      <#if pageId == "login" && displayInfo>
         <div id="kc-info" class="mt-6">
             <div id="kc-info-wrapper" class="text-gray-600 text-center">
                 <#nested "info">

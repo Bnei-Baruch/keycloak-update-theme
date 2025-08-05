@@ -1,6 +1,6 @@
 <#import "template.ftl" as layout>
 <#import "buttons.ftl" as buttons>
-<@layout.registrationLayout displayMessage=false; section>
+<@layout.registrationLayout pageId="error" displayMessage=false; section>
     <#if section="header">
         ${kcSanitize(msg("errorTitle"))?no_esc}
         <#elseif section="form">
