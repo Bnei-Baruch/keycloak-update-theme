@@ -1,5 +1,10 @@
 <#macro show social>
     <div id="kc-social-providers" class="w-full text-gray-800 space-y-1">
+        <#if social.providers?has_content>
+            <div class="text-sm text-gray-600 text-center mb-4 <#if locale.currentLanguageTag?starts_with("he") || locale.currentLanguageTag?starts_with("ar")>rtl-text-center</#if>">
+                ${msg("socialSignInExplanation")}
+            </div>
+        </#if>
         <#list social.providers as p>
             <a id="social-${p.alias}" class="py-3 px-4 flex items-center justify-center space-x-4 w-full rounded-lg border border-gray-300 hover:bg-gray-50 transition" aria-label="${p.displayName}" type="button" href="${p.loginUrl}">
                     <span>
@@ -95,7 +100,7 @@
                                 </span>
                         </#switch>
                     </span>
-                    <span class="ml-3">${msg("socialSignInWith")} ${p.displayName!}</span></a>
+                    <span class="ml-3 <#if locale.currentLanguageTag?starts_with("he") || locale.currentLanguageTag?starts_with("ar")>rtl-text</#if>">${msg("socialSignInWith")} ${p.displayName!}</span></a>
         </#list>
     </div>
 </#macro>

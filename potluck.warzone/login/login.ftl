@@ -33,14 +33,23 @@
                     <input type="hidden" id="id-hidden-input" name="credentialId" <#if auth.selectedCredential?has_content>value="${auth.selectedCredential}"</#if>/>
                     <@buttons.loginButton />
                 </form>
+                
+                <#if realm.registrationAllowed && !registrationDisabled?? && social.providers?? && social.providers?has_content>
+                    <div class="mt-6 text-center">
+                        <span class="text-base font-semibold text-gray-600 <#if locale.currentLanguageTag?starts_with("he") || locale.currentLanguageTag?starts_with("ar")>rtl-text</#if>">${msg("noAccount")} <a href="${url.registrationUrl}" class="text-brand-600 font-bold text-base hover:underline">${msg("doRegister")}</a></span>
+                    </div>
+                </#if>
             </#if>
             </div>
         </div>
     <#elseif section = "info" >
-        <#if realm.password && realm.registrationAllowed && !registrationDisabled??>
+        <#if realm.password && realm.registrationAllowed && !registrationDisabled?? && (!social.providers?? || !social.providers?has_content)>
             <div id="kc-registration-container" class="text-gray-600 text-center">
                 <div id="kc-registration">
-                    <span class="text-lg font-semibold">${msg("noAccount")} <a href="${url.registrationUrl}" class="text-brand-600 font-bold text-lg">${msg("doRegister")}</a></span>
+                    <div class="text-lg font-semibold <#if locale.currentLanguageTag?starts_with("he") || locale.currentLanguageTag?starts_with("ar")>rtl-text</#if>">${msg("noAccount")}</div>
+                    <div class="mt-2">
+                        <a href="${url.registrationUrl}" class="text-brand-600 font-bold text-lg">Register here</a>
+                    </div>
                 </div>
             </div>
         </#if>

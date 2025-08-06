@@ -37,7 +37,7 @@
 
 		<#nested "beforeField" attribute>
 
-		<@field.group name=attribute.name label=advancedMsg(attribute.displayName!'') error=kcSanitize(messagesPerField.get('${attribute.name}'))?no_esc required=attribute.required>
+		<@field.group name=attribute.name label=advancedMsg(attribute.displayName!'') error=kcSanitize(messagesPerField.get('${attribute.name}'))?no_esc required=true>
 			<#assign inputWrapperClass = "">
 			<#if attribute.annotations.inputType?? && (attribute.annotations.inputType == "select-radiobuttons" || attribute.annotations.inputType == "multiselect-checkboxes")>
 				<#assign inputWrapperClass = "flex item-center gap-2">
@@ -94,6 +94,7 @@
 			value="${(value!'')}" 
 			class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-brand-500 w-full"
 			aria-invalid="<#if messagesPerField.existsError('${attribute.name}')>true</#if>"
+			required
 			<#if attribute.readOnly>disabled</#if>
 			<#if attribute.autocomplete??>autocomplete="${attribute.autocomplete}"</#if>
 			<#if attribute.annotations.inputTypePlaceholder??>placeholder="${advancedMsg(attribute.annotations.inputTypePlaceholder)}"</#if>
@@ -132,6 +133,7 @@
 		name="${attribute.name}" 
 		class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-brand-500 w-full"
 		aria-invalid="<#if messagesPerField.existsError('${attribute.name}')>true</#if>"
+		required
 		<#if attribute.readOnly>disabled</#if>
 		<#if attribute.annotations.inputTypeCols??>cols="${attribute.annotations.inputTypeCols}"</#if>
 		<#if attribute.annotations.inputTypeRows??>rows="${attribute.annotations.inputTypeRows}"</#if>
@@ -145,6 +147,7 @@
 		name="${attribute.name}"
 		class="px-4 py-2.5 bg-white text-gray-800 rounded-lg border border-gray-300 focus:outline-none focus:border-brand-300 focus:border-dashed focus:ring-1 focus:ring-offset-2 focus:ring-brand-500 w-full"
 		aria-invalid="<#if messagesPerField.existsError('${attribute.name}')>true</#if>"
+		required
 		<#if attribute.readOnly>disabled</#if>
 		<#if attribute.annotations.inputType=='multiselect'>multiple</#if>
 		<#if attribute.annotations.inputTypeSize??>size="${attribute.annotations.inputTypeSize}"</#if>

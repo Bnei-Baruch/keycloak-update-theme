@@ -133,6 +133,43 @@
       body:has(#kc-register-form) .traditional-login-form {
         display: block;
       }
+      
+      /* RTL Support for Hebrew and Arabic */
+      .rtl-text {
+        direction: rtl;
+        text-align: right;
+      }
+      
+      .rtl-text-center {
+        direction: rtl;
+        text-align: center;
+      }
+      
+      .rtl-text-left {
+        direction: rtl;
+        text-align: right;
+      }
+      
+
+      
+      /* Title font size and alignment */
+      #kc-page-title-custom {
+        font-size: 1.15rem !important;
+        line-height: 2rem !important;
+        font-weight: 600 !important;
+        text-align: center !important;
+      }
+      
+      /* Language selector should always be LTR */
+      #login-select-toggle {
+        direction: ltr !important;
+        text-align: left !important;
+      }
+      
+      #login-select-toggle option {
+        direction: ltr !important;
+        text-align: left !important;
+      }
     </style>
 </head>
 
@@ -153,7 +190,7 @@
                 value="${l.url}"
                 ${(l.languageTag == locale.currentLanguageTag)?then('selected','')}
               >
-                ${l.label}
+                <#if l.languageTag == "he">עברית<#else>${l.label}</#if>
               </option>
             </#list>
           </select>

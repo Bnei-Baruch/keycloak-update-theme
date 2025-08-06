@@ -22,8 +22,8 @@
             <@userProfileCommons.userProfileFormFields; callback, attribute>
                 <#if callback == "afterField">
                     <#if passwordRequired?? && (attribute.name == 'username' || (attribute.name == 'email' && realm.registrationEmailAsUsername))>
-                        <@field.password name="password" label=msg("password") autocomplete="new-password" />
-                        <@field.password name="password-confirm" label=msg("passwordConfirm") autocomplete="new-password" />
+                        <@field.password name="password" label=msg("password") autocomplete="new-password" required=true />
+                        <@field.password name="password-confirm" label=msg("passwordConfirm") autocomplete="new-password" required=true />
                     </#if>
                 </#if>
             <div class="flex flex-col gap-y-4">
