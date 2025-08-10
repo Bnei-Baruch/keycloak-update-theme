@@ -4,9 +4,9 @@
 <#import "buttons.ftl" as buttons>
 <@layout.registrationLayout pageId="update-password" displayMessage=!messagesPerField.existsError('password','password-confirm'); section>
 <!-- template: login-update-password.ftl -->
-    <#if section = "header">
+    <#if section == "header">
         ${msg("updatePasswordTitle")}
-    <#elseif section = "form">
+    <#elseif section == "form">
         <form id="kc-passwd-update-form" action="${url.loginAction}" method="post" novalidate="novalidate">
             <div class="flex flex-col gap-4">
                 <@field.password name="password-new" label=msg("passwordNew") fieldName="password" autocomplete="new-password" autofocus=true />

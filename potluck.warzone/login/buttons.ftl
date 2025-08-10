@@ -1,5 +1,5 @@
 <#macro actionGroup>
-  <div class="flex flex-wrap item-center justify-end gap-4 mt-6">
+  <div class="flex flex-wrap items-center justify-end gap-4 mt-6">
     <#nested>
   </div>
 </#macro>

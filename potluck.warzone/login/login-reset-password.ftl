@@ -31,10 +31,10 @@
             </div>
 
             <div style="margin-top: 30px;">
-            <@buttons.actionGroup>
-                <@buttons.buttonLink href=url.loginUrl label="backToLogin" class=[]/>
-                <@buttons.button id="kc-form-buttons" label="doSubmit" class=[]/>
-            </@buttons.actionGroup>
+                <@buttons.actionGroup>
+                    <@buttons.buttonLink href=url.loginUrl label="backToLogin" class=[]/>
+                    <@buttons.button id="kc-form-buttons" label="doSubmit" class=[]/>
+                </@buttons.actionGroup>
             </div>
         </form>
     </#if>

@@ -225,9 +225,12 @@
                   </#if>
         
         <!-- Traditional Login Form -->
-        <#if pageId == "login" || pageId == "register" || pageId == "reset-password">
-          <div id="main-body" class="traditional-login-form <#if pageId == "reset-password">show</#if>">
-            <#if !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
+        <#if pageId == "login" || pageId == "register" || pageId == "reset-password" || pageId == "update-password">
+          <div id="main-body" class="traditional-login-form <#if pageId == "reset-password" || pageId == "update-password">show</#if>">
+            <#if pageId == "reset-password" || pageId == "update-password">
+              <!-- For reset-password and update-password pages, always show the form content -->
+              <div class="my-5"><#nested "form"></div>
+            <#elseif !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
               <#if displayRequiredFields>
                 <div class="text-brand-800 mt-3">
                   <span class="border border-brand-400 px-3 font-medium py-1 rounded-md text-sm bg-brand-50/75">
@@ -259,8 +262,8 @@
               <@loginAlert.alert message=message />
             </#if>
 
-            <#-- Render the main form if not logout success -->
-            <#if !(message?? && message.summary?? && message.summary == msg("successLogout"))>
+            <#-- Render the main form if not logout success and not reset-password or update-password pages -->
+            <#if pageId != "reset-password" && pageId != "update-password" && !(message?? && message.summary?? && message.summary == msg("successLogout"))>
               <div class="my-5"><#nested "form"></div>
             </#if>
 
