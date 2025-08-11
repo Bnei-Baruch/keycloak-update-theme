@@ -6,9 +6,9 @@
 
 <!-- template: login.ftl -->
 
-    <#if section = "header">
+    <#if section == "header">
         ${msg("loginAccountTitle")}
-    <#elseif section = "form">
+    <#elseif section == "form">
         <div id="kc-form" class="w-full">
           <div id="kc-form-wrapper" class="w-full">
             <#if realm.password>
@@ -42,7 +42,7 @@
             </#if>
             </div>
         </div>
-    <#elseif section = "info" >
+    <#elseif section == "info" >
         <#if realm.password && realm.registrationAllowed && !registrationDisabled?? && (!social.providers?? || !social.providers?has_content)>
             <div id="kc-registration-container" class="text-gray-600 text-center">
                 <div id="kc-registration">
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </#if>
-    <#elseif section = "socialProviders" >
+    <#elseif section == "socialProviders" >
         <#if realm.password && social.providers?? && social.providers?has_content>
             <@identityProviders.show social=social/>
         </#if>

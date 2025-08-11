@@ -1,9 +1,9 @@
 <#import "template.ftl" as layout>
 <#import "buttons.ftl" as buttons>
 <@layout.registrationLayout pageId="error" displayMessage=false; section>
-    <#if section="header">
+    <#if section=="header">
         ${kcSanitize(msg("errorTitle"))?no_esc}
-        <#elseif section="form">
+        <#elseif section=="form">
             <div id="kc-error-message" class="my-10">
                 <div class="instruction alert-general">
                     <div class="flex flex-col gap-4">
