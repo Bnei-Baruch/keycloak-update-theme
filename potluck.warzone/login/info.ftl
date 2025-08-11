@@ -1,13 +1,13 @@
 <#import "template.ftl" as layout>
 <#import "buttons.ftl" as buttons>
 <@layout.registrationLayout displayMessage=false; section>
-    <#if section = "header">
+    <#if section == "header">
         <#if messageHeader??>
             ${kcSanitize(msg("${messageHeader}"))?no_esc}
         <#else>
             ${message.summary}
         </#if>
-    <#elseif section = "form">
+    <#elseif section == "form">
     <div id="kc-info-message">
         <p class="mb-3">${message.summary}<#if requiredActions??><#list requiredActions>: <b><#items as reqActionItem>${kcSanitize(msg("requiredAction.${reqActionItem}"))?no_esc}<#sep>, </#items></b></#list><#else></#if></p>
         <#if skipLink??>

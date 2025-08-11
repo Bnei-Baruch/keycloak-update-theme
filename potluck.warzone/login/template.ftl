@@ -1,6 +1,7 @@
 <#import "field.ftl" as field>
 <#import "footer.ftl" as loginFooter>
 <#import "alert.ftl" as loginAlert>
+
 <#macro username>
   <div></div>
   <#assign label>
@@ -71,9 +72,7 @@
         checkCookiesAndSetTimer("${url.ssoLoginInOtherTabsUrl?no_esc}");
     </script>
     <style>
-      body {
-        background-color: #f9fafb !important;
-      }
+      body { background-color: #f9fafb !important; }
       .text-brand-500 { color: #000000 !important; }
       .text-brand-600 { color: #00a6b4 !important; }
       .text-brand-700 { color: #005385 !important; }
@@ -91,84 +90,51 @@
       .focus\:border-brand-300:focus { border-color: #00a6b4 !important; }
       .focus\:ring-brand-300:focus { --tw-ring-color: #00a6b4 !important; }
       .focus\:ring-brand-500:focus { --tw-ring-color: #005385 !important; }
+
       .alert-error { border-color: #dc2626 !important; background-color: #fef2f2 !important; color: #991b1b !important; }
-      .alert-error .text-red-500 { color: #dc2626 !important; }
       .alert-general { border-color: #dc2626 !important; background-color: #fef2f2 !important; color: #991b1b !important; }
-      .alert-general .text-red-500 { color: #dc2626 !important; }
       .alert-general { --tw-shadow-color: rgb(220 38 38 / 0.2) !important; --tw-shadow: var(--tw-shadow-colored) !important; }
       .alert-error { --tw-shadow-color: rgb(220 38 38 / 0.2) !important; --tw-shadow: var(--tw-shadow-colored) !important; }
-      
-      /* Custom styles for login toggle */
-      .login-toggle-btn {
-        background-color: #ffffff;
-        border: 1px solid #d1d5db;
-        color: #374151;
-        padding: 12px 16px;
-        border-radius: 8px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        font-size: 16px;
-        font-weight: 500;
-        transition: all 0.2s ease;
-        cursor: pointer;
-      }
-      
-      .login-toggle-btn:hover {
-        background-color: #f9fafb;
-        border-color: #9ca3af;
-      }
-      
-      .traditional-login-form {
-        display: none;
-      }
-      
-      .traditional-login-form.show {
-        display: block;
-      }
-      
-      /* Show form automatically on registration page */
-      body:has(#kc-register-form) .traditional-login-form {
-        display: block;
-      }
-      
-      /* RTL Support for Hebrew and Arabic */
-      .rtl-text {
-        direction: rtl;
-        text-align: right;
-      }
-      
-      .rtl-text-center {
-        direction: rtl;
-        text-align: center;
-      }
-      
-      .rtl-text-left {
-        direction: rtl;
-        text-align: right;
-      }
-      
 
-      
-      /* Title font size and alignment */
+      .login-toggle-btn {
+        background-color: #ffffff; border: 1px solid #d1d5db; color: #374151;
+        padding: 12px 16px; border-radius: 8px; width: 100%;
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        font-size: 16px; font-weight: 500; transition: all 0.2s ease; cursor: pointer;
+      }
+      .login-toggle-btn:hover { background-color: #f9fafb; border-color: #9ca3af; }
+
+      .traditional-login-form { display: none; }
+      .traditional-login-form.show { display: block; }
+
+      body:has(#kc-register-form) .traditional-login-form { display: block; }
+
+      .rtl-text { direction: rtl; text-align: right; }
+      .rtl-text-center { direction: rtl; text-align: center; }
+      .rtl-text-left { direction: rtl; text-align: right; }
+
       #kc-page-title-custom {
-        font-size: 1.15rem !important;
-        line-height: 2rem !important;
-        font-weight: 600 !important;
-        text-align: center !important;
+        font-size: 1.15rem !important; line-height: 2rem !important;
+        font-weight: 600 !important; text-align: center !important;
       }
-      
-      /* Language selector should always be LTR */
-      #login-select-toggle {
-        direction: ltr !important;
-        text-align: left !important;
+
+      #login-select-toggle { direction: ltr !important; text-align: left !important; }
+      #login-select-toggle option { direction: ltr !important; text-align: left !important; }
+
+      /* Success panel styling */
+      .success-panel {
+        border: 1px solid #10b98133;
+        background: #ecfdf5;
+        color: #065f46;
+        padding: 14px 16px;
+        border-radius: 8px;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
       }
-      
-      #login-select-toggle option {
-        direction: ltr !important;
-        text-align: left !important;
+      .success-panel .icon {
+        font-weight: 700;
+        line-height: 1;
       }
     </style>
 </head>
@@ -186,49 +152,73 @@
             onchange="if (this.value) window.location.href=this.value"
           >
             <#list locale.supported?sort_by("label") as l>
-              <option
-                value="${l.url}"
-                ${(l.languageTag == locale.currentLanguageTag)?then('selected','')}
-              >
+              <option value="${l.url}" ${(l.languageTag == locale.currentLanguageTag)?then('selected','')}>
                 <#if l.languageTag == "he">עברית<#else>${l.label}</#if>
               </option>
             </#list>
           </select>
         </div>
       </#if>
+
       <header id="kc-header-custom" class="mb-12 text-3xl text-center" style="font-family: 'Assistant', sans-serif; font-weight: 700; transform: translateX(-50px);">
         <div class="flex items-center justify-center gap-4">
           <img src="${url.resourcesPath}/img/logo.png" alt="Logo" class="w-11 h-11 object-scale-down">
           <p class="text-2xl" style="font-family: 'Assistant', sans-serif; font-weight: 700; color: #005385;">BNEI BARUCH</p>
         </div>
       </header>
-            <div class="border border-gray-200 rounded-lg p-6 bg-white shadow-lg">
-                                            <div class="text-slate-700" style="margin-bottom: 20px;">
-                    <h2 class="text-brand-500" id="kc-page-title-custom"><#nested "header"></h1>
-                  </div>
 
-                  <!-- Social Login First -->
-                  <#if pageId == "login">
-                    <div style="margin-bottom: 10px;">
-                      <#nested "socialProviders">
-                    </div>
-                    <div id="or-divider" class="text-center">
-                      <span class="text-gray-500 text-sm">${msg("or")}</span>
-                    </div>
-                    <div style="margin-top: 10px; margin-bottom: 0px;">
-                      <button id="show-traditional-login" class="login-toggle-btn" onclick="toggleTraditionalLogin()" 
-                              data-show-text="${msg("loginToggleShowForm")}" 
-                              data-hide-text="${msg("loginToggleHideForm")}">
-                        ${msg("loginToggleShowForm")}
-                      </button>
-                    </div>
-                  </#if>
+      <div class="border border-gray-200 rounded-lg p-6 bg-white shadow-lg">
+        <div class="text-slate-700" style="margin-bottom: 20px;">
+          <h2 class="text-brand-500" id="kc-page-title-custom"><#nested "header"></h2>
+        </div>
+
+        <#-- Decide if we are in the "email sent" state on login page -->
+        <#assign showEmailSentPanel =
+          (pageId == "login") &&
+          (message?has_content) &&
+          (message.type == "success") &&
+          !(message?? && message.summary?? && message.summary == msg("successLogout"))
+        >
+
+        <#if showEmailSentPanel>
+          <div class="success-panel" id="kc-global-messages">
+            <div class="icon">✔</div>
+            <div>
+              ${msg("emailSentMessage")}
+              <div class="mt-3">
+                <a href="${url.loginUrl}" class="text-brand-600 underline">${msg("backToLogin")!msg("doContinue")}</a>
+              </div>
+            </div>
+          </div>
+        <#else>
+          <!-- Social Login First -->
+          <#if pageId == "login">
+            <div style="margin-bottom: 10px;">
+              <#nested "socialProviders">
+            </div>
+            <div id="or-divider" class="text-center">
+              <span class="text-gray-500 text-sm">${msg("or")}</span>
+            </div>
+            <div style="margin-top: 10px; margin-bottom: 0px;">
+              <button id="show-traditional-login" class="login-toggle-btn" onclick="toggleTraditionalLogin()" 
+                      data-show-text="${msg("loginToggleShowForm")}" 
+                      data-hide-text="${msg("loginToggleHideForm")}">
+                ${msg("loginToggleShowForm")}
+              </button>
+            </div>
+          </#if>
+        </#if>
         
         <!-- Traditional Login Form -->
-        <#if pageId == "login" || pageId == "register" || pageId == "reset-password" || pageId == "update-password">
-          <div id="main-body" class="traditional-login-form <#if pageId == "reset-password" || pageId == "update-password">show</#if>">
+        <#if !showEmailSentPanel && (pageId == "login" || pageId == "register" || pageId == "reset-password" || pageId == "update-password")>
+          <div id="main-body"
+               class="traditional-login-form ${(
+                 pageId == "reset-password" ||
+                 pageId == "update-password" ||
+                 (pageId == "login" && message?has_content)
+               )?then('show','')}">
+
             <#if pageId == "reset-password" || pageId == "update-password">
-              <!-- For reset-password and update-password pages, always show the form content -->
               <div class="my-5"><#nested "form"></div>
             <#elseif !(auth?has_content && auth.showUsername() && !auth.showResetCredentials())>
               <#if displayRequiredFields>
@@ -257,12 +247,12 @@
               </#if>
             </#if>
 
-            <#-- Show alerts if needed -->
-            <#if displayMessage && message?has_content && (message.type != 'warning' || !isAppInitiatedAction??)>
+            <#-- Alerts inside the form for non-login pages only -->
+            <#if pageId != "login" && displayMessage && message?has_content && (message.type != 'warning' || !isAppInitiatedAction??)>
               <@loginAlert.alert message=message />
             </#if>
 
-            <#-- Render the main form if not logout success and not reset-password or update-password pages -->
+            <#-- Render main form if not logout success and not reset/update password pages -->
             <#if pageId != "reset-password" && pageId != "update-password" && !(message?? && message.summary?? && message.summary == msg("successLogout"))>
               <div class="my-5"><#nested "form"></div>
             </#if>
@@ -279,14 +269,15 @@
           </div>
         </#if>
       
-      <!-- Registration Link - Always Visible -->
-      <#if pageId == "login" && displayInfo>
-        <div id="kc-info" class="mt-6">
+        <!-- Registration Link - Always Visible -->
+        <#if pageId == "login" && displayInfo && !showEmailSentPanel>
+          <div id="kc-info" class="mt-6">
             <div id="kc-info-wrapper" class="text-gray-600 text-center">
-                <#nested "info">
+              <#nested "info">
             </div>
-        </div>
-      </#if>
+          </div>
+        </#if>
+      </div>
     </main>
     <@loginFooter.content/>
   </div>
@@ -298,26 +289,16 @@
       const socialProviders = document.getElementById('kc-social-providers');
       const orDivider = document.getElementById('or-divider');
       
-      if (form.classList.contains('show')) {
-        // Hide traditional form and show social providers
+      if (form?.classList.contains('show')) {
         form.classList.remove('show');
-        if (socialProviders) {
-          socialProviders.style.display = 'block';
-        }
-        if (orDivider) {
-          orDivider.style.display = 'block';
-        }
-        button.innerHTML = button.dataset.showText;
+        if (socialProviders) socialProviders.style.display = 'block';
+        if (orDivider) orDivider.style.display = 'block';
+        if (button) button.innerHTML = button?.dataset?.showText || '';
       } else {
-        // Show traditional form and hide social providers
-        form.classList.add('show');
-        if (socialProviders) {
-          socialProviders.style.display = 'none';
-        }
-        if (orDivider) {
-          orDivider.style.display = 'none';
-        }
-        button.innerHTML = button.dataset.hideText;
+        form?.classList.add('show');
+        if (socialProviders) socialProviders.style.display = 'none';
+        if (orDivider) orDivider.style.display = 'none';
+        if (button) button.innerHTML = button?.dataset?.hideText || '';
       }
     }
   </script>
