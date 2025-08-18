@@ -1,5 +1,5 @@
 <#import "template.ftl" as layout>
-<@layout.registrationLayout; section>
+<@layout.registrationLayout pageId="login" displayMessage=false displayInfo=false; section>
     <#if section = "header">
         ${msg("pageExpiredTitle")}
     <#elseif section = "form">

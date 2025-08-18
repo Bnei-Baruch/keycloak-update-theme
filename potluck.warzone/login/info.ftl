@@ -1,6 +1,6 @@
 <#import "template.ftl" as layout>
 <#import "buttons.ftl" as buttons>
-<@layout.registrationLayout displayMessage=false; section>
+<@layout.registrationLayout pageId="info" displayMessage=true; section>
     <#if section == "header">
         <#if messageHeader??>
             ${kcSanitize(msg("${messageHeader}"))?no_esc}
