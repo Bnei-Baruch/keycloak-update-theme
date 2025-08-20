@@ -209,7 +209,8 @@
           </#if>
         </#if>
         
-        <!-- Traditional Login Form -->
+        <!-- Page bodies -->
+        <#-- 1) Login/Register/Reset/Update -->
         <#if !showEmailSentPanel && (pageId == "login" || pageId == "register" || pageId == "reset-password" || pageId == "update-password")>
           <div id="main-body"
                class="traditional-login-form ${(
@@ -267,9 +268,23 @@
               </form>
             </#if>
           </div>
+
+        <#-- 2) Logout Confirm -->
+        <#elseif !showEmailSentPanel && pageId == "logout-confirm">
+          <div id="main-body" class="my-5">
+            <#-- Display messages (if any), same as on non-login pages -->
+            <#if displayMessage && message?has_content && (message.type != 'warning' || !isAppInitiatedAction??)>
+              <@loginAlert.alert message=message />
+            </#if>
+
+            <#-- The approval/cancel form injected from logout-confirm.ftl -->
+            <div class="my-5">
+              <#nested "form">
+            </div>
+          </div>
         </#if>
       
-        <!-- Registration Link - Always Visible -->
+        <!-- Registration Link - Always Visible on login -->
         <#if pageId == "login" && displayInfo && !showEmailSentPanel>
           <div id="kc-info" class="mt-6">
             <div id="kc-info-wrapper" class="text-gray-600 text-center">
